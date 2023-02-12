@@ -14,10 +14,10 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- FontAwesome JS-->
-    <script defer src="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/plugins/fontawesome/js/all.min.js') ?>"></script>
+    <script defer src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/fontawesome/js/all.min.js') ?>"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/css/portal.css') ?>">
+    <link id="theme-style" rel="stylesheet" href="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/css/portal.css') ?>">
 
 </head>
 
