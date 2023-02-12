@@ -16,13 +16,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- FontAwesome JS-->
-    <script defer src="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/plugins/fontawesome/js/all.min.js') ?>"></script>
+    <script defer src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/fontawesome/js/all.min.js') ?>"></script>
 
-    <link rel="stylesheet" href="<?= base_url('vendor/dataTables/datatables.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('vendor/sweetalert2/sweetalert2.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/template/dataTables/datatables.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/template/sweetalert2/sweetalert2.min.css') ?>">
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/css/portal.css') ?>">
+    <link id="theme-style" rel="stylesheet" href="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/css/portal.css') ?>">
 
     <link id="theme-style" rel="stylesheet" href="<?= base_url('assets/css/custom.css') ?>">
 
@@ -60,20 +60,20 @@
     </div><!--//app-wrapper-->
 
     <!-- Javascript -->
-    <script src="<?= base_url('vendor/jQuery/jquery-3.6.3.js') ?>"></script>
+    <script src="<?= base_url('assets/template/jQuery/jquery-3.6.3.js') ?>"></script>
 
-    <script src="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/plugins/popper.min.js') ?>"></script>
-    <script src="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/popper.min.js') ?>"></script>
+    <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
 
     <!-- Charts JS -->
-    <script src="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/plugins/chart.js/chart.min.js') ?>"></script>
-    <script src="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/js/index-charts.js') ?>"></script>
+    <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/chart.js/chart.min.js') ?>"></script>
+    <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/js/index-charts.js') ?>"></script>
 
     <!-- Page Specific JS -->
-    <script src="<?= base_url('vendor/portal-theme-bs5-v2.1/assets/js/app.js') ?>"></script>
+    <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/js/app.js') ?>"></script>
 
-    <script src="<?= base_url('vendor/dataTables/datatables.min.js') ?>"></script>
-    <script src="<?= base_url('vendor/sweetalert2/sweetalert2.min.js') ?>"></script>
+    <script src="<?= base_url('assets/template/dataTables/datatables.min.js') ?>"></script>
+    <script src="<?= base_url('assets/template/sweetalert2/sweetalert2.min.js') ?>"></script>
 
     <?= $this->renderSection('js') ?>
 

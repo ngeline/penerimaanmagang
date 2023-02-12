@@ -20,7 +20,7 @@
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/css/portal.css') ?>">
 
-    <link rel="stylesheet" href="<?= base_url('vendor/sweetalert2/sweetalert2.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/template/sweetalert2/sweetalert2.min.css') ?>">
 
 </head>
 
@@ -121,8 +121,8 @@
 
     </div><!--//row-->
 
-    <script src="<?= base_url('vendor/jQuery/jquery-3.6.3.js') ?>"></script>
-    <script src="<?= base_url('vendor/sweetalert2/sweetalert2.min.js') ?>"></script>
+    <script src="<?= base_url('assets/template/jQuery/jquery-3.6.3.js') ?>"></script>
+    <script src="<?= base_url('assets/template/sweetalert2/sweetalert2.min.js') ?>"></script>
 
     <script>
         $(document).ready(function() {
