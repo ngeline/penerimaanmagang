@@ -25,11 +25,24 @@ class RegisterController extends BaseController
         $role = 'siswa';
 
         $validation =  \Config\Services::validation();
+
         $validation->setRules([
-            'username' => 'required|min_length[5]|max_length[20]',
-            'password' => 'required|min_length[8]|max_length[20]',
-            'kode' => 'required|matches[validKode]',
-            'validKode' => 'required',
+            'username' => [
+                'label' => 'Nama Pengguna',
+                'rules' => 'required|alpha_numeric|min_length[5]|max_length[20]|is_unique[users.username]|regex_match[/^\S*$/]'
+            ],
+            'password' => [
+                'label' => 'Kata Sandi',
+                'rules' => 'required|min_length[8]|max_length[20]'
+            ],
+            'kode' => [
+                'label' => 'Kode Verifikasi',
+                'rules' => 'required|matches[validKode]'
+            ],
+            'validKode' => [
+                'label' => 'Kode Valid',
+                'rules' => 'required'
+            ],
         ]);
 
         if (!$validation->run($_POST)) {
@@ -57,7 +70,7 @@ class RegisterController extends BaseController
 
         $siswa->insertSiswa($dataSiswa);
 
-        return redirect()->to(base_url('login'))->with('success', 'Registration successfully');
+        return redirect()->to(base_url('login'))->with('success', 'Pendaftaran berhasil!');
     }
 
     public function kode()

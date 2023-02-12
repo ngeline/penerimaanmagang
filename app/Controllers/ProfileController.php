@@ -118,7 +118,7 @@ class ProfileController extends BaseController
 
         $model->updateSiswa($data, $id);
 
-        session()->setFlashdata("success", 'Successfully Updating Data');
+        session()->setFlashdata("success", 'Berhasil memperbarui data!');
         return redirect()->to(base_url('profile'));
     }
 }

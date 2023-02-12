@@ -31,14 +31,17 @@ class UsersController extends BaseController
 
         $validation =  \Config\Services::validation();
         $validation->setRules([
-            'password' => 'required|min_length[8]|max_length[20]',
+            'password' => [
+                'label' => 'Kata Sandi',
+                'rules' => 'required|min_length[8]|max_length[20]'
+            ],
         ]);
 
         if (!$validation->run($_POST)) {
             $errors = $validation->getErrors();
             $arr = implode("<br>", $errors);
             session()->setFlashdata("warning", $arr);
-            return redirect()->to(base_url('users'));
+            return redirect()->to(base_url('admin/users'));
         }
 
         $data = [
@@ -47,8 +50,8 @@ class UsersController extends BaseController
 
         $model->updateUser($data, $id);
 
-        session()->setFlashdata("success", 'Successfully Updating Data');
-        return redirect()->to(base_url('users'));
+        session()->setFlashdata("success", 'Berhasil memperbarui data!');
+        return redirect()->to(base_url('admin/users'));
     }
 
     public function delete($id)
@@ -61,8 +64,8 @@ class UsersController extends BaseController
 
         $model->updateUser($data, $id);
 
-        session()->setFlashdata("success", 'Your file has been deleted');
-        return redirect()->to(base_url('users'));
+        session()->setFlashdata("success", 'File Anda telah dihapus!');
+        return redirect()->to(base_url('admin/users'));
     }
 
     public function updateSiswaUsers()
@@ -74,8 +77,14 @@ class UsersController extends BaseController
 
         $validation =  \Config\Services::validation();
         $validation->setRules([
-            'username' => 'min_length[5]|max_length[20]',
-            'password' => 'min_length[8]|max_length[20]',
+            'username' => [
+                'label' => 'Nama Pengguna',
+                'rules' => 'min_length[5]|max_length[20]'
+            ],
+            'password' => [
+                'label' => 'Kata Sandi',
+                'rules' => 'min_length[8]|max_length[20]'
+            ],
         ]);
 
         if (!isset($data['username']) || !isset($data['password'])) {
@@ -103,7 +112,7 @@ class UsersController extends BaseController
             $model->updateUser($data, $id);
         }
 
-        session()->setFlashdata("success", 'Successfully Updating Data');
+        session()->setFlashdata("success", 'Berhasil memperbarui data!');
         return redirect()->to(base_url('profile'));
     }
 }

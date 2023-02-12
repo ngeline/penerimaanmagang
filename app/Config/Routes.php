@@ -47,21 +47,25 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
     $routes->get('dashboard', 'AuthController::dashboard');
     $routes->get('profile', 'ProfileController::index');
 
-    $routes->group('', ['filter' => 'AdminFilter'], function ($routes) {
+    $routes->group('admin', ['filter' => 'AdminFilter'], function ($routes) {
         $routes->get('users', 'UsersController::index');
         $routes->post('users/update', 'UsersController::update');
         $routes->get('users/delete/(:any)', 'UsersController::delete/$1');
+
+        $routes->get('siswa', 'SiswaController::index');
+        $routes->post('siswa/update', 'SiswaController::update');
+        $routes->get('siswa/delete/(:any)/(:any)', 'SiswaController::delete/$1/$2');
     });
 
-    $routes->group('', ['filter' => 'SiswaFilter'], function ($routes) {
-        $routes->post('siswa/users/update', 'UsersController::updateSiswaUsers');
-        $routes->post('siswa/profile/update', 'ProfileController::updateProfileSiswa');
+    $routes->group('siswa', ['filter' => 'SiswaFilter'], function ($routes) {
+        $routes->post('users/update', 'UsersController::updateSiswaUsers');
+        $routes->post('profile/update', 'ProfileController::updateProfileSiswa');
 
-        $routes->get('siswa/pengajuan', 'PengajuanController::index');
-        $routes->get('siswa/magang', 'MagangController::index');
-        $routes->get('siswa/absensi', 'AbsensiController::index');
-        $routes->get('siswa/kegiatan', 'KegiatanController::index');
-        $routes->get('siswa/penilaian', 'PenilaianController::index');
+        $routes->get('pengajuan', 'PengajuanController::index');
+        $routes->get('magang', 'MagangController::index');
+        $routes->get('absensi', 'AbsensiController::index');
+        $routes->get('kegiatan', 'KegiatanController::index');
+        $routes->get('penilaian', 'PenilaianController::index');
     });
 });
 

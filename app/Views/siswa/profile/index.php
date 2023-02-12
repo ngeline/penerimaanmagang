@@ -1,7 +1,7 @@
 <?php $this->extend('layouts/portal') ?>
 
 <?php $this->section('content') ?>
-<h1 class="app-page-title">Profile Siswa Magang</h1>
+<h1 class="app-page-title">Profil Siswa Magang</h1>
 
 <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration">
     <div class="inner">
@@ -9,9 +9,9 @@
             <!-- <h3 class="mb-3">Welcome, developer!</h3> -->
             <div class="row gx-5 gy-3">
                 <div class="col-12 col-lg-12">
-                    <h5>Form Update Personal Data</h5>
+                    <h5>Form Perbarui Data Diri</h5>
                     <hr>
-                    <form action="<?= base_url('siswa/profile/update') ?>" method="POST">
+                    <form action="<?= base_url('siswa/profile/update') ?>" method="POST" id="form-profile">
                         <?= csrf_field() ?>
                         <div class="row">
                             <div class="col-md-12">
@@ -62,7 +62,7 @@
                                 <input id="kelas" name="kelas" type="number" class="form-control" value="<?= $siswa['kelas']; ?>" required="required">
                             </div>
                             <div class="mb-3 col-md-6" id="divTingkat">
-                                <label class="form-label" id="divTingkat">Tingkat</label>
+                                <label class="form-label">Tingkat</label>
                                 <input id="tingkat" name="tingkat" type="number" class="form-control" value="<?= $siswa['tingkat']; ?>" required="required">
                             </div>
                             <div class="mb-3 col-md-6" id="divSekolah">
@@ -83,12 +83,13 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mt-3 d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btn-primary text-white button-container">Update</button>
+                                    <button type="button" class="btn btn-primary text-white" onclick="confirmSubmit()">Simpan</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <h5 class="mt-4">Form Update Username & Password</h5>
+                    <hr>
+                    <h5 class="mt-4">Form Perbarui Nama Pengguna & Kata Sandi</h5>
                     <hr>
                     <form action="<?= base_url('siswa/users/update') ?>" method="POST">
                         <?= csrf_field() ?>
@@ -97,20 +98,21 @@
                                 <input type="hidden" name="id" value="<?= $users['id']; ?>">
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label class="form-label">Username</label>
+                                <label class="form-label">Nama Pengguna</label>
                                 <input id="username" name="username" type="text" class="form-control" value="<?= $users['username']; ?>">
                             </div>
                             <div class="mb-3 col-md-6">
-                                <label class="form-label">Password</label>
+                                <label class="form-label">Kata Sandi</label>
                                 <input id="password" name="password" type="password" class="form-control">
                             </div>
                             <div class="col-md-12">
                                 <div class="mt-3 d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btn-primary text-white button-container">Update</button>
+                                    <button type="submit" class="btn btn-primary text-white button-container">Simpan</button>
                                 </div>
                             </div>
                         </div>
                     </form>
+                    <hr>
                 </div>
             </div><!--//row-->
         </div><!--//app-card-body-->
@@ -120,6 +122,24 @@
 <?php $this->endSection() ?>
 
 <?php $this->section('js') ?>
+<script>
+    function confirmSubmit() {
+        Swal.fire({
+            title: 'Apakah kamu yakin?',
+            text: "Anda tidak akan dapat mengembalikan ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, serahkan!',
+            cancelButtonText: 'Kembali',
+        }).then((result) => {
+            if (result.value) {
+                document.getElementById("form-profile").submit();
+            }
+        });
+    }
+</script>
 <script>
     $(document).ready(function() {
 
@@ -166,7 +186,9 @@
         }
 
         $(function() {
-            sembunyi();
+            <?= ($siswa['status_lengkap'] == 'tidak') ? 'sembunyi();' : '' ?>
+            <?= ($siswa['status_lengkap'] == 'lengkap' && $siswa['jenjang'] == 'SLTA') ? 'PerguruanSembunyi();' : '' ?>
+            <?= ($siswa['status_lengkap'] == 'lengkap' && $siswa['jenjang'] == 'Perguruan Tinggi') ? 'SltaSembunyi();' : '' ?>
         });
 
         $("#jenjang").change(function() {
@@ -201,11 +223,10 @@
             }
         });
 
-
         <?php if (session()->has("success")) { ?>
             Swal.fire({
                 icon: 'success',
-                title: 'Great!',
+                title: 'Bagus!',
                 text: '<?= session("success") ?>'
             })
         <?php } ?>
@@ -213,7 +234,7 @@
         <?php if (session()->has("warning")) { ?>
             Swal.fire({
                 icon: 'warning',
-                title: 'Wait!',
+                title: 'Tunggu!',
                 html: '<?= session("warning") ?>'
             })
         <?php } ?>
