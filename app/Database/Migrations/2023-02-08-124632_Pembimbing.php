@@ -28,6 +28,10 @@ class Pembimbing extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 36,
             ],
+            'nip' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20
+            ],
             'nama' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255

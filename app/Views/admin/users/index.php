@@ -37,7 +37,7 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-warning">
-                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Form Edit</h5>
+                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Form Edit Data</h5>
                                                 </div>
                                                 <form action="<?= base_url('admin/users/update') ?>" method="POST">
                                                     <?= csrf_field() ?>
@@ -74,7 +74,7 @@
         /* Get data table */
         var table = $('#Tables').DataTable({
             oLanguage: {
-                sUrl: "<?= base_url('vendor/dataTables/indonesian.json') ?>"
+                sUrl: "<?= base_url('assets/template/dataTables/indonesian.json') ?>"
             }
         })
 
@@ -82,7 +82,7 @@
             var id = $(this).data('id');
 
             Swal.fire({
-                title: 'Apakah kamu yakin',
+                title: 'Apakah kamu yakin?',
                 text: "Anda tidak akan dapat mengembalikan ini!",
                 icon: 'warning',
                 showCancelButton: true,

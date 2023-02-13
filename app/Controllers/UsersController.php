@@ -87,30 +87,56 @@ class UsersController extends BaseController
             ],
         ]);
 
-        if (!isset($data['username']) || !isset($data['password'])) {
-            if (!$validation->run($_POST)) {
-                $errors = $validation->getErrors();
-                $arr = implode("<br>", $errors);
-                session()->setFlashdata("warning", $arr);
-                return redirect()->to(base_url('profile'));
-            }
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('profile'));
         }
 
-        if (!empty($data['username'])) {
-            $data = [
-                'username' => $data['username'],
-            ];
+        $data = [
+            'username' => $data['username'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT)
+        ];
 
-            $model->updateUser($data, $id);
+        $model->updateUser($data, $id);
+
+        session()->setFlashdata("success", 'Berhasil memperbarui data!');
+        return redirect()->to(base_url('profile'));
+    }
+
+    public function updatePembimbingUsers()
+    {
+        $data = $this->request->getPost();
+        $id = $data['id'];
+
+        $model = new UsersModel();
+
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
+            'username' => [
+                'label' => 'Nama Pengguna',
+                'rules' => 'min_length[5]|max_length[20]'
+            ],
+            'password' => [
+                'label' => 'Kata Sandi',
+                'rules' => 'min_length[8]|max_length[20]'
+            ],
+        ]);
+
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('profile'));
         }
 
-        if (!empty($data['password'])) {
-            $data = [
-                'password' => password_hash($data['password'], PASSWORD_DEFAULT)
-            ];
+        $data = [
+            'username' => $data['username'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT)
+        ];
 
-            $model->updateUser($data, $id);
-        }
+        $model->updateUser($data, $id);
 
         session()->setFlashdata("success", 'Berhasil memperbarui data!');
         return redirect()->to(base_url('profile'));

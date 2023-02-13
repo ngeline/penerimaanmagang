@@ -55,6 +55,11 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('siswa', 'SiswaController::index');
         $routes->post('siswa/update', 'SiswaController::update');
         $routes->get('siswa/delete/(:any)/(:any)', 'SiswaController::delete/$1/$2');
+
+        $routes->get('pembimbing', 'PembimbingController::index');
+        $routes->post('pembimbing/store', 'PembimbingController::store');
+        $routes->post('pembimbing/update', 'PembimbingController::update');
+        $routes->get('pembimbing/delete/(:any)', 'PembimbingController::delete/$1');
     });
 
     $routes->group('siswa', ['filter' => 'SiswaFilter'], function ($routes) {
@@ -66,6 +71,11 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('absensi', 'AbsensiController::index');
         $routes->get('kegiatan', 'KegiatanController::index');
         $routes->get('penilaian', 'PenilaianController::index');
+    });
+
+    $routes->group('pembimbing', ['filter' => 'PembimbingFilter'], function ($routes) {
+        $routes->post('users/update', 'UsersController::updatePembimbingUsers');
+        $routes->post('profile/update', 'ProfileController::updateProfilePembimbing');
     });
 });
 

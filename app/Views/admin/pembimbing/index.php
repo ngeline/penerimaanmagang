@@ -1,7 +1,66 @@
 <?php $this->extend('layouts/portal') ?>
 
 <?php $this->section('content') ?>
-<h1 class="app-page-title">Kelola Siswa Magang</h1>
+<!-- Modal Create -->
+<div class="modal fade" id="tambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white" id="staticBackdropLabel">Form Tambah Data</h5>
+            </div>
+            <form action="<?= base_url('admin/pembimbing/store') ?>" method="POST">
+                <?= csrf_field() ?>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input id="nama" name="nama" type="text" class="form-control">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">NIP</label>
+                            <input id="nip" name="nip" type="number" class="form-control">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Bidang Pekerjaan</label>
+                            <select name="bidang" id="bidang" class="form-select">
+                                <option value="">--Pilih Status--</option>
+                                <?php foreach ($bidang as $item) : ?>
+                                    <option value="<?= $item['id'] ?>"><?= $item['nama_bidang'] ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Email</label>
+                            <input id="email" name="email" type="email" class="form-control">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Telepon</label>
+                            <input id="telepon" name="telepon" type="number" class="form-control">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label">Jenis Kelamin</label>
+                            <select name="jk" id="jk" class="form-select">
+                                <option value="">--Pilih Status--</option>
+                                <option value="l">Laki-laki</option>
+                                <option value="p">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label class="form-label">Alamat</label>
+                            <textarea name="alamat" id="alamat" rows="10" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-success text-white">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h1 class="app-page-title">Kelola Pembimbing Lapangan</h1>
 
 <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration">
     <div class="inner">
@@ -9,14 +68,18 @@
             <!-- <h3 class="mb-3">Welcome, developer!</h3> -->
             <div class="row gx-5 gy-3">
                 <div class="col-12 col-lg-12">
+                    <div class="mb-3 d-flex flex-row-reverse">
+                        <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#tambah">
+                            Tambah Data
+                        </button>
+                    </div>
                     <div class="table-responsive ">
                         <table class="table table-striped w-100" id="Tables">
                             <thead class="table-light">
                                 <th>No</th>
-                                <th>Nama Pengguna</th>
+                                <th>NIP</th>
                                 <th>Nama Lengkap</th>
-                                <th>Jenjang</th>
-                                <th>Jurusan</th>
+                                <th>Bidang</th>
                                 <th>Telepon</th>
                                 <th>Aksi</th>
                             </thead>
@@ -25,16 +88,15 @@
                                 <?php foreach ($list as $row) : ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
-                                        <td><?= $row['username'] ?></td>
-                                        <td><?= ($row['nama'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['nama'] ?></td>
-                                        <td><?= ($row['jenjang'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['jenjang'] ?></td>
-                                        <td><?= ($row['jurusan'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['jurusan'] ?></td>
-                                        <td><?= ($row['telepon'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['telepon'] ?></td>
+                                        <td><?= $row['nip'] ?></td>
+                                        <td><?= $row['nama'] ?></td>
+                                        <td><?= $row['nama_bidang'] ?></td>
+                                        <td><?= $row['telepon'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Edit<?php echo $no ?>">
                                                 Edit
                                             </button>
-                                            <button id="confirm-button-<?= $row['id_siswa'] ?>" class="btn btn-danger text-white" data-id="<?= base_url('admin/siswa/delete/' . $row['id_siswa'] . '/' . $row['id_users']) ?>">Hapus</button>
+                                            <button id="confirm-button-<?= $row['id_pembimbing'] ?>" class="btn btn-danger text-white" data-id="<?= base_url('admin/pembimbing/delete/' . $row['id_pembimbing'] . '/' . $row['id_users']) ?>">Hapus</button>
                                         </td>
                                     </tr>
 
@@ -45,21 +107,26 @@
                                                 <div class="modal-header bg-warning">
                                                     <h5 class="modal-title text-white" id="staticBackdropLabel">Form Edit Data</h5>
                                                 </div>
-                                                <form action="<?= base_url('admin/siswa/update') ?>" method="POST">
+                                                <form action="<?= base_url('admin/pembimbing/update') ?>" method="POST">
                                                     <?= csrf_field() ?>
                                                     <div class="modal-body">
-                                                        <input type="hidden" name="id" value="<?= $row['id_siswa'] ?>">
+                                                        <input type="hidden" name="id" value="<?= $row['id_pembimbing'] ?>">
                                                         <div class="row">
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label">Nama Lengkap</label>
                                                                 <input id="nama" name="nama" type="text" class="form-control" value="<?= $row['nama']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Jenis Kelamin</label>
-                                                                <select name="jk" id="jk" class="form-select">
+                                                                <label class="form-label">NIP</label>
+                                                                <input id="nip" name="nip" type="number" class="form-control" value="<?= $row['nip']; ?>">
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Bidang Pekerjaan</label>
+                                                                <select name="bidang" id="bidang" class="form-select">
                                                                     <option value="">--Pilih Status--</option>
-                                                                    <option value="l" <?= ($row['jenis_kelamin'] == 'l') ? 'selected' : '' ?>>Laki-laki</option>
-                                                                    <option value="p" <?= ($row['jenis_kelamin'] == 'p') ? 'selected' : '' ?>>Perempuan</option>
+                                                                    <?php foreach ($bidang as $item) : ?>
+                                                                        <option value="<?= $item['id'] ?>" <?= ($row['bidang_id'] == $item['id']) ? 'selected' : '' ?>><?= $item['nama_bidang'] ?></option>
+                                                                    <?php endforeach ?>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
@@ -70,49 +137,17 @@
                                                                 <label class="form-label">Telepon</label>
                                                                 <input id="telepon" name="telepon" type="number" class="form-control" value="<?= $row['telepon']; ?>">
                                                             </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Jenis Kelamin</label>
+                                                                <select name="jk" id="jk" class="form-select">
+                                                                    <option value="">--Pilih Status--</option>
+                                                                    <option value="l" <?= ($row['jenis_kelamin'] == 'l') ? 'selected' : '' ?>>Laki-laki</option>
+                                                                    <option value="p" <?= ($row['jenis_kelamin'] == 'p') ? 'selected' : '' ?>>Perempuan</option>
+                                                                </select>
+                                                            </div>
                                                             <div class="mb-3 col-md-12">
                                                                 <label class="form-label">Alamat</label>
                                                                 <textarea name="alamat" id="alamat" rows="10" class="form-control"><?= $row['alamat']; ?></textarea>
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Jenjang Pendidikan</label>
-                                                                <select name="jenjang" id="jenjang" class="form-select" required>
-                                                                    <option value="">--Pilih Status--</option>
-                                                                    <option value="Perguruan Tinggi" <?= ($row['jenjang'] == 'Perguruan Tinggi') ? 'selected' : '' ?>>Perguruan Tinggi</option>
-                                                                    <option value="SLTA" <?= ($row['jenjang'] == 'SLTA') ? 'selected' : '' ?>>SLTA Sederajat</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Prodi</label>
-                                                                <input id="prodi" name="prodi" type="text" class="form-control" value="<?= $row['prodi']; ?>">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Jurusan</label>
-                                                                <input id="jurusan" name="jurusan" type="text" class="form-control" value="<?= $row['jurusan']; ?>">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Kelas</label>
-                                                                <input id="kelas" name="kelas" type="number" class="form-control" value="<?= $row['kelas']; ?>">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Tingkat</label>
-                                                                <input id="tingkat" name="tingkat" type="number" class="form-control" value="<?= $row['tingkat']; ?>">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Asal Sekolah</label>
-                                                                <input id="sekolah" name="sekolah" type="text" class="form-control" value="<?= $row['asal_sekolah']; ?>">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Perguruan Tinggi</label>
-                                                                <input id="perguruan" name="perguruan" type="text" class="form-control" value="<?= $row['perguruan']; ?>">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">NISN</label>
-                                                                <input id="nisn" name="nisn" type="number" class="form-control" value="<?= $row['nisn']; ?>">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">NIM</label>
-                                                                <input id="nim" name="nim" type="number" class="form-control" value="<?= $row['nim']; ?>">
                                                             </div>
                                                         </div>
                                                     </div>

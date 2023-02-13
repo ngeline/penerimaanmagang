@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\BidangModel;
 use App\Models\UsersModel;
 use App\Models\SiswaModel;
 use App\Models\PembimbingModel;
@@ -30,6 +31,11 @@ class ProfileController extends BaseController
         $pembimbing = new PembimbingModel();
         $data['pembimbing'] = $pembimbing->where('users_id', $id)->first();
 
+        if (!empty($data['pembimbing'])) {
+            $bidang = new BidangModel();
+            $data['bidang'] = $bidang->where('id', $data['pembimbing']['bidang_id'])->first();
+        }
+
         if ($role == 'siswa') {
             return view('siswa/profile/index', $data);
         } else if ($role == 'pembimbing') {
@@ -51,30 +57,93 @@ class ProfileController extends BaseController
 
         if ($data['jenjang'] == 'SLTA') {
             $validation->setRules([
-                'nama' => 'required',
-                'jk' => 'required',
-                'email' => 'required',
-                'telepon' => 'required|is_natural_no_zero',
-                'alamat' => 'required',
-                'jenjang' => 'required',
-                'jurusan' => 'required',
-                'kelas' => 'is_natural_no_zero',
-                'sekolah' => 'required',
-                'nisn' => 'is_natural_no_zero',
+                'nama' => [
+                    'label' => 'Nama Lengkap',
+                    'rules' => 'required'
+                ],
+                'jk' => [
+                    'label' => 'Jenis Kelamin',
+                    'rules' => 'required'
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'rules' => 'required'
+                ],
+                'telepon' => [
+                    'label' => 'Telepon',
+                    'rules' => 'required|is_natural_no_zero'
+                ],
+                'alamat' => [
+                    'label' => 'Alamat',
+                    'rules' => 'required'
+                ],
+                'jenjang' => [
+                    'label' => 'Jenjang Pendidikan',
+                    'rules' => 'required'
+                ],
+                'jurusan' => [
+                    'label' => 'Jurusan',
+                    'rules' => 'required'
+                ],
+                'kelas' => [
+                    'label' => 'Kelas',
+                    'rules' => 'is_natural_no_zero'
+                ],
+                'sekolah' => [
+                    'label' => 'Sekolah',
+                    'rules' => 'required'
+                ],
+                'nisn' => [
+                    'label' => 'NISN',
+                    'rules' => 'is_natural_no_zero'
+                ],
             ]);
         } else if ($data['jenjang'] == 'Perguruan Tinggi') {
             $validation->setRules([
-                'nama' => 'required',
-                'jk' => 'required',
-                'email' => 'required',
-                'telepon' => 'required|is_natural_no_zero',
-                'alamat' => 'required',
-                'jenjang' => 'required',
-                'prodi' => 'required',
-                'jurusan' => 'required',
-                'perguruan' => 'required',
-                'tingkat' => 'is_natural_no_zero',
-                'nim' => 'is_natural_no_zero',
+                'nama' => [
+                    'label' => 'Nama Lengkap',
+                    'rules' => 'required'
+                ],
+                'jk' => [
+                    'label' => 'Jenis Kelamin',
+                    'rules' => 'required'
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'rules' => 'required'
+                ],
+                'telepon' => [
+                    'label' => 'Telepon',
+                    'rules' => 'required|is_natural_no_zero'
+                ],
+                'alamat' => [
+                    'label' => 'Alamat',
+                    'rules' => 'required'
+                ],
+                'jenjang' => [
+                    'label' => 'Jenjang Pendidikan',
+                    'rules' => 'required'
+                ],
+                'prodi' => [
+                    'label' => 'Prodi',
+                    'rules' => 'required'
+                ],
+                'jurusan' => [
+                    'label' => 'Jurusan',
+                    'rules' => 'required'
+                ],
+                'perguruan' => [
+                    'label' => 'Perguruan Tinggi',
+                    'rules' => 'required'
+                ],
+                'Tingkat' => [
+                    'label' => 'Tingkat',
+                    'rules' => 'is_natural_no_zero'
+                ],
+                'nim' => [
+                    'label' => 'NIM',
+                    'rules' => 'is_natural_no_zero'
+                ],
             ]);
         }
 
@@ -117,6 +186,60 @@ class ProfileController extends BaseController
         }
 
         $model->updateSiswa($data, $id);
+
+        session()->setFlashdata("success", 'Berhasil memperbarui data!');
+        return redirect()->to(base_url('profile'));
+    }
+
+    public function updateProfilePembimbing()
+    {
+        $data = $this->request->getPost();
+
+        $id = $data['id'];
+
+        $model = new PembimbingModel();
+
+        $validation =  \Config\Services::validation();
+
+        $validation->setRules([
+            'nama' => [
+                'label' => 'Nama Lengkap',
+                'rules' => 'required'
+            ],
+            'jk' => [
+                'label' => 'Jenis Kelamin',
+                'rules' => 'required'
+            ],
+            'email' => [
+                'label' => 'Email',
+                'rules' => 'required'
+            ],
+            'telepon' => [
+                'label' => 'Telepon',
+                'rules' => 'required|is_natural_no_zero'
+            ],
+            'alamat' => [
+                'label' => 'Alamat',
+                'rules' => 'required'
+            ],
+        ]);
+
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('profile'));
+        }
+
+        $data = [
+            'nama' => $data['nama'],
+            'jenis_kelamin' => $data['jk'],
+            'email' => $data['email'],
+            'telepon' => $data['telepon'],
+            'alamat' => $data['alamat'],
+        ];
+
+        $model->updatePembimbing($data, $id);
 
         session()->setFlashdata("success", 'Berhasil memperbarui data!');
         return redirect()->to(base_url('profile'));
