@@ -5,7 +5,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 use Ramsey\Uuid\Uuid;
 
-class PengajuanAnggotaAnggotaModel extends Model
+class PengajuanAnggotaModel extends Model
 {
     protected $allowedFields;
 

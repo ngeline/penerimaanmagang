@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\MagangModel;
 use App\Models\SiswaModel;
 use App\Models\PengajuanModel;
+use App\Models\PengajuanAnggotaModel;
 
 class MagangController extends BaseController
 {
@@ -25,13 +27,55 @@ class MagangController extends BaseController
         $pengajuan = new PengajuanModel();
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
 
+        // Jika Profil tidak lengkap
         if ($siswaDetail['status_lengkap'] == 'tidak') {
             return view('siswa/error/profilError', $data);
         } else {
-            if (empty($pengajuanDetail)) {
-                return view('siswa/error/pengajuanError', $data);
+            // Jika belum mengajukan && belum diterima
+            if (!empty($pengajuanDetail) && $pengajuanDetail['status_pengajuan'] == 'diterima') {
+                $magang = new MagangModel();
+                $magangDetail = $magang->where('pengajuan_id', $pengajuanDetail['id'])->findAll();
+
+                // Jika belum ada data dimagang
+                if ($magangDetail) {
+                    foreach ($magangDetail as $value) {
+                        if ($value['siswa_id'] == $siswaDetail['id']) {
+                            return view('siswa/magang/index', $data);
+                        }
+                    }
+                } else {
+                    return view('siswa/error/magangError', $data);
+                }
             } else {
-                return view('siswa/magang/index', $data);
+                $anggota = new PengajuanAnggotaModel();
+                $anggotaDetail = $anggota->where('siswa_id', $siswaDetail['id'])->findAll();
+
+                if ($anggotaDetail) {
+                    foreach ($anggotaDetail as $value) {
+                        $cekPengajuan = new PengajuanModel();
+                        $cekPengajuanDetail = $cekPengajuan->where('id', $value['pengajuan_id'])->first();
+
+                        if (!empty($cekPengajuanDetail) && $cekPengajuanDetail['status_pengajuan'] == 'diterima') {
+                            $magang = new MagangModel();
+                            $magangDetail = $magang->where('pengajuan_id', $cekPengajuanDetail['id'])->findAll();
+
+                            // Jika belum ada data dimagang
+                            if ($magangDetail) {
+                                foreach ($magangDetail as $value) {
+                                    if ($value['siswa_id'] == $siswaDetail['id']) {
+                                        return view('siswa/magang/index', $data);
+                                    }
+                                }
+                            } else {
+                                return view('siswa/error/magangError', $data);
+                            }
+                        } else {
+                            return view('siswa/error/pengajuanError', $data);
+                        }
+                    }
+                } else {
+                    return view('siswa/error/pengajuanError', $data);
+                }
             }
         }
     }

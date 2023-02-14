@@ -37,7 +37,8 @@ class Pengajuan extends Migration
                 'type' => 'TEXT'
             ],
             'file_surat_balasan' => [
-                'type' => 'TEXT'
+                'type' => 'TEXT',
+                'null' => true
             ],
             'status_pengajuan' => [
                 'type' => 'ENUM',

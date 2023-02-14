@@ -136,7 +136,7 @@ class ProfileController extends BaseController
                     'label' => 'Perguruan Tinggi',
                     'rules' => 'required'
                 ],
-                'Tingkat' => [
+                'tingkat' => [
                     'label' => 'Tingkat',
                     'rules' => 'is_natural_no_zero'
                 ],
