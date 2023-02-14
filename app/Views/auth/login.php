@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>Penerimaan Magang</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
 
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url('logo.ico')?>">
 
     <!-- FontAwesome JS-->
     <script defer src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/fontawesome/js/all.min.js') ?>"></script>
@@ -57,7 +57,7 @@
                             </div>
                         </form>
 
-                        <div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link" href="<?= base_url('register') ?>">here</a>.</div>
+                        <div class="auth-option text-center pt-5">Belum punya akun? Daftar <a class="text-link" href="<?= base_url('register') ?>">di sini</a>.</div>
                     </div><!--//auth-form-container-->
 
                 </div><!--//auth-body-->
@@ -79,8 +79,8 @@
                 <div class="d-flex flex-column align-content-end h-100">
                     <div class="h-100"></div>
                     <div class="overlay-content p-3 p-lg-4 rounded">
-                        <h5 class="mb-3 overlay-title">Explore Portal Admin Template</h5>
-                        <div>Portal is a free Bootstrap 5 admin dashboard template. You can download and view the template license <a href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">here</a>.</div>
+                        <h5 class="mb-3 overlay-title">DINAS PENDIDIKAN KOTA KEDIRI</h5>
+                        <div>Website Penerimaan Magang Dinas Pendidikan Kota Kediri</div>
                     </div>
                 </div>
             </div><!--//auth-background-overlay-->

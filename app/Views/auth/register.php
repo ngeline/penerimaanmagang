@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>Penerimaan Magang</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -12,7 +12,7 @@
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="<?= base_url('logo.ico')?>">
 
     <!-- FontAwesome JS-->
     <script defer src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/fontawesome/js/all.min.js') ?>"></script>
@@ -29,8 +29,8 @@
         <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
             <div class="d-flex flex-column align-content-end">
                 <div class="app-auth-body mx-auto">
-                    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"></a></div>
-                    <h2 class="auth-heading text-center mb-4">Sign up to Portal</h2>
+                    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="<?= base_url('logo.png')?>" alt="logo"></a></div>
+                    <h2 class="auth-heading text-center mb-4">Daftar Akun</h2>
 
                     <div class="auth-form-container text-start mx-auto">
                         <form class="auth-form auth-signup-form" action="<?= base_url('register') ?>" method="POST">
@@ -84,11 +84,11 @@
                             </div>
                             <input type="hidden" name="validKode" id="validKode">
                             <div class="text-center">
-                                <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Sign Up</button>
+                                <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Daftar</button>
                             </div>
                         </form><!--//auth-form-->
 
-                        <div class="auth-option text-center pt-5">Already have an account? <a class="text-link" href="<?= base_url('login') ?>">Log in</a></div>
+                        <div class="auth-option text-center pt-5">Sudah mempunyai akun ? <a class="text-link" href="<?= base_url('login') ?>">Masuk</a></div>
                     </div><!--//auth-form-container-->
 
 
@@ -98,7 +98,7 @@
                 <footer class="app-auth-footer">
                     <div class="container text-center py-3">
                         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-                        <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+                        <!-- <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small> -->
 
                     </div>
                 </footer><!--//app-auth-footer-->
@@ -112,8 +112,8 @@
                 <div class="d-flex flex-column align-content-end h-100">
                     <div class="h-100"></div>
                     <div class="overlay-content p-3 p-lg-4 rounded">
-                        <h5 class="mb-3 overlay-title">Explore Portal Admin Template</h5>
-                        <div>Portal is a free Bootstrap 5 admin dashboard template. You can download and view the template license <a href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">here</a>.</div>
+                        <h5 class="mb-3 overlay-title">DINAS PENDIDIKAN KOTA KEDIRI</h5>
+                        <div>Website Penerimaan Magang Dinas Pendidikan Kota Kediri</div>
                     </div>
                 </div>
             </div><!--//auth-background-overlay-->
