@@ -157,7 +157,10 @@ class PengajuanController extends BaseController
             $id = $this->request->getVar('id');
 
             $pengajuan = new PengajuanModel();
-            $dataPengajuan = $pengajuan->getPengajuan($id);
+            $dataPengajuan = $pengajuan->select('pengajuan.*,siswa.*')
+                ->join('siswa', 'pengajuan.siswa_id = siswa.id')
+                ->where('pengajuan.id', $id)
+                ->get()->getResultArray();
 
             $anggota = new PengajuanAnggotaModel();
             $dataAnggota = $anggota->select('pengajuan_anggota.*,siswa.*')
@@ -171,13 +174,100 @@ class PengajuanController extends BaseController
                 array_push($arrNama, $value['nama']);
             }
 
+            $count = count($arrNama);
+
             $data = [
                 'status' => 'success',
                 'data' => $dataPengajuan,
-                'anggota' => $arrNama
+                'anggota' => $arrNama,
+                'jmlAnggota' => $count
             ];
 
             return $this->response->setJSON($data);
         }
+    }
+
+    public function indexAdmin()
+    {
+        $data['activePage'] = 'adminPengajuan';
+
+        $pengajuan = new PengajuanModel();
+        $data['pengajuan'] = $pengajuan->select('pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa')
+            ->join('siswa', 'pengajuan.siswa_id = siswa.id')
+            ->get()->getResultArray();
+
+        return view('admin/pengajuan/index', $data);
+    }
+
+    public function validasiAdmin()
+    {
+        $data = $this->request->getPost();
+
+        $id = $data['id'];
+
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
+            'validasiStatus' => [
+                'label' => 'Status Pengajuan',
+                'rules' => 'required'
+            ],
+            'validasiCatatan' => [
+                'label' => 'Catatan',
+                'rules' => 'required'
+            ],
+            'suratBalasan' => [
+                'label' => 'File Surat Balasan',
+                'rules' => 'uploaded[suratBalasan]|max_size[suratBalasan,5120]|ext_in[suratBalasan,pdf]'
+            ],
+        ]);
+
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('admin/pengajuan'));
+        }
+
+        //Get the uploaded file
+        $surat = $this->request->getFile('suratBalasan');
+
+        // Check if the file was uploaded successfully
+        if ($surat->isValid() && !$surat->hasMoved()) {
+            // Move the file to a new location
+            $nameSurat =  time() . $surat->getName();
+
+            $surat->move(FCPATH . 'assets/file/pengajuan', $nameSurat);
+        }
+
+        $pengajuan = new PengajuanModel();
+        $dataPengajuan = [
+            'file_surat_balasan' => $nameSurat,
+            'status_pengajuan' => $data['validasiStatus'],
+            'catatan' => $data['validasiCatatan'],
+        ];
+        $pengajuan->updatePengajuan($dataPengajuan, $id);
+
+        $anggota = new PengajuanAnggotaModel();
+        $dataAnggota = $anggota->where('pengajuan_id', $id)->findAll();
+
+        if ($data['validasiStatus'] == 'diterima') {
+            if ($dataAnggota) {
+                foreach ($dataAnggota as $value) {
+                    $siswa = new SiswaModel();
+                    $dataSiswa = $siswa->getSiswa($value['siswa_id']);
+
+                    $user = new UsersModel();
+                    $dataUser = [
+                        'status' => 'aktif'
+                    ];
+                    $user->updateUser($dataUser, $dataSiswa['users_id']);
+                }
+            }
+        }
+
+        // PESAN WA
+
+        session()->setFlashdata("success", 'Berhasil memperbarui data!');
+        return redirect()->to(base_url('admin/pengajuan'));
     }
 }

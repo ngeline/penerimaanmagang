@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Institusi Pemohon</label>
-                            <input id="sekol" name="sekol" type="text" class="form-control" value="<?= (empty($siswa['asal_sekolah'])) ? $siswa['perguruan'] : $siswa['asal_sekolah'] ?>" readonly>
+                            <input id="sekol" name="sekol" type="text" class="form-control" value="<?= (($siswa['jenjang'] == 'SLTA') ? $siswa['asal_sekolah'] : $siswa['perguruan']) ?>" readonly>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Tanggal Mulai Magang</label>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label class="form-label">Institusi Pemohon</label>
-                        <input type="text" class="form-control" value="<?= (empty($siswa['asal_sekolah'])) ? $siswa['perguruan'] : $siswa['asal_sekolah'] ?>" readonly>
+                        <input type="text" class="form-control" value="<?= (($siswa['jenjang'] == 'SLTA') ? $siswa['asal_sekolah'] : $siswa['perguruan']) ?>" readonly>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label class="form-label">Tanggal Mulai Magang</label>
@@ -132,7 +132,7 @@
     </div>
 </div>
 
-<h1 class="app-page-title">Kelola Pengajuan Magang</h1>
+<h1 class="app-page-title">Pengajuan Magang</h1>
 
 <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration">
     <div class="inner">
@@ -159,7 +159,7 @@
                                 <?php foreach ($pengajuan as $row) : ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
-                                        <td><?= $row['created_at'] ?></td>
+                                        <td><?= date_format(new DateTime($row['created_at']), 'd/m/Y H:i:s'); ?></td>
                                         <td><?= $row['status_pengajuan'] ?></td>
                                         <td><?= ($row['status_pengajuan'] == 'diproses') ? 'tidak ada' : $row['catatan'] ?></td>
                                         <td>
@@ -215,7 +215,6 @@
             }
         });
 
-
         $('body').on('click', '#detail', function() {
             var this_id = $(this).data('id');
             $.ajax({
@@ -226,23 +225,29 @@
                 },
                 success: function(response) {
                     $('#detailModal').modal('show');
-                    $('#detailMulai').val(response.data.tanggal_mulai);
-                    $('#detailSelesai').val(response.data.tanggal_selesai);
-                    $('#fileProposal').attr('href', '<?= base_url('assets/file/pengajuan') ?>' + '/' + response.data.file_proposal);
-                    $('#fileSurat').attr('href', '<?= base_url('assets/file/pengajuan') ?>' + '/' + response.data.file_proposal);
-                    $('#detailStatus').val(response.data.status_pengajuan);
-                    if (response.data.catatan == null) {
-                        $('#detailCatatan').val('tidak ada');
+                    $('#detailMulai').val(response.data[0].tanggal_mulai);
+                    $('#detailSelesai').val(response.data[0].tanggal_selesai);
+                    $('#fileProposal').attr('href', '<?= base_url('assets/file/pengajuan') ?>' + '/' + response.data[0].file_proposal);
+                    $('#fileSurat').attr('href', '<?= base_url('assets/file/pengajuan') ?>' + '/' + response.data[0].file_surat_pengajuan);
+                    $('#detailStatus').val(response.data[0].status_pengajuan);
+                    if (response.data[0].catatan !== null) {
+                        $('#detailCatatan').val(response.data[0].catatan);
                     } else {
-                        $('#detailCatatan').val(response.data.catatan);
+                        $('#detailCatatan').val('tidak ada');
                     }
-                    if (response.anggota) {
+                    if (response.jmlAnggota >= 1) {
                         $("#hideShowAnggota").show();
                         $('#detailAnggota').val(response.anggota.join(', '));
+                    } else {
+                        $("#hideShowAnggota").hide();
+                        $('#detailAnggota').val('');
                     }
-                    if (response.data.file_surat_balasan) {
+                    if (response.data[0].file_surat_balasan !== null) {
                         $("#hideShowBalasan").show();
-                        $('#fileBalasan').val(response.data.file_surat_balasan);
+                        $('#fileBalasan').attr('href', '<?= base_url('assets/file/pengajuan') ?>' + '/' + response.data[0].file_surat_balasan);
+                    } else {
+                        $("#hideShowBalasan").hide();
+                        $('#fileBalasan').attr('href', '');
                     }
                 }
             });

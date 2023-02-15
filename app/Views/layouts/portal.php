@@ -75,6 +75,8 @@
     <script src="<?= base_url('assets/template/dataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/template/sweetalert2/sweetalert2.min.js') ?>"></script>
 
+    <script src="<?= base_url('assets/js/crypto-js.js_4.0.0/crypto-js.js') ?>"></script>
+
     <?= $this->renderSection('js') ?>
 
 </body>

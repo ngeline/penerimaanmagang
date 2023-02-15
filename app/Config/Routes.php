@@ -60,6 +60,10 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->post('pembimbing/store', 'PembimbingController::store');
         $routes->post('pembimbing/update', 'PembimbingController::update');
         $routes->get('pembimbing/delete/(:any)', 'PembimbingController::delete/$1');
+
+        $routes->get('pengajuan', 'PengajuanController::indexAdmin');
+        $routes->get('pengajuan/detail', 'PengajuanController::detail');
+        $routes->post('pengajuan/validasi', 'PengajuanController::validasiAdmin');
     });
 
     $routes->group('siswa', ['filter' => 'SiswaFilter'], function ($routes) {
