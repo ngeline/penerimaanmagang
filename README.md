@@ -2,10 +2,25 @@
 
 ## How to run
 
-- Clone project
-- 
+- Clone project ('git clone https://github.com/ngeline/penerimaanmagang.git')
+- Update composer project ('composer update')
+- Create database ('simagang-apps')
+- Migration database ('php spark migrate')
+- Seeder database ('php spark db:seed DatabaseSeeder')
+- Run project ('php spark serve')
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
+## Akun Admin
+- Username ('admin')
+- Password ('12345678')
+
+## Akun Pembimbing
+- Buat akun dibagian admin ('kelola pembimbing')
+- Username & password sama dengan NIP pembimbing
+
+## Akun Siswa
+- Registrasi akun & validasi kode lewat WA
+
+<!-- CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
 More information can be found at the [official site](https://codeigniter.com).
 
 This repository holds a composer-installable app starter.
@@ -62,4 +77,4 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library -->
