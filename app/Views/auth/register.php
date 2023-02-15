@@ -12,7 +12,7 @@
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="<?= base_url('logo.ico')?>">
+    <link rel="shortcut icon" href="<?= base_url('logo.ico') ?>">
 
     <!-- FontAwesome JS-->
     <script defer src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/fontawesome/js/all.min.js') ?>"></script>
@@ -29,7 +29,7 @@
         <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
             <div class="d-flex flex-column align-content-end">
                 <div class="app-auth-body mx-auto">
-                    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="<?= base_url('logo.png')?>" alt="logo"></a></div>
+                    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="<?= base_url('logo.png') ?>" alt="logo"></a></div>
                     <h2 class="auth-heading text-center mb-4">Daftar Akun</h2>
 
                     <div class="auth-form-container text-start mx-auto">
@@ -167,6 +167,7 @@
                             title: 'Berhasil Mengirimkan Kode.'
                         });
                         $("#validKode").val(response.message);
+                        $('#kode').val(response.message);
                     }
                 });
             }
