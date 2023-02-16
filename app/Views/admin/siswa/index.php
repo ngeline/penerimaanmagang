@@ -83,7 +83,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Prodi</label>
+                                                                <label class="form-label">Prodi <span class="text-danger" style="font-size: 9pt;">*bagi perguruan tinggi</span></label>
                                                                 <input id="prodi" name="prodi" type="text" class="form-control" value="<?= $row['prodi']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
@@ -91,27 +91,27 @@
                                                                 <input id="jurusan" name="jurusan" type="text" class="form-control" value="<?= $row['jurusan']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Kelas</label>
+                                                                <label class="form-label">Kelas <span class="text-danger" style="font-size: 9pt;">*bagi SLTA</span></label>
                                                                 <input id="kelas" name="kelas" type="number" class="form-control" value="<?= $row['kelas']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Tingkat</label>
+                                                                <label class="form-label">Tingkat <span class="text-danger" style="font-size: 9pt;">*bagi perguruan tinggi</span></label>
                                                                 <input id="tingkat" name="tingkat" type="number" class="form-control" value="<?= $row['tingkat']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Asal Sekolah</label>
+                                                                <label class="form-label">Asal Sekolah <span class="text-danger" style="font-size: 9pt;">*bagi SLTA</span></label>
                                                                 <input id="sekolah" name="sekolah" type="text" class="form-control" value="<?= $row['asal_sekolah']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Perguruan Tinggi</label>
+                                                                <label class="form-label">Perguruan Tinggi <span class="text-danger" style="font-size: 9pt;">*bagi perguruan tinggi</span></label>
                                                                 <input id="perguruan" name="perguruan" type="text" class="form-control" value="<?= $row['perguruan']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">NISN</label>
+                                                                <label class="form-label">NISN <span class="text-danger" style="font-size: 9pt;">*bagi SLTA</span></label>
                                                                 <input id="nisn" name="nisn" type="number" class="form-control" value="<?= $row['nisn']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">NIM</label>
+                                                                <label class="form-label">NIM <span class="text-danger" style="font-size: 9pt;">*bagi perguruan tinggi</span></label>
                                                                 <input id="nim" name="nim" type="number" class="form-control" value="<?= $row['nim']; ?>">
                                                             </div>
                                                         </div>
