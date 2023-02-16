@@ -265,7 +265,7 @@ class MagangController extends BaseController
         $dataPembimbing = $pembimbing->where('users_id', $id)->first();
 
         $magang = new MagangModel();
-        $data['list'] = $magang->select('magang.*, magang.id AS id_magang, pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa, siswa.nama AS nama_siswa, pembimbing.*, pembimbing.id AS id_pembimbing, pembimbing.nama AS nama_pembimbing')
+        $data['list'] = $magang->select('magang.*, magang.id AS id_magang, pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa, siswa.nama AS nama_siswa, pembimbing.nama AS nama_pembimbing')
             ->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')
             ->join('siswa', 'magang.siswa_id = siswa.id')
             ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')

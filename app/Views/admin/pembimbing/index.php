@@ -81,7 +81,7 @@
                                 <th>Nama Lengkap</th>
                                 <th>Bidang</th>
                                 <th>Telepon</th>
-                                <th>Aksi</th>
+                                <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>

@@ -23,7 +23,7 @@
                                 </li>
                             <?php endif; ?>
                             <!-- <li><a class="dropdown-item" href="settings .html">Settings</a></li> -->
-                            <li><a class="dropdown-item" href="<?= base_url('logout') ?>">Log Out</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('logout') ?>">Keluar</a></li>
                         </ul>
                     </div><!--//app-user-dropdown-->
                 </div><!--//app-utilities-->

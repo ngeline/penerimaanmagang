@@ -17,7 +17,7 @@
                                 <th>Jenjang</th>
                                 <th>Jurusan</th>
                                 <th>Telepon</th>
-                                <th>Aksi</th>
+                                <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
@@ -40,7 +40,7 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-info">
-                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Form Detail Data</h5>
+                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Detail Data</h5>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">

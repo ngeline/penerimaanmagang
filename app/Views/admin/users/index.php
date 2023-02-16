@@ -12,10 +12,10 @@
                     <div class="table-responsive ">
                         <table class="table table-striped w-100" id="Tables">
                             <thead class="table-light">
-                                <th>No</th>
+                                <th style="width: 2%;">No</th>
                                 <th>Nama Pengguna</th>
                                 <th>Wewenang</th>
-                                <th>Aksi</th>
+                                <th data-orderable="false" style="width: 17%;">Aksi</th>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>

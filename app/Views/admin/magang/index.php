@@ -71,7 +71,7 @@
                                 <th>Nama Siswa Magang</th>
                                 <th>Nama Pembimbing</th>
                                 <th>Periode Magang</th>
-                                <th>Aksi</th>
+                                <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>

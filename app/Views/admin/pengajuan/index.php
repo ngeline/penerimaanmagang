@@ -75,7 +75,7 @@
                                 <th>Institusi Pemohon</th>
                                 <th>Tanggal Pengajuan</th>
                                 <th>Status Pengajuan</th>
-                                <th>Aksi</th>
+                                <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>

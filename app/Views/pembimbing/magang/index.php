@@ -16,7 +16,7 @@
                                 <th>Nama Siswa Magang</th>
                                 <th>Nama Pembimbing</th>
                                 <th>Periode Magang</th>
-                                <th>Aksi</th>
+                                <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
@@ -38,7 +38,7 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-info">
-                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Form Edit Data</h5>
+                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Detail Data</h5>
                                                 </div>
                                                 <div class="modal-body">
                                                     <input type="hidden" name="id" value="<?= $row['id_magang'] ?>">
