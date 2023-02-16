@@ -17,15 +17,24 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="<?= base_url('green/assets/vendor/animate.css/animate.min.css') ?>" rel="stylesheet">
-  <link href="<?= base_url('green/assets/vendor/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
-  <link href="<?= base_url('green/assets/vendor/bootstrap-icons/bootstrap-icons.css') ?>" rel="stylesheet">
-  <link href="<?= base_url('green/assets/vendor/boxicons/css/boxicons.min.css') ?>" rel="stylesheet">
-  <link href="<?= base_url('green/assets/vendor/glightbox/css/glightbox.min.css') ?>" rel="stylesheet">
-  <link href="<?= base_url('green/assets/vendor/swiper/swiper-bundle.min.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('green/assets/vendors/animate.css/animate.min.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('green/assets/vendors/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('green/assets/vendors/bootstrap-icons/bootstrap-icons.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('green/assets/vendors/boxicons/css/boxicons.min.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('green/assets/vendors/glightbox/css/glightbox.min.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('green/assets/vendors/swiper/swiper-bundle.min.css') ?>" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="<?= base_url('green/assets/css/style.css') ?>" rel="stylesheet">
+
+  <style>
+    .sotabilos {
+      padding: 4px 7px 9px;
+      border-radius: 3px;
+      color: #fff;
+      font-weight: bold
+    }
+  </style>
 
 </head>
 
@@ -40,7 +49,7 @@
       </div>
       <div class="social-links d-none d-md-block">
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.instagram.com/dinaspendidikan_kotakediri" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
       </div>
     </div>
   </section>
@@ -56,8 +65,10 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#visi">Visi & Misi</a></li>
+          <li><a class="nav-link scrollto" href="#services">Kegiatan</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
-          <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
+          <li><a class="nav-link scrollto" href="<?= base_url('login') ?>">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -75,31 +86,33 @@
         <div class="text-center">
           <div class="carousel-item active" style="background-image: url(<?= base_url('green/assets/img/slide/slide-1.jpg') ?>">
             <div class="carousel-container">
-            <div class="page-next-level"> <h4 class="title text-primary">Dinas Pendidikan Kota Kediri</h4> 
-            <p>Situs resmi Dinas Pendidikan Kota Kediri, Semoga dengan adanya website ini dapat mempermudah semua lapisan masyarakat dalam mengakses informasi terkait pendidikan. <br></p>
-            <p>Dinas Pendidikan <b class="text-primary">#SIMPATIK</b></p> 
-            <p>#<b class="text-primary">S</b>enyumSapaSalam, #<b class="text-primary">I</b>nformatif, #<b class="text-primary">M</b>elayani, #<b class="text-primary">P</b>rofesional, #<b class="text-primary">A</b>kuntabel, #<b class="text-primary">T</b>ransparan, #<b class="text-primary">I</b>klash, #<b class="text-primary">K</b>ooperatif</p> 
-            <div class="page-next">
-            <nav aria-label="breadcrumb" class="d-inline-block"> <ul class="breadcrumb bg-white rounded"> 
-            <li class="breadcrumb-item"> <a href="https://pendidikan.kedirikota.go.id/">Home</a></li> 
-            <li class="breadcrumb-item active" aria-current="page">Contact</li> </ul> 
-            </nav> 
+              <div class="page-next-level">
+                <h4 class="title text-primary">Dinas Pendidikan Kota Kediri</h4>
+                <p>Situs resmi Dinas Pendidikan Kota Kediri, Semoga dengan adanya website ini dapat mempermudah semua lapisan masyarakat dalam mengakses informasi terkait pendidikan. <br></p>
+                <p>Dinas Pendidikan <b class="text-primary">#SIMPATIK</b></p>
+                <p>#<b class="text-primary">S</b>enyumSapaSalam, #<b class="text-primary">I</b>nformatif, #<b class="text-primary">M</b>elayani, #<b class="text-primary">P</b>rofesional, #<b class="text-primary">A</b>kuntabel, #<b class="text-primary">T</b>ransparan, #<b class="text-primary">I</b>klash, #<b class="text-primary">K</b>ooperatif</p>
+                <div class="page-next">
+                  <nav aria-label="breadcrumb" class="d-inline-block">
+                    <ul class="breadcrumb bg-white rounded">
+                      <!-- <li class="breadcrumb-item"> <a href="https://pendidikan.kedirikota.go.id/">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Contact</li> -->
+                    </ul>
+                  </nav>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   </section>
   <!-- End Hero -->
 
   <main id="main">
 
-    <!-- ======= About Us Section ======= -->
-    <section id="contact" class="contact">
+    <section id="visi" class="contact">
       <div class="container">
 
         <div class="section-title">
-          <h2>Kontak</h2>
+          <h2>Visi & Misi</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
@@ -129,8 +142,8 @@
               </div>
             </div>
 
-      </div>
-    </section>
+          </div>
+        </section>
 
       </div>
     </section><!-- End About Us Section -->
@@ -140,7 +153,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Layanan</h2>
+          <h2>Kegiatan</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
@@ -228,6 +241,47 @@
       </div>
     </section><!-- End Services Section -->
 
+    <!-- ======= About Us Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Kontak</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <section id="featured-services" class="featured-services section-bg">
+          <div class="container">
+            <div class="row no-gutters">
+              <div class="col-lg-4 col-md-6">
+                <div class="icon-box">
+                  <div class="icon"><i class="bi bi-telephone"></i></div>
+                  <h4 class="title"><a href="">(0354) 689923</a></h4>
+                  <p class="description">Layanan telepon untuk saran/pertanyaan warga Kota Kediri</p>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="icon-box">
+                  <div class="icon"><i class="bi bi-envelope-check-fill"></i></div>
+                  <h4 class="title"><a href="">dispendik@kedirikota.go.id</a></h4>
+                  <p class="description">Saran/pertanyaan bisa kirim via e-mail</p>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="icon-box">
+                  <div class="icon"><i class="bi bi-geo-alt-fill"></i></div>
+                  <h4 class="title"><a href="">Jln. Mayor Bismo No. 10 - 12</a></h4>
+                  <p class="description">Ulas kami di google maps</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.8854681327753!2d112.0067138141545!3d-7.8019484796089085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78572dceb27a57%3A0xd31cc01bbc30d3cc!2sKantor%20Dinas%20Pendidikan%20Kota%20Kediri!5e0!3m2!1sid!2sid!4v1676518943632!5m2!1sid!2sid" class="w-100 mb-0" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+
+      </div>
+    </section><!-- End About Us Section -->
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -248,11 +302,11 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="<?= base_url('green/assets/vendors/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+  <script src="<?= base_url('green/assets/vendors/glightbox/js/glightbox.min.js') ?>"></script>
+  <script src="<?= base_url('green/assets/vendors/isotope-layout/isotope.pkgd.min.js') ?>"></script>
+  <script src="<?= base_url('green/assets/vendors/swiper/swiper-bundle.min.js') ?>"></script>
+  <script src="<?= base_url('green/assets/vendors/php-email-form/validate.js') ?>"></script>
 
   <!-- Template Main JS File -->
   <script src="<?= base_url('green/assets/js/main.js') ?>"></script>
