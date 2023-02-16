@@ -93,10 +93,14 @@ class SiswaController extends BaseController
         $magang = new MagangModel();
         $dataMagang = $magang->where('pembimbing_id', $dataPembimbing['id'])->where('status_hapus', 'tidak')->findAll();
 
-        $arrId = [];
+        if ($dataMagang) {
+            $arrId = [];
 
-        foreach ($dataMagang as $value) {
-            array_push($arrId, $value['siswa_id']);
+            foreach ($dataMagang as $value) {
+                array_push($arrId, $value['siswa_id']);
+            }
+        } else {
+            $arrId = ['0'];
         }
 
         $siswa = new SiswaModel();

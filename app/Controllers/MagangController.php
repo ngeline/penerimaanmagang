@@ -28,6 +28,15 @@ class MagangController extends BaseController
         $pengajuan = new PengajuanModel();
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
 
+        $magang = new MagangModel();
+        $data['list'] = $magang->select('bidang.*, pembimbing.*, pengajuan.*, magang.*, magang.id AS id_magang')
+            ->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')
+            ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')
+            ->join('bidang', 'pembimbing.bidang_id = bidang.id')
+            ->where('magang.siswa_id', $siswaDetail['id'])
+            ->where('magang.status_hapus', 'tidak')
+            ->get()->getResultArray();
+
         // Jika Profil tidak lengkap
         if ($siswaDetail['status_lengkap'] == 'tidak') {
             return view('siswa/error/profilError', $data);
