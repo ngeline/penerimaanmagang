@@ -34,7 +34,7 @@ class KegiatanController extends BaseController
             // Jika belum mengajukan && belum diterima
             if (!empty($pengajuanDetail) && $pengajuanDetail['status_pengajuan'] == 'diterima') {
                 $magang = new MagangModel();
-                $magangDetail = $magang->where('pengajuan_id', $pengajuanDetail['id'])->findAll();
+                $magangDetail = $magang->where('pengajuan_id', $pengajuanDetail['id'])->where('status_hapus', 'tidak')->findAll();
 
                 // Jika belum ada data dimagang
                 if ($magangDetail) {
@@ -57,7 +57,7 @@ class KegiatanController extends BaseController
 
                         if (!empty($cekPengajuanDetail) && $cekPengajuanDetail['status_pengajuan'] == 'diterima') {
                             $magang = new MagangModel();
-                            $magangDetail = $magang->where('pengajuan_id', $cekPengajuanDetail['id'])->findAll();
+                            $magangDetail = $magang->where('pengajuan_id', $cekPengajuanDetail['id'])->where('status_hapus', 'tidak')->findAll();
 
                             // Jika belum ada data dimagang
                             if ($magangDetail) {

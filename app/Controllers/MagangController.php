@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\MagangModel;
+use App\Models\PembimbingModel;
 use App\Models\SiswaModel;
 use App\Models\PengajuanModel;
 use App\Models\PengajuanAnggotaModel;
@@ -34,7 +35,7 @@ class MagangController extends BaseController
             // Jika belum mengajukan && belum diterima
             if (!empty($pengajuanDetail) && $pengajuanDetail['status_pengajuan'] == 'diterima') {
                 $magang = new MagangModel();
-                $magangDetail = $magang->where('pengajuan_id', $pengajuanDetail['id'])->findAll();
+                $magangDetail = $magang->where('pengajuan_id', $pengajuanDetail['id'])->where('status_hapus', 'tidak')->findAll();
 
                 // Jika belum ada data dimagang
                 if ($magangDetail) {
@@ -57,7 +58,7 @@ class MagangController extends BaseController
 
                         if (!empty($cekPengajuanDetail) && $cekPengajuanDetail['status_pengajuan'] == 'diterima') {
                             $magang = new MagangModel();
-                            $magangDetail = $magang->where('pengajuan_id', $cekPengajuanDetail['id'])->findAll();
+                            $magangDetail = $magang->where('pengajuan_id', $cekPengajuanDetail['id'])->where('status_hapus', 'tidak')->findAll();
 
                             // Jika belum ada data dimagang
                             if ($magangDetail) {
@@ -77,6 +78,180 @@ class MagangController extends BaseController
                     return view('siswa/error/pengajuanError', $data);
                 }
             }
+        }
+    }
+
+    public function indexAdmin()
+    {
+        $data['activePage'] = 'siswaMagang';
+
+        $magang = new MagangModel();
+        $data['list'] = $magang->select('magang.*, magang.id AS id_magang, pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa, siswa.nama AS nama_siswa, pembimbing.*, pembimbing.id AS id_pembimbing, s.*, s.id AS id_s, s.nama AS s_nama, pembimbing.nama AS nama_pembimbing')
+            ->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')
+            ->join('siswa', 'magang.siswa_id = siswa.id')
+            ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')
+            ->join('siswa AS s', 'pengajuan.siswa_id = s.id')
+            ->where('magang.status_hapus', 'tidak')
+            ->get()->getResultArray();
+
+        $pembimbing = new PembimbingModel();
+        $data['pembimbing'] = $pembimbing->getPembimbings();
+
+        $pengajuan = new PengajuanModel();
+        $data['pengajuan'] = $pengajuan->select('pengajuan.id AS id_pengajuan, pengajuan.created_at, siswa.nama AS nama_siswa, pengajuan.tanggal_mulai, pengajuan.tanggal_selesai')
+            ->join('siswa', 'pengajuan.siswa_id = siswa.id')
+            ->where('pengajuan.status_pengajuan', 'diterima')
+            ->orderBy('pengajuan.created_at', 'asc')
+            ->get()->getResultArray();
+
+        return view('admin/magang/index', $data);
+    }
+
+    public function storeAdmin()
+    {
+        $data = $this->request->getPost();
+
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
+            'pengajuan' => [
+                'label' => 'List Pengajuan',
+                'rules' => 'required'
+            ],
+            'daftarSiswa' => [
+                'label' => 'Siswa Magang',
+                'rules' => 'required'
+            ],
+            'pembimbing' => [
+                'label' => 'Pembimbing Magang',
+                'rules' => 'required'
+            ],
+        ]);
+
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('admin/magang'));
+        }
+
+        $magang = new MagangModel();
+        $dataMagang = [
+            'pengajuan_id' => $data['pengajuan'],
+            'siswa_id' => $data['daftarSiswa'],
+            'pembimbing_id' => $data['pembimbing']
+        ];
+        $magang->insertMagang($dataMagang);
+
+        session()->setFlashdata("success", 'Berhasil menambahkan data!');
+        return redirect()->to(base_url('admin/magang'));
+    }
+
+    public function updateAdmin()
+    {
+        $data = $this->request->getPost();
+
+        $id = $data['id'];
+
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
+            'editPembimbing' => [
+                'label' => 'Pembimbing Magang',
+                'rules' => 'required'
+            ],
+            'editStatus' => [
+                'label' => 'Status Magang',
+                'rules' => 'required'
+            ],
+        ]);
+
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('admin/magang'));
+        }
+
+        $magang = new MagangModel();
+        $dataMagang = [
+            'pembimbing_id' => $data['editPembimbing'],
+            'status_magang' => $data['editStatus'],
+            'sertifikat' => $data['editSertifikat']
+        ];
+        $magang->updateMagang($dataMagang, $id);
+
+        session()->setFlashdata("success", 'Berhasil memperbarui data!');
+        return redirect()->to(base_url('admin/magang'));
+    }
+
+    public function deleteAdmin($id)
+    {
+        $magang = new MagangModel();
+
+        $dataMagang = [
+            'status_hapus' => 'hapus'
+        ];
+
+        $magang->updateMagang($dataMagang, $id);
+
+        session()->setFlashdata("success", 'File Anda telah dihapus!');
+        return redirect()->to(base_url('admin/magang'));
+    }
+
+    public function listSiswa()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+
+            if ($id == 0) {
+                $data = [
+                    'status' => 'success',
+                    'anggota' => '0',
+                    'listSiswa' => '0'
+                ];
+
+                return $this->response->setJSON($data);
+            }
+
+            $pengajuan = new PengajuanModel();
+            $dataPengajuan = $pengajuan->select('pengajuan.*,siswa.*')
+                ->join('siswa', 'pengajuan.siswa_id = siswa.id')
+                ->where('pengajuan.id', $id)
+                ->get()->getResultArray();
+
+            $anggota = new PengajuanAnggotaModel();
+            $dataAnggota = $anggota->select('pengajuan_anggota.*,siswa.*')
+                ->join('siswa', 'pengajuan_anggota.siswa_id = siswa.id')
+                ->where('pengajuan_id', $id)
+                ->get()->getResultArray();
+
+            $arrNama = [];
+            $arrId = [];
+
+            $siswaPemohon = $dataPengajuan['0']['nama'];
+            array_push($arrNama, $siswaPemohon);
+            foreach ($dataAnggota as $value) {
+                array_push($arrNama, $value['nama']);
+            }
+
+            $siswaPemohonId = $dataPengajuan['0']['siswa_id'];
+            array_push($arrId, $siswaPemohonId);
+            foreach ($dataAnggota as $value) {
+                array_push($arrId, $value['siswa_id']);
+            }
+
+            $listSiswa = new SiswaModel();
+            $getListSiswa = $listSiswa->select('siswa.id, siswa.nama')
+                ->whereIn('id', $arrId)
+                ->orderBy('nama', 'asc')
+                ->get()->getResultArray();
+
+            $data = [
+                'status' => 'success',
+                'anggota' => $arrNama,
+                'listSiswa' => $getListSiswa
+            ];
+
+            return $this->response->setJSON($data);
         }
     }
 }

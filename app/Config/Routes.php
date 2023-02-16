@@ -64,6 +64,12 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('pengajuan', 'PengajuanController::indexAdmin');
         $routes->get('pengajuan/detail', 'PengajuanController::detail');
         $routes->post('pengajuan/validasi', 'PengajuanController::validasiAdmin');
+
+        $routes->get('magang', 'MagangController::indexAdmin');
+        $routes->post('magang/store', 'MagangController::storeAdmin');
+        $routes->post('magang/update', 'MagangController::updateAdmin');
+        $routes->get('magang/delete/(:any)', 'MagangController::deleteAdmin/$1');
+        $routes->get('magang/list-siswa', 'MagangController::listSiswa');
     });
 
     $routes->group('siswa', ['filter' => 'SiswaFilter'], function ($routes) {

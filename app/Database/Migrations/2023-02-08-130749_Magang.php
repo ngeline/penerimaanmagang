@@ -38,6 +38,12 @@ class Magang extends Migration
                 'type' => 'TEXT',
                 'null' => true
             ],
+            'status_hapus' => [
+                'type' => 'ENUM',
+                'constraint' => "'hapus', 'tidak'",
+                'null' => false,
+                'default' => 'tidak',
+            ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'
         ]);
