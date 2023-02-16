@@ -155,7 +155,7 @@
                 <?php if (session()->get('role') === 'pembimbing') : ?>
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link <?= ($activePage == 'pembimbingSiswa') ? 'active' : '' ?>" href="index.html">
+                        <a class="nav-link <?= ($activePage == 'pembimbingSiswa') ? 'active' : '' ?>" href="<?= base_url('pembimbing/siswa') ?>">
                             <span class="nav-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />

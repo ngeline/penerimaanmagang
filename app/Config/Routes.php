@@ -89,6 +89,8 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
     $routes->group('pembimbing', ['filter' => 'PembimbingFilter'], function ($routes) {
         $routes->post('users/update', 'UsersController::updatePembimbingUsers');
         $routes->post('profile/update', 'ProfileController::updateProfilePembimbing');
+
+        $routes->get('siswa', 'SiswaController::indexPembimbing');
     });
 });
 

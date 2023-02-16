@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\MagangModel;
+use App\Models\PembimbingModel;
 use App\Models\UsersModel;
 use App\Models\SiswaModel;
 
@@ -77,5 +79,29 @@ class SiswaController extends BaseController
 
         session()->setFlashdata("success", 'File Anda telah dihapus!');
         return redirect()->to(base_url('admin/siswa'));
+    }
+
+    public function indexPembimbing()
+    {
+        $data['activePage'] = 'pembimbingSiswa';
+
+        $id = session()->get('id');
+
+        $pembimbing = new PembimbingModel();
+        $dataPembimbing = $pembimbing->where('users_id', $id)->first();
+
+        $magang = new MagangModel();
+        $dataMagang = $magang->where('pembimbing_id', $dataPembimbing['id'])->where('status_hapus', 'tidak')->findAll();
+
+        $arrId = [];
+
+        foreach ($dataMagang as $value) {
+            array_push($arrId, $value['siswa_id']);
+        }
+
+        $siswa = new SiswaModel();
+        $data['list'] = $siswa->whereIn('id', $arrId)->where('status_hapus', 'tidak')->findAll();
+
+        return view('pembimbing/siswa/index', $data);
     }
 }
