@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?= base_url('green/assets/img/favicon.png') ?>" rel="icon">
+  <link href="<?= base_url('logo.ico') ?>" rel="icon">
   <link href="<?= base_url('green/assets/img/apple-touch-icon.png') ?>" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -26,15 +26,6 @@
 
   <!-- Template Main CSS File -->
   <link href="<?= base_url('green/assets/css/style.css') ?>" rel="stylesheet">
-
-  <style>
-    .sotabilos {
-      padding: 4px 7px 9px;
-      border-radius: 3px;
-      color: #fff;
-      font-weight: bold
-    }
-  </style>
 
 </head>
 
@@ -58,7 +49,7 @@
   <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">DISPENDIK</a></h1>
+      <h1 class="logo me-auto"><a href="<?= base_url('/') ?>">DISPENDIK</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
@@ -91,14 +82,14 @@
                 <p>Situs resmi Dinas Pendidikan Kota Kediri, Semoga dengan adanya website ini dapat mempermudah semua lapisan masyarakat dalam mengakses informasi terkait pendidikan. <br></p>
                 <p>Dinas Pendidikan <b class="text-primary">#SIMPATIK</b></p>
                 <p>#<b class="text-primary">S</b>enyumSapaSalam, #<b class="text-primary">I</b>nformatif, #<b class="text-primary">M</b>elayani, #<b class="text-primary">P</b>rofesional, #<b class="text-primary">A</b>kuntabel, #<b class="text-primary">T</b>ransparan, #<b class="text-primary">I</b>klash, #<b class="text-primary">K</b>ooperatif</p>
-                <div class="page-next">
+                <!-- <div class="page-next">
                   <nav aria-label="breadcrumb" class="d-inline-block">
                     <ul class="breadcrumb bg-white rounded">
-                      <!-- <li class="breadcrumb-item"> <a href="https://pendidikan.kedirikota.go.id/">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Contact</li> -->
+                      <li class="breadcrumb-item"> <a href="https://pendidikan.kedirikota.go.id/">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Contact</li>
                     </ul>
                   </nav>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

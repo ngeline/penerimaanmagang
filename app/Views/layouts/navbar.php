@@ -17,7 +17,7 @@
                         <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="<?= base_url('assets/img/icons8-name-48.png') ?>" alt="user profile"></a>
                         <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                             <?php if (session()->get('role') === 'siswa' || session()->get('role') === 'pembimbing') : ?>
-                                <li><a class="dropdown-item" href="<?= base_url('profile') ?>">Profile</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('profile') ?>">Profil</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

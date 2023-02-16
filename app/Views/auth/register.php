@@ -29,7 +29,7 @@
         <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
             <div class="d-flex flex-column align-content-end">
                 <div class="app-auth-body mx-auto">
-                    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="<?= base_url('logo.png') ?>" alt="logo"></a></div>
+                    <div class="app-auth-branding mb-4"><a class="app-logo" href="<?= base_url('/') ?>"><img class="logo-icon me-2" src="<?= base_url('logo.png') ?>" alt="logo"></a></div>
                     <h2 class="auth-heading text-center mb-4">Daftar Akun</h2>
 
                     <div class="auth-form-container text-start mx-auto">
@@ -37,7 +37,7 @@
                             <?= csrf_field() ?>
                             <div class="mb-3">
                                 <label class="sr-only">Username</label>
-                                <input id="username" name="username" type="text" placeholder="Username" class="form-control" value="<?php echo set_value('username'); ?>" required="required">
+                                <input id="username" name="username" type="text" placeholder="Nama Pengguna" class="form-control" value="<?php echo set_value('username'); ?>" required="required">
                                 <!-- Tambahkan pesan validasi -->
                                 <?php if (isset($validation)) : ?>
                                     <small style="color: red;">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="sr-only">Password</label>
-                                <input id="password" name="password" type="password" placeholder="Password" class="form-control" value="<?php echo set_value('password'); ?>" required="required">
+                                <input id="password" name="password" type="password" placeholder="Kata Sandi" class="form-control" value="<?php echo set_value('password'); ?>" required="required">
                                 <!-- Tambahkan pesan validasi -->
                                 <?php if (isset($validation)) : ?>
                                     <small style="color: red;">
