@@ -83,7 +83,7 @@ class MagangController extends BaseController
 
     public function indexAdmin()
     {
-        $data['activePage'] = 'siswaMagang';
+        $data['activePage'] = 'adminMagang';
 
         $magang = new MagangModel();
         $data['list'] = $magang->select('magang.*, magang.id AS id_magang, pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa, siswa.nama AS nama_siswa, pembimbing.*, pembimbing.id AS id_pembimbing, s.*, s.id AS id_s, s.nama AS s_nama, pembimbing.nama AS nama_pembimbing')
@@ -253,5 +253,36 @@ class MagangController extends BaseController
 
             return $this->response->setJSON($data);
         }
+    }
+
+    public function indexPembimbing()
+    {
+        $data['activePage'] = 'pembimbingMagang';
+
+        $id = session()->get('id');
+
+        $pembimbing = new PembimbingModel();
+        $dataPembimbing = $pembimbing->where('users_id', $id)->first();
+
+        $magang = new MagangModel();
+        $data['list'] = $magang->select('magang.*, magang.id AS id_magang, pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa, siswa.nama AS nama_siswa, pembimbing.*, pembimbing.id AS id_pembimbing, pembimbing.nama AS nama_pembimbing')
+            ->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')
+            ->join('siswa', 'magang.siswa_id = siswa.id')
+            ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')
+            ->where('pembimbing_id', $dataPembimbing['id'])
+            ->where('magang.status_hapus', 'tidak')
+            ->get()->getResultArray();
+
+        $pembimbing = new PembimbingModel();
+        $data['pembimbing'] = $pembimbing->getPembimbings();
+
+        $pengajuan = new PengajuanModel();
+        $data['pengajuan'] = $pengajuan->select('pengajuan.id AS id_pengajuan, pengajuan.created_at, siswa.nama AS nama_siswa, pengajuan.tanggal_mulai, pengajuan.tanggal_selesai')
+            ->join('siswa', 'pengajuan.siswa_id = siswa.id')
+            ->where('pengajuan.status_pengajuan', 'diterima')
+            ->orderBy('pengajuan.created_at', 'asc')
+            ->get()->getResultArray();
+
+        return view('pembimbing/magang/index', $data);
     }
 }

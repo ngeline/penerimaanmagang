@@ -91,6 +91,7 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->post('profile/update', 'ProfileController::updateProfilePembimbing');
 
         $routes->get('siswa', 'SiswaController::indexPembimbing');
+        $routes->get('magang', 'MagangController::indexPembimbing');
     });
 });
 
