@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="<?= base_url('assets/template/dataTables/datatables.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/template/sweetalert2/sweetalert2.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/template/glightbox/css/glightbox.min.css') ?>">
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/css/portal.css') ?>">
@@ -74,6 +75,7 @@
 
     <script src="<?= base_url('assets/template/dataTables/datatables.min.js') ?>"></script>
     <script src="<?= base_url('assets/template/sweetalert2/sweetalert2.min.js') ?>"></script>
+    <script src="<?= base_url('assets/template/glightbox/js/glightbox.min.js') ?>"></script>
 
     <script src="<?= base_url('assets/js/crypto-js.js_4.0.0/crypto-js.js') ?>"></script>
 

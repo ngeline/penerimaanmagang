@@ -39,7 +39,7 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-info">
-                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Form Detail Data</h5>
+                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Detail Data</h5>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">
@@ -55,6 +55,16 @@
                                                             <label class="form-label">Keterangan</label>
                                                             <textarea rows="4" class="form-control" readonly><?= $row['keterangan'] ?></textarea>
                                                         </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Status Magang</label>
+                                                            <input type="text" class="form-control" value="<?= $row['status_magang'] ?>" readonly>
+                                                        </div>
+                                                        <?php if ($row['sertifikat']) : ?>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Sertifikat</label>
+                                                                <a href="<?= base_url('assets/file/sertifikat/' . $row['sertifikat']) ?>" class="btn btn-warning text-white w-100" download>Unduh</a>
+                                                            </div>
+                                                        <?php endif; ?>
                                                         <div class="mb-3 col-md-6">
                                                             <label class="form-label">Nama Pembimbing</label>
                                                             <input type="text" class="form-control" value="<?= $row['nama'] ?>" readonly>

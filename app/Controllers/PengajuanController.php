@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\MagangModel;
 use App\Models\PengajuanAnggotaModel;
 use App\Models\PengajuanModel;
 use App\Models\SiswaModel;
@@ -74,6 +75,18 @@ class PengajuanController extends BaseController
             foreach ($kondisi as $value) {
                 if ($value['status_pengajuan'] == 'diproses') {
                     session()->setFlashdata("warning", 'Pengajuan magang anda masih diproses. Mohon tunggu hingga dikonfirmasi oleh admin, sebelum mengajukan kembali.');
+                    return redirect()->to(base_url('siswa/pengajuan'));
+                }
+            }
+        }
+
+        $getMagang = new MagangModel();
+        $kondisiMagang = $getMagang->where('siswa_id', $data['id'])->findAll();
+
+        if ($kondisiMagang) {
+            foreach ($kondisiMagang as $value) {
+                if ($value['status_magang'] == 'berjalan') {
+                    session()->setFlashdata("warning", 'Anda sudah diterima magang dan sedang dalam masa magang. Mohon tunggu hingga magang selesai, sebelum mengajukan kembali.');
                     return redirect()->to(base_url('siswa/pengajuan'));
                 }
             }

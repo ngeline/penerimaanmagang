@@ -44,7 +44,7 @@
                             <div class="mb-3 col-md-6">
                                 <label class="form-label">Jenjang Pendidikan</label>
                                 <select name="jenjang" id="jenjang" class="form-select" required>
-                                    <option value="">--Pilih Status--</option>
+                                    <option value="0">--Pilih Status--</option>
                                     <option value="Perguruan Tinggi" <?= ($siswa['jenjang'] == 'Perguruan Tinggi') ? 'selected' : '' ?>>Perguruan Tinggi</option>
                                     <option value="SLTA" <?= ($siswa['jenjang'] == 'SLTA') ? 'selected' : '' ?>>SLTA Sederajat</option>
                                 </select>

@@ -161,7 +161,7 @@
                                         <td><?php echo $no++ ?></td>
                                         <td><?= date_format(new DateTime($row['created_at']), 'd/m/Y H:i:s'); ?></td>
                                         <td><?= $row['status_pengajuan'] ?></td>
-                                        <td><?= ($row['status_pengajuan'] == 'diproses') ? 'tidak ada' : $row['catatan'] ?></td>
+                                        <td><?= ($row['status_pengajuan'] == 'diproses') ? 'tidak ada catatan' : $row['catatan'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-info text-white" id="detail" data-id="<?= $row['id'] ?>">
                                                 Detail

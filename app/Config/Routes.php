@@ -81,7 +81,10 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('pengajuan/detail', 'PengajuanController::detail');
 
         $routes->get('magang', 'MagangController::index');
+
         $routes->get('absensi', 'AbsensiController::index');
+        $routes->post('absensi/store', 'AbsensiController::store');
+
         $routes->get('kegiatan', 'KegiatanController::index');
         $routes->get('penilaian', 'PenilaianController::index');
     });

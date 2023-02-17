@@ -51,7 +51,7 @@ class ProfileController extends BaseController
 
         $id = $data['id'];
 
-        $model = new SiswaModel();;
+        $model = new SiswaModel();
 
         $validation =  \Config\Services::validation();
 
@@ -145,6 +145,9 @@ class ProfileController extends BaseController
                     'rules' => 'is_natural_no_zero'
                 ],
             ]);
+        } else {
+            session()->setFlashdata("warning", 'Input anda tidak sesuai');
+            return redirect()->to(base_url('profile'));
         }
 
         if (!$validation->run($_POST)) {
