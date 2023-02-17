@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AbsensiModel;
 use App\Models\MagangModel;
 use App\Models\SiswaModel;
 use App\Models\PengajuanModel;
@@ -26,6 +27,29 @@ class AbsensiController extends BaseController
 
         $pengajuan = new PengajuanModel();
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
+
+        $magang = new MagangModel();
+        $dataMagang = $magang->where('siswa_id', $siswaDetail['id'])->findAll();
+
+        if ($dataMagang) {
+            $arrId = [];
+
+            foreach ($dataMagang as $value) {
+                array_push($arrId, $value['id']);
+
+                if ($value['status_magang'] == 'berjalan') {
+                    $dataId = $value['id'];
+                }
+            }
+        } else {
+            $arrId = ['0'];
+            $dataId = 0;
+        }
+
+        $data['id_magang'] = $dataId;
+
+        $absensi = new AbsensiModel();
+        $data['list'] = $absensi->whereIn('magang_id', $arrId)->findAll();
 
         // Jika Profil tidak lengkap
         if ($siswaDetail['status_lengkap'] == 'tidak') {
@@ -78,5 +102,97 @@ class AbsensiController extends BaseController
                 }
             }
         }
+    }
+
+    public function store()
+    {
+        $data = $this->request->getPost();
+
+        $tanggal = date('Y-m-d');
+
+        $model = new AbsensiModel();
+        $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $tanggal)->first();
+
+        if ($kondisi) {
+            session()->setFlashdata("warning", 'Absensi hari ini sudah Anda isi');
+            return redirect()->to(base_url('siswa/absensi'));
+        }
+
+        $validation =  \Config\Services::validation();
+
+        if ($data['absensi'] == 'hadir') {
+            $validation->setRules([
+                'absensi' => [
+                    'label' => 'Absensi',
+                    'rules' => 'required'
+                ],
+                'foto' => [
+                    'label' => 'Foto Absensi',
+                    'rules' => 'uploaded[foto]|max_size[foto,5120]|ext_in[foto,jpg,jpeg,png]'
+                ],
+            ]);
+        } else if ($data['absensi'] == 'izin') {
+            $validation->setRules([
+                'absensi' => [
+                    'label' => 'Absensi',
+                    'rules' => 'required'
+                ],
+                'izin' => [
+                    'label' => 'Surat Izin',
+                    'rules' => 'uploaded[izin]|max_size[izin,5120]|ext_in[izin,jpg,jpeg,png]'
+                ],
+            ]);
+        } else {
+            session()->setFlashdata("warning", 'Input anda tidak sesuai');
+            return redirect()->to(base_url('siswa/absensi'));
+        }
+
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('siswa/absensi'));
+        }
+
+        if ($data['absensi'] == 'hadir') {
+            $file = $this->request->getFile('foto');
+
+            // Check if the file was uploaded successfully
+            if ($file->isValid() && !$file->hasMoved()) {
+                // Move the file to a new location
+                $nameFile =  time() . $file->getName();
+
+                $file->move(FCPATH . 'assets/file/absensi', $nameFile);
+            }
+
+            $data = [
+                'magang_id' => $data['id'],
+                'tanggal' => $tanggal,
+                'absen' => $data['absensi'],
+                'foto_absensi' => $nameFile,
+            ];
+        } else if ($data['absensi'] == 'izin') {
+            $file = $this->request->getFile('izin');
+
+            // Check if the file was uploaded successfully
+            if ($file->isValid() && !$file->hasMoved()) {
+                // Move the file to a new location
+                $nameFile =  time() . $file->getName();
+
+                $file->move(FCPATH . 'assets/file/absensi', $nameFile);
+            }
+
+            $data = [
+                'magang_id' => $data['id'],
+                'tanggal' => $tanggal,
+                'absen' => $data['absensi'],
+                'file_surat_izin' => $nameFile,
+            ];
+        }
+
+        $model->insertAbsensi($data);
+
+        session()->setFlashdata("success", 'Berhasil menambahkan data!');
+        return redirect()->to(base_url('siswa/absensi'));
     }
 }
