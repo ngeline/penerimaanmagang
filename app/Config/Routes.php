@@ -70,6 +70,9 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->post('magang/update', 'MagangController::updateAdmin');
         $routes->get('magang/delete/(:any)', 'MagangController::deleteAdmin/$1');
         $routes->get('magang/list-siswa', 'MagangController::listSiswa');
+
+        $routes->get('absensi', 'AbsensiController::indexAdmin');
+        $routes->post('absensi/update', 'AbsensiController::updateAdmin');
     });
 
     $routes->group('siswa', ['filter' => 'SiswaFilter'], function ($routes) {
