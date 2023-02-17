@@ -1,7 +1,7 @@
 <?php $this->extend('layouts/portal') ?>
 
 <?php $this->section('content') ?>
-<h1 class="app-page-title">Kelola Absensi Magang</h1>
+<h1 class="app-page-title">Kelola Kegiatan Magang</h1>
 
 <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration">
     <div class="inner">
@@ -13,10 +13,10 @@
                         <table class="table table-striped w-100" id="Tables">
                             <thead class="table-light">
                                 <th>No</th>
-                                <th>Tanggal Absensi</th>
+                                <th>Tanggal Kegiatan</th>
                                 <th>Nama Siswa Magang</th>
-                                <th>Absensi</th>
-                                <th>Status Validasi Absensi</th>
+                                <th>Kegiatan</th>
+                                <th>Status Validasi Kegiatan</th>
                                 <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
@@ -26,8 +26,8 @@
                                         <td><?php echo $no++ ?></td>
                                         <td><?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?></td>
                                         <td><?= $row['nama'] ?></td>
-                                        <td><?= $row['absen'] ?></td>
-                                        <td><?= $row['status_absen'] ?></td>
+                                        <td><?= $row['kegiatan'] ?></td>
+                                        <td><?= $row['status_kegiatan'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Validasi<?php echo $no ?>">
                                                 Validasi
@@ -42,10 +42,10 @@
                                                 <div class="modal-header bg-warning">
                                                     <h5 class="modal-title text-white" id="staticBackdropLabel">Form Validasi Data</h5>
                                                 </div>
-                                                <form action="<?= base_url('admin/absensi/update') ?>" method="POST">
+                                                <form action="<?= base_url('pembimbing/kegiatan/update') ?>" method="POST">
                                                     <?= csrf_field() ?>
                                                     <div class="modal-body">
-                                                        <input type="hidden" name="id" value="<?= $row['id_absensi'] ?>">
+                                                        <input type="hidden" name="id" value="<?= $row['id_kegiatan'] ?>">
                                                         <div class="row">
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label">Nama Siswa Magang</label>
@@ -56,32 +56,24 @@
                                                                 <input type="text" class="form-control" value="<?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?>" readonly>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Absensi</label>
-                                                                <input type="text" class="form-control" value="<?= $row['absen'] ?>" readonly>
+                                                                <label class="form-label">Kegiatan</label>
+                                                                <input type="text" class="form-control" value="<?= $row['kegiatan'] ?>" readonly>
                                                             </div>
-                                                            <?php if ($row['absen'] == 'hadir') : ?>
-                                                                <div class="mb-3 col-md-6">
-                                                                    <label class="form-label">Foto Absensi</label>
-                                                                    <a class="btn btn-warning text-white w-100" id="fotoBtn" data-id="<?= base_url('assets/file/absensi/' . $row['foto_absensi']) ?>">Lihat</a>
-                                                                </div>
-                                                            <?php endif; ?>
-                                                            <?php if ($row['absen'] == 'izin') : ?>
-                                                                <div class="mb-3 col-md-6">
-                                                                    <label class="form-label">Surat Izin</label>
-                                                                    <a href="<?= base_url('assets/file/absensi/' . $row['file_surat_izin']) ?>" class="btn btn-warning text-white w-100" download>Unduh</a>
-                                                                </div>
-                                                            <?php endif; ?>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Status Validasi Absensi</label>
+                                                                <label class="form-label">Foto Kegiatan</label>
+                                                                <a class="btn btn-warning text-white w-100" id="fotoBtn" data-id="<?= base_url('assets/file/kegiatan/' . $row['foto_kegiatan']) ?>">Lihat</a>
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Status Validasi Kegiatan</label>
                                                                 <select name="validasiStatus" id="validasiStatus" class="form-select" required>
-                                                                    <option value="diproses" <?= ($row['status_absen'] == 'diproses') ? 'selected' : '' ?>>Diproses</option>
-                                                                    <option value="diterima" <?= ($row['status_absen'] == 'diterima') ? 'selected' : '' ?>>Diterima</option>
-                                                                    <option value="ditolak" <?= ($row['status_absen'] == 'ditolak') ? 'selected' : '' ?>>Ditolak</option>
+                                                                    <option value="diproses" <?= ($row['status_kegiatan'] == 'diproses') ? 'selected' : '' ?>>Diproses</option>
+                                                                    <option value="diterima" <?= ($row['status_kegiatan'] == 'diterima') ? 'selected' : '' ?>>Diterima</option>
+                                                                    <option value="ditolak" <?= ($row['status_kegiatan'] == 'ditolak') ? 'selected' : '' ?>>Ditolak</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label">Catatan</label>
-                                                                <textarea name="validasiCatatan" rows="4" class="form-control" required><?= ($row['status_absen'] == 'diproses') ? '' : $row['catatan'] ?></textarea>
+                                                                <textarea name="validasiCatatan" rows="4" class="form-control" required><?= ($row['status_kegiatan'] == 'diproses') ? '' : $row['catatan'] ?></textarea>
                                                             </div>
                                                         </div>
                                                     </div>

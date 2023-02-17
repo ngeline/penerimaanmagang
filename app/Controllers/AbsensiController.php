@@ -108,16 +108,6 @@ class AbsensiController extends BaseController
     {
         $data = $this->request->getPost();
 
-        $tanggal = date('Y-m-d');
-
-        $model = new AbsensiModel();
-        $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $tanggal)->first();
-
-        if ($kondisi) {
-            session()->setFlashdata("warning", 'Absensi hari ini sudah Anda isi');
-            return redirect()->to(base_url('siswa/absensi'));
-        }
-
         $validation =  \Config\Services::validation();
 
         if ($data['absensi'] == 'hadir') {
@@ -151,6 +141,16 @@ class AbsensiController extends BaseController
             $errors = $validation->getErrors();
             $arr = implode("<br>", $errors);
             session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('siswa/absensi'));
+        }
+
+        $tanggal = date('Y-m-d');
+
+        $model = new AbsensiModel();
+        $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $tanggal)->first();
+
+        if ($kondisi) {
+            session()->setFlashdata("warning", 'Absensi hari ini sudah Anda isi');
             return redirect()->to(base_url('siswa/absensi'));
         }
 

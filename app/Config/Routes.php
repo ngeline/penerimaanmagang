@@ -89,6 +89,8 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->post('absensi/store', 'AbsensiController::store');
 
         $routes->get('kegiatan', 'KegiatanController::index');
+        $routes->post('kegiatan/store', 'KegiatanController::store');
+
         $routes->get('penilaian', 'PenilaianController::index');
     });
 
@@ -98,6 +100,9 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
 
         $routes->get('siswa', 'SiswaController::indexPembimbing');
         $routes->get('magang', 'MagangController::indexPembimbing');
+
+        $routes->get('kegiatan', 'KegiatanController::indexPembimbing');
+        $routes->post('kegiatan/update', 'KegiatanController::updatePembimbing');
     });
 });
 
