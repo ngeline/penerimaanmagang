@@ -195,4 +195,55 @@ class AbsensiController extends BaseController
         session()->setFlashdata("success", 'Berhasil menambahkan data!');
         return redirect()->to(base_url('siswa/absensi'));
     }
+
+    public function indexAdmin()
+    {
+        $data['activePage'] = 'adminAbsensi';
+
+        $absensi = new AbsensiModel();
+        $data['list'] = $absensi->select('absensi.*, magang.*, siswa.*, absensi.id AS id_absensi')
+            ->join('magang', 'absensi.magang_id = magang.id')
+            ->join('siswa', 'magang.siswa_id = siswa.id')
+            ->get()->getResultArray();
+
+        return view('admin/absensi/index', $data);
+    }
+
+    public function updateAdmin()
+    {
+        $data = $this->request->getPost();
+
+        $id = $data['id'];
+
+        $validation =  \Config\Services::validation();
+
+        $validation->setRules([
+            'validasiStatus' => [
+                'label' => 'Status Validasi Absensi',
+                'rules' => 'required'
+            ],
+            'validasiCatatan' => [
+                'label' => 'Catatan',
+                'rules' => 'required'
+            ],
+        ]);
+
+        if (!$validation->run($_POST)) {
+            $errors = $validation->getErrors();
+            $arr = implode("<br>", $errors);
+            session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('admin/absensi'));
+        }
+
+        $data = [
+            'status_absen' => $data['validasiStatus'],
+            'catatan' => $data['validasiCatatan'],
+        ];
+
+        $model = new AbsensiModel();
+        $model->updateAbsensi($data, $id);
+
+        session()->setFlashdata("success", 'Berhasil menambahkan data!');
+        return redirect()->to(base_url('admin/absensi'));
+    }
 }

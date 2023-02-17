@@ -1,8 +1,4 @@
-<?php
-
-use PhpParser\Node\Expr\New_;
-
-$this->extend('layouts/portal') ?>
+<?php $this->extend('layouts/portal') ?>
 
 <?php $this->section('content') ?>
 <!-- Modal Create -->
