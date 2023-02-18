@@ -29,7 +29,7 @@ class AbsensiController extends BaseController
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
 
         $magang = new MagangModel();
-        $dataMagang = $magang->where('siswa_id', $siswaDetail['id'])->findAll();
+        $dataMagang = $magang->where('siswa_id', $siswaDetail['id'])->where('status_hapus', 'tidak')->findAll();
 
         if ($dataMagang) {
             $arrId = [];
@@ -39,6 +39,8 @@ class AbsensiController extends BaseController
 
                 if ($value['status_magang'] == 'berjalan') {
                     $dataId = $value['id'];
+                } else {
+                    $dataId = 0;
                 }
             }
         } else {
@@ -141,6 +143,11 @@ class AbsensiController extends BaseController
             $errors = $validation->getErrors();
             $arr = implode("<br>", $errors);
             session()->setFlashdata("warning", $arr);
+            return redirect()->to(base_url('siswa/absensi'));
+        }
+
+        if ($data['id'] == 0) {
+            session()->setFlashdata("warning", 'Anda tidak dapat menambahkan absensi dikarenakan status magang Anda sudah selesai');
             return redirect()->to(base_url('siswa/absensi'));
         }
 

@@ -144,6 +144,13 @@ class MagangController extends BaseController
         }
 
         $magang = new MagangModel();
+        $kondisi = $magang->where('pengajuan_id', $data['pengajuan'])->where('siswa_id', $data['daftarSiswa'])->first();
+
+        if ($kondisi) {
+            session()->setFlashdata("warning", 'Pengajuan dan siswa yang dipilih sudah ada sebelumnya');
+            return redirect()->to(base_url('admin/magang'));
+        }
+
         $dataMagang = [
             'pengajuan_id' => $data['pengajuan'],
             'siswa_id' => $data['daftarSiswa'],

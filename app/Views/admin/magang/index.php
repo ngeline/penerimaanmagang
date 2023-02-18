@@ -71,6 +71,8 @@
                                 <th>Nama Siswa Magang</th>
                                 <th>Nama Pembimbing</th>
                                 <th>Periode Magang</th>
+                                <th>Status Magang</th>
+                                <th>Status Sertifikat</th>
                                 <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
@@ -82,6 +84,8 @@
                                         <td><?= $row['nama_siswa'] ?></td>
                                         <td><?= $row['nama_pembimbing'] ?></td>
                                         <td><?= date_format(new DateTime($row['tanggal_mulai']), 'd/m/Y'); ?> - <?= date_format(new DateTime($row['tanggal_selesai']), 'd/m/Y'); ?></td>
+                                        <td><?= $row['status_magang'] ?></td>
+                                        <td><?= ($row['sertifikat']) ? 'sudah' : 'belum' ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Edit<?php echo $no ?>">
                                                 Edit

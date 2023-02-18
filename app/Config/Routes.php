@@ -92,6 +92,7 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->post('kegiatan/store', 'KegiatanController::store');
 
         $routes->get('penilaian', 'PenilaianController::index');
+        $routes->get('penilaian/detail', 'PenilaianController::editPembimbing');
     });
 
     $routes->group('pembimbing', ['filter' => 'PembimbingFilter'], function ($routes) {
@@ -103,6 +104,11 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
 
         $routes->get('kegiatan', 'KegiatanController::indexPembimbing');
         $routes->post('kegiatan/update', 'KegiatanController::updatePembimbing');
+
+        $routes->get('penilaian', 'PenilaianController::indexPembimbing');
+        $routes->post('penilaian/store', 'PenilaianController::storePembimbing');
+        $routes->get('penilaian/edit', 'PenilaianController::editPembimbing');
+        $routes->post('penilaian/update', 'PenilaianController::updatePembimbing');
     });
 });
 
