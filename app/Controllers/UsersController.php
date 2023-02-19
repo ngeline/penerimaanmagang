@@ -26,9 +26,6 @@ class UsersController extends BaseController
 
         $id = $data['id'];
 
-        $model = new UsersModel();
-        $data['users'] = $model->where('status', 'aktif')->findAll();
-
         $validation =  \Config\Services::validation();
         $validation->setRules([
             'password' => [
@@ -48,6 +45,7 @@ class UsersController extends BaseController
             'password' => password_hash($data['password'], PASSWORD_DEFAULT)
         ];
 
+        $model = new UsersModel();
         $model->updateUser($data, $id);
 
         session()->setFlashdata("success", 'Berhasil memperbarui data!');

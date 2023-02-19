@@ -56,6 +56,9 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->post('siswa/update', 'SiswaController::update');
         $routes->get('siswa/delete/(:any)/(:any)', 'SiswaController::delete/$1/$2');
 
+        $routes->get('bidang', 'BidangController::index');
+        $routes->post('bidang/update', 'BidangController::update');
+
         $routes->get('pembimbing', 'PembimbingController::index');
         $routes->post('pembimbing/store', 'PembimbingController::store');
         $routes->post('pembimbing/update', 'PembimbingController::update');
