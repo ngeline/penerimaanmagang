@@ -49,7 +49,7 @@
                                 <th>No</th>
                                 <th>Periode Magang</th>
                                 <th>Total Rata-Rata Penilaian</th>
-                                <th data-orderable="false">Aksi</th>
+                                <th data-orderable="false" style="width: 17%;">Aksi</th>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
@@ -62,6 +62,7 @@
                                             <button type="button" class="btn btn-info text-white" id="detailBtn" data-id="<?= $row['magang_id'] ?>">
                                                 Detail
                                             </button>
+                                            <button class="btn btn-warning text-white" disabled>Cetak</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

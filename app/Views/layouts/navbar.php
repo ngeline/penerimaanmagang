@@ -14,7 +14,7 @@
 
                 <div class="app-utilities col-auto">
                     <div class="app-utility-item app-user-dropdown dropdown">
-                        <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="<?= base_url('assets/img/icons8-name-48.png') ?>" alt="user profile"></a>
+                        <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="<?= base_url('assets/img/icons8-name-48.png') ?>" alt="user profile"><?= session()->get('username') ?></a>
                         <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                             <?php if (session()->get('role') === 'siswa' || session()->get('role') === 'pembimbing') : ?>
                                 <li><a class="dropdown-item" href="<?= base_url('profile') ?>">Profil</a></li>

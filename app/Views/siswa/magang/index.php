@@ -17,6 +17,8 @@
                                 <th>Periode Magang</th>
                                 <th>Tempat Magang</th>
                                 <th>Nama Pembimbing</th>
+                                <th>Status Magang</th>
+                                <th>Status Sertifikat</th>
                                 <th data-orderable="false">Aksi</th>
                             </thead>
                             <tbody>
@@ -27,6 +29,8 @@
                                         <td><?= date_format(new DateTime($row['tanggal_mulai']), 'd/m/Y'); ?> - <?= date_format(new DateTime($row['tanggal_selesai']), 'd/m/Y'); ?></td>
                                         <td><?= $row['nama_bidang'] ?></td>
                                         <td><?= $row['nama'] ?></td>
+                                        <td><?= $row['status_magang'] ?></td>
+                                        <td><?= ($row['sertifikat']) ? 'sudah' : 'belum' ?></td>
                                         <td>
                                             <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#Detail<?php echo $no ?>">
                                                 Detail
@@ -62,7 +66,7 @@
                                                         <?php if ($row['sertifikat']) : ?>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label">Sertifikat</label>
-                                                                <a href="<?= base_url('assets/file/sertifikat/' . $row['sertifikat']) ?>" class="btn btn-warning text-white w-100" download>Unduh</a>
+                                                                <button class="btn btn-warning text-white w-100" disabled>Cetak</button>
                                                             </div>
                                                         <?php endif; ?>
                                                         <div class="mb-3 col-md-6">
