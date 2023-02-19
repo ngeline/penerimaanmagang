@@ -39,7 +39,7 @@
         <i class="bi bi-phone-fill phone-icon"></i> (0354) 689923
       </div>
       <div class="social-links d-none d-md-block">
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <!-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> -->
         <a href="https://www.instagram.com/dinaspendidikan_kotakediri" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
       </div>
     </div>
@@ -56,7 +56,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#visi">Visi & Misi</a></li>
+          <!-- <li><a class="nav-link scrollto" href="#visi">Visi & Misi</a></li> -->
           <li><a class="nav-link scrollto" href="#services">Kegiatan</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak Kami</a></li>
           <li><a class="nav-link scrollto" href="<?= base_url('login') ?>">Login</a></li>
@@ -99,7 +99,7 @@
 
   <main id="main">
 
-    <section id="visi" class="contact">
+    <!-- <section id="visi" class="contact">
       <div class="container">
 
         <div class="section-title">
@@ -137,7 +137,7 @@
         </section>
 
       </div>
-    </section><!-- End About Us Section -->
+    </section> -->
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
@@ -145,7 +145,7 @@
 
         <div class="section-title">
           <h2>Kegiatan</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
 
         <div class="row">
@@ -238,7 +238,7 @@
 
         <div class="section-title">
           <h2>Kontak</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
 
         <section id="featured-services" class="featured-services section-bg">
@@ -282,8 +282,8 @@
       <p>Dinas Pendidikan Kota Kediri</p>
       <p>Situs resmi Dinas Pendidikan Kota Kediri, Semoga dengan adanya website ini dapat mempermudah semua lapisan masyarakat dalam mengakses informasi terkait pendidikan.</p>
       <div class="social-links">
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <!-- <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a> -->
+        <a href="https://www.instagram.com/dinaspendidikan_kotakediri" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
       </div>
       <div class="copyright">
         &copy; Copyright <strong><span>2023 Dinas Pendidikan Kota Kediri</span></strong>. All Rights Reserved
