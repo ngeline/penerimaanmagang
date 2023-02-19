@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mt-3 d-flex flex-row-reverse">
-                                    <button type="button" class="btn btn-primary text-white" onclick="confirmSubmit()">Simpan</button>
+                                    <button type="submit" class="btn btn-primary text-white">Simpan</button>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,9 @@
 
 <?php $this->section('js') ?>
 <script>
-    function confirmSubmit() {
+    const form = document.getElementById('form-profile');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
         Swal.fire({
             title: 'Apakah kamu yakin?',
             text: "Anda tidak akan dapat mengembalikan ini!",
@@ -135,10 +137,10 @@
             cancelButtonText: 'Kembali',
         }).then((result) => {
             if (result.value) {
-                document.getElementById("form-profile").submit();
+                form.submit();
             }
         });
-    }
+    });
 </script>
 <script>
     $(document).ready(function() {

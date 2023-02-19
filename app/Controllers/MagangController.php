@@ -23,7 +23,7 @@ class MagangController extends BaseController
         $id = session()->get('id');
 
         $siswa = new SiswaModel();
-        $siswaDetail = $siswa->where('users_id', $id)->first();
+        $siswaDetail = $siswa->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $pengajuan = new PengajuanModel();
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
@@ -104,7 +104,7 @@ class MagangController extends BaseController
             ->get()->getResultArray();
 
         $pembimbing = new PembimbingModel();
-        $data['pembimbing'] = $pembimbing->getPembimbings();
+        $data['pembimbing'] = $pembimbing->where('status_hapus', 'tidak')->findAll();
 
         $pengajuan = new PengajuanModel();
         $data['pengajuan'] = $pengajuan->select('pengajuan.id AS id_pengajuan, pengajuan.created_at, siswa.nama AS nama_siswa, pengajuan.tanggal_mulai, pengajuan.tanggal_selesai')
@@ -144,7 +144,7 @@ class MagangController extends BaseController
         }
 
         $magang = new MagangModel();
-        $kondisi = $magang->where('pengajuan_id', $data['pengajuan'])->where('siswa_id', $data['daftarSiswa'])->first();
+        $kondisi = $magang->where('pengajuan_id', $data['pengajuan'])->where('siswa_id', $data['daftarSiswa'])->where('status_hapus', 'tidak')->first();
 
         if ($kondisi) {
             session()->setFlashdata("warning", 'Pengajuan dan siswa yang dipilih sudah ada sebelumnya');
@@ -278,7 +278,7 @@ class MagangController extends BaseController
         $id = session()->get('id');
 
         $pembimbing = new PembimbingModel();
-        $dataPembimbing = $pembimbing->where('users_id', $id)->first();
+        $dataPembimbing = $pembimbing->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $magang = new MagangModel();
         $data['list'] = $magang->select('magang.*, magang.id AS id_magang, pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa, siswa.nama AS nama_siswa, pembimbing.nama AS nama_pembimbing')
@@ -290,7 +290,7 @@ class MagangController extends BaseController
             ->get()->getResultArray();
 
         $pembimbing = new PembimbingModel();
-        $data['pembimbing'] = $pembimbing->getPembimbings();
+        $data['pembimbing'] = $pembimbing->where('status_hapus', 'tidak')->findAll();
 
         $pengajuan = new PengajuanModel();
         $data['pengajuan'] = $pengajuan->select('pengajuan.id AS id_pengajuan, pengajuan.created_at, siswa.nama AS nama_siswa, pengajuan.tanggal_mulai, pengajuan.tanggal_selesai')

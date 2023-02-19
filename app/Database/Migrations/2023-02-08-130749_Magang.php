@@ -20,6 +20,10 @@ class Magang extends Migration
                 'constraint' => 36,
                 // 'unique' => true,
             ],
+            'pengajuan_id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 36,
+            ],
             'pembimbing_id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,

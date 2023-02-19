@@ -31,10 +31,10 @@ class AuthController extends BaseController
             //cek password
             //jika salah arahkan lagi ke halaman login
             if (!password_verify($data['password'], $user['password'])) {
-                return redirect()->to(base_url('login'))->with('error', 'Invalid username or password');
+                return redirect()->to(base_url('login'))->with('error', 'Nama pengguna atau password tidak cocok');
             } else {
                 if ($user['status'] === 'nonaktif') {
-                    return redirect()->to(base_url('login'))->with('error', 'Username or password is expired');
+                    return redirect()->to(base_url('login'))->with('error', 'Nama pengguna atau password kadaluarsa');
                 }
                 //jika benar, arahkan user masuk ke aplikasi 
                 $sessLogin = [
@@ -52,7 +52,7 @@ class AuthController extends BaseController
                 return redirect()->to(base_url('dashboard'));
             }
         } else {
-            return redirect()->to(base_url('login'))->with('error', 'Invalid username or password');
+            return redirect()->to(base_url('login'))->with('error', 'Nama pengguna atau password tidak cocok');
         }
     }
 

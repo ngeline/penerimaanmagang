@@ -62,7 +62,7 @@
                                                             <?php if ($row['absen'] == 'hadir') : ?>
                                                                 <div class="mb-3 col-md-6">
                                                                     <label class="form-label">Foto Absensi</label>
-                                                                    <a class="btn btn-warning text-white w-100" id="fotoBtn" data-id="<?= base_url('assets/file/absensi/' . $row['foto_absensi']) ?>">Lihat</a>
+                                                                    <a class="btn btn-warning text-white w-100 image-btn" data-image-url="<?= base_url('assets/file/absensi/' . $row['foto_absensi']) ?>">Lihat</a>
                                                                 </div>
                                                             <?php endif; ?>
                                                             <?php if ($row['absen'] == 'izin') : ?>
@@ -115,8 +115,8 @@
             }
         });
 
-        $('#fotoBtn').click(function() {
-            var this_id = $(this).data('id');
+        $('.image-btn').click(function() {
+            var this_id = $(this).data('image-url');
             const myGallery = GLightbox({
                 elements: [{
                     'href': this_id,

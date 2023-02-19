@@ -23,7 +23,7 @@ class PengajuanController extends BaseController
         $id = session()->get('id');
 
         $siswa = new SiswaModel();
-        $siswaDetail = $siswa->where('users_id', $id)->first();
+        $siswaDetail = $siswa->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $data['siswa'] = $siswaDetail;
 
@@ -76,12 +76,19 @@ class PengajuanController extends BaseController
                 if ($value['status_pengajuan'] == 'diproses') {
                     session()->setFlashdata("warning", 'Pengajuan magang anda masih diproses. Mohon tunggu hingga dikonfirmasi oleh admin, sebelum mengajukan kembali.');
                     return redirect()->to(base_url('siswa/pengajuan'));
+                } else if ($value['status_pengajuan'] == 'diterima') {
+                    $cekMagang = new MagangModel();
+                    $cekKondisiMagang = $cekMagang->where('pengajuan_id', $value['id'])->where('status_hapus', 'tidak')->first();
+                    if (!$cekKondisiMagang) {
+                        session()->setFlashdata("warning", 'Pengajuan anda sudah diterima dan belum ditindaklanjuti oleh admin. Mohon tunggu hingga ditindaklanjuti oleh admin, sebelum mengajukan kembali.');
+                        return redirect()->to(base_url('siswa/pengajuan'));
+                    }
                 }
             }
         }
 
         $getMagang = new MagangModel();
-        $kondisiMagang = $getMagang->where('siswa_id', $data['id'])->findAll();
+        $kondisiMagang = $getMagang->where('siswa_id', $data['id'])->where('status_hapus', 'tidak')->findAll();
 
         if ($kondisiMagang) {
             foreach ($kondisiMagang as $value) {

@@ -24,7 +24,7 @@ class KegiatanController extends BaseController
         $id = session()->get('id');
 
         $siswa = new SiswaModel();
-        $siswaDetail = $siswa->where('users_id', $id)->first();
+        $siswaDetail = $siswa->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $pengajuan = new PengajuanModel();
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
@@ -141,7 +141,7 @@ class KegiatanController extends BaseController
         }
 
         $model = new KegiatanModel();
-        $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $data['tanggal'])->first();
+        $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $data['tanggal'])->where('status_kegiatan !=', 'ditolak')->findAll();
 
         if ($kondisi) {
             session()->setFlashdata("warning", 'Kegiatan pada hari terpilih sudah Anda isi');
@@ -178,10 +178,10 @@ class KegiatanController extends BaseController
         $id = session()->get('id');
 
         $pembimbing = new PembimbingModel();
-        $pembimbingDetail = $pembimbing->where('users_id', $id)->first();
+        $pembimbingDetail = $pembimbing->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $magang = new MagangModel();
-        $dataMagang = $magang->where('pembimbing_id', $pembimbingDetail['id'])->findAll();
+        $dataMagang = $magang->where('pembimbing_id', $pembimbingDetail['id'])->where('status_hapus', 'tidak')->findAll();
 
         if ($dataMagang) {
             $arrId = [];

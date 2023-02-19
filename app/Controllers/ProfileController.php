@@ -26,14 +26,14 @@ class ProfileController extends BaseController
         $data['users'] = $model->getUser($id);
 
         $siswa = new SiswaModel();
-        $data['siswa'] = $siswa->where('users_id', $id)->first();
+        $data['siswa'] = $siswa->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $pembimbing = new PembimbingModel();
-        $data['pembimbing'] = $pembimbing->where('users_id', $id)->first();
+        $data['pembimbing'] = $pembimbing->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         if (!empty($data['pembimbing'])) {
             $bidang = new BidangModel();
-            $data['bidang'] = $bidang->where('id', $data['pembimbing']['bidang_id'])->first();
+            $data['bidang'] = $bidang->where('id', $data['pembimbing']['bidang_id'])->where('status_hapus', 'tidak')->first();
         }
 
         if ($role == 'siswa') {

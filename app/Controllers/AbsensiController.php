@@ -23,7 +23,7 @@ class AbsensiController extends BaseController
         $id = session()->get('id');
 
         $siswa = new SiswaModel();
-        $siswaDetail = $siswa->where('users_id', $id)->first();
+        $siswaDetail = $siswa->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $pengajuan = new PengajuanModel();
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
@@ -131,7 +131,7 @@ class AbsensiController extends BaseController
                 ],
                 'izin' => [
                     'label' => 'Surat Izin',
-                    'rules' => 'uploaded[izin]|max_size[izin,5120]|ext_in[izin,jpg,jpeg,png]'
+                    'rules' => 'uploaded[izin]|max_size[izin,5120]|ext_in[izin,pdf]'
                 ],
             ]);
         } else {
@@ -154,7 +154,7 @@ class AbsensiController extends BaseController
         $tanggal = date('Y-m-d');
 
         $model = new AbsensiModel();
-        $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $tanggal)->first();
+        $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $tanggal)->where('status_absen !=', 'ditolak')->findAll();
 
         if ($kondisi) {
             session()->setFlashdata("warning", 'Absensi hari ini sudah Anda isi');

@@ -88,7 +88,7 @@ class SiswaController extends BaseController
         $id = session()->get('id');
 
         $pembimbing = new PembimbingModel();
-        $dataPembimbing = $pembimbing->where('users_id', $id)->first();
+        $dataPembimbing = $pembimbing->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $magang = new MagangModel();
         $dataMagang = $magang->where('pembimbing_id', $dataPembimbing['id'])->where('status_hapus', 'tidak')->findAll();

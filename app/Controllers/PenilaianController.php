@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Database\Migrations\Penilaian;
 use App\Models\MagangModel;
 use App\Models\SiswaModel;
 use App\Models\PembimbingModel;
@@ -26,7 +25,7 @@ class PenilaianController extends BaseController
         $id = session()->get('id');
 
         $siswa = new SiswaModel();
-        $siswaDetail = $siswa->where('users_id', $id)->first();
+        $siswaDetail = $siswa->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $pengajuan = new PengajuanModel();
         $pengajuanDetail = $pengajuan->where('siswa_id', $siswaDetail['id'])->first();
@@ -54,7 +53,7 @@ class PenilaianController extends BaseController
             ->get()->getResultArray();
 
         $kategori = new PenilaianKategoriModel();
-        $data['kategori'] = $kategori->getKategoriPenilaians();
+        $data['kategori'] = $kategori->where('status_hapus', 'tidak')->findAll();
 
         $data['count'] = count($data['kategori']);
 
@@ -118,7 +117,7 @@ class PenilaianController extends BaseController
         $id = session()->get('id');
 
         $pembimbing = new PembimbingModel();
-        $pembimbingDetail = $pembimbing->where('users_id', $id)->first();
+        $pembimbingDetail = $pembimbing->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $magang = new MagangModel();
         $dataMagang = $magang->where('pembimbing_id', $pembimbingDetail['id'])->where('status_hapus', 'tidak')->findAll();
@@ -157,7 +156,7 @@ class PenilaianController extends BaseController
         $data['siswa'] = $siswa->whereIn('id', $arrSiswa)->where('status_hapus', 'tidak')->findAll();
 
         $kategori = new PenilaianKategoriModel();
-        $data['kategori'] = $kategori->getKategoriPenilaians();
+        $data['kategori'] = $kategori->where('status_hapus', 'tidak')->findAll();
 
         $data['count'] = count($data['kategori']);
 
@@ -190,7 +189,7 @@ class PenilaianController extends BaseController
         $id = session()->get('id');
 
         $pembimbing = new PembimbingModel();
-        $pembimbingDetail = $pembimbing->where('users_id', $id)->first();
+        $pembimbingDetail = $pembimbing->where('users_id', $id)->where('status_hapus', 'tidak')->first();
 
         $magang = new MagangModel();
         $dataMagang = $magang->where('pembimbing_id', $pembimbingDetail['id'])

@@ -37,7 +37,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-success text-white" onclick="confirmSubmit()">Simpan</button>
+                    <button type="submit" class="btn btn-success text-white">Simpan</button>
                 </div>
             </form>
         </div>
@@ -107,7 +107,7 @@
                                                         <?php if ($row['absen'] == 'hadir') : ?>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label">Foto Absensi</label>
-                                                                <a class="btn btn-warning text-white w-100" id="fotoBtn" data-id="<?= base_url('assets/file/absensi/' . $row['foto_absensi']) ?>">Lihat</a>
+                                                                <a class="btn btn-warning text-white w-100 image-btn" data-image-url="<?= base_url('assets/file/absensi/' . $row['foto_absensi']) ?>">Lihat</a>
                                                             </div>
                                                         <?php endif; ?>
                                                         <?php if ($row['absen'] == 'izin') : ?>
@@ -142,7 +142,9 @@
 
 <?php $this->section('js') ?>
 <script>
-    function confirmSubmit() {
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
         Swal.fire({
             title: 'Apakah kamu yakin?',
             text: "Anda tidak akan dapat mengembalikan ini!",
@@ -154,10 +156,10 @@
             cancelButtonText: 'Kembali',
         }).then((result) => {
             if (result.value) {
-                document.getElementById("form").submit();
+                form.submit();
             }
         });
-    }
+    });
 </script>
 <script>
     $(document).ready(function() {
@@ -168,8 +170,8 @@
             }
         })
 
-        $('#fotoBtn').click(function() {
-            var this_id = $(this).data('id');
+        $('.image-btn').click(function() {
+            var this_id = $(this).data('image-url');
             const myGallery = GLightbox({
                 elements: [{
                     'href': this_id,

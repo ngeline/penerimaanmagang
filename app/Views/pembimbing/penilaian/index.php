@@ -48,7 +48,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-success text-white" onclick="confirmSubmit()">Simpan</button>
+                    <button type="submit" class="btn btn-success text-white">Simpan</button>
                 </div>
             </form>
         </div>
@@ -143,7 +143,9 @@
 
 <?php $this->section('js') ?>
 <script>
-    function confirmSubmit() {
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
         Swal.fire({
             title: 'Apakah kamu yakin?',
             text: "Anda tidak akan dapat mengembalikan ini!",
@@ -155,10 +157,10 @@
             cancelButtonText: 'Kembali',
         }).then((result) => {
             if (result.value) {
-                document.getElementById("form").submit();
+                form.submit();
             }
         });
-    }
+    });
 </script>
 <script>
     $(document).ready(function() {

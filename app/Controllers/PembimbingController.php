@@ -21,7 +21,7 @@ class PembimbingController extends BaseController
         $pembimbing = new PembimbingModel();
 
         $listBidang = new BidangModel();
-        $data['bidang'] = $listBidang->getBidangs();
+        $data['bidang'] = $listBidang->where('status_hapus', 'tidak')->findAll();
 
         $data['list'] = $pembimbing->select('bidang.*, pembimbing.*, pembimbing.id as id_pembimbing, users.*, users.id as id_users')
             ->join('users', 'pembimbing.users_id = users.id')

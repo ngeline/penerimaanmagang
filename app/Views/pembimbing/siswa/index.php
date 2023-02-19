@@ -25,9 +25,9 @@
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?= $row['nama'] ?></td>
-                                        <td><?= $row['jenjang'] ?></td>
-                                        <td><?= $row['jurusan'] ?></td>
-                                        <td><?= $row['telepon'] ?></td>
+                                        <td><?= ($row['jenjang'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['jenjang'] ?></td>
+                                        <td><?= ($row['jurusan'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['jurusan'] ?></td>
+                                        <td><?= ($row['telepon'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['telepon'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#Detail<?php echo $no ?>">
                                                 Detail
