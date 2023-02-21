@@ -62,7 +62,7 @@
                                             <button type="button" class="btn btn-info text-white" id="detailBtn" data-id="<?= $row['magang_id'] ?>">
                                                 Detail
                                             </button>
-                                            <button class="btn btn-warning text-white" disabled>Cetak</button>
+                                            <a href="<?= base_url('siswa/generate-nilai/' . $row['magang_id'])  ?>" class="btn btn-warning text-white">Cetak</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -97,7 +97,7 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('penilaian', 'PenilaianController::index');
         $routes->get('penilaian/detail', 'PenilaianController::editPembimbing');
 
-        $routes->get('generate-nilai', 'CetakController::generateNilai');
+        $routes->get('generate-nilai/(:any)', 'CetakController::generateNilai/$1');
         $routes->get('generate-sertifikat', 'CetakController::generateSertifikat');
     });
 
