@@ -132,7 +132,7 @@ class PengajuanController extends BaseController
                 $jk = $data['jk'][$count];
 
                 $words = explode(" ", $nama);
-                $first_word = $words[0] . '12345';
+                $first_word = $words[0] . random_int(11111, 99999);
 
                 // Insert User
                 $dataUser = [
