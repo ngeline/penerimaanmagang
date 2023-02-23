@@ -53,7 +53,7 @@ class PenilaianController extends BaseController
             ->get()->getResultArray();
 
         $kategori = new PenilaianKategoriModel();
-        $data['kategori'] = $kategori->where('status_hapus', 'tidak')->findAll();
+        $data['kategori'] = $kategori->where('status_hapus', 'tidak')->orderBy('updated_at', 'desc')->findAll();
 
         $data['count'] = count($data['kategori']);
 

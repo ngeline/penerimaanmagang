@@ -11,7 +11,7 @@ class BidangController extends BaseController
     {
         $data['activePage'] = 'adminBidang';
         $model = new BidangModel();
-        $data['list'] = $model->where('status_hapus', 'tidak')->findAll();
+        $data['list'] = $model->where('status_hapus', 'tidak')->orderBy('updated_at', 'desc')->findAll();
         return view('admin/bidang/index', $data);
     }
 

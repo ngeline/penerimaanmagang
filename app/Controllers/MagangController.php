@@ -35,6 +35,7 @@ class MagangController extends BaseController
             ->join('bidang', 'pembimbing.bidang_id = bidang.id')
             ->where('magang.siswa_id', $siswaDetail['id'])
             ->where('magang.status_hapus', 'tidak')
+            ->orderBy('magang.updated_at', 'desc')
             ->get()->getResultArray();
 
         // Jika Profil tidak lengkap
@@ -101,6 +102,7 @@ class MagangController extends BaseController
             ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')
             ->join('siswa AS s', 'pengajuan.siswa_id = s.id')
             ->where('magang.status_hapus', 'tidak')
+            ->orderBy('magang.updated_at', 'desc')
             ->get()->getResultArray();
 
         $pembimbing = new PembimbingModel();
@@ -287,16 +289,7 @@ class MagangController extends BaseController
             ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')
             ->where('pembimbing_id', $dataPembimbing['id'])
             ->where('magang.status_hapus', 'tidak')
-            ->get()->getResultArray();
-
-        $pembimbing = new PembimbingModel();
-        $data['pembimbing'] = $pembimbing->where('status_hapus', 'tidak')->findAll();
-
-        $pengajuan = new PengajuanModel();
-        $data['pengajuan'] = $pengajuan->select('pengajuan.id AS id_pengajuan, pengajuan.created_at, siswa.nama AS nama_siswa, pengajuan.tanggal_mulai, pengajuan.tanggal_selesai')
-            ->join('siswa', 'pengajuan.siswa_id = siswa.id')
-            ->where('pengajuan.status_pengajuan', 'diterima')
-            ->orderBy('pengajuan.created_at', 'asc')
+            ->orderBy('magang.updated_at', 'desc')
             ->get()->getResultArray();
 
         return view('pembimbing/magang/index', $data);

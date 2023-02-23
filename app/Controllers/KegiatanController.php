@@ -52,7 +52,7 @@ class KegiatanController extends BaseController
         $data['id_magang'] = $dataId;
 
         $kegiatan = new KegiatanModel();
-        $data['list'] = $kegiatan->whereIn('magang_id', $arrId)->findAll();
+        $data['list'] = $kegiatan->whereIn('magang_id', $arrId)->orderBy('updated_at', 'desc')->findAll();
 
         // Jika Profil tidak lengkap
         if ($siswaDetail['status_lengkap'] == 'tidak') {
@@ -198,6 +198,7 @@ class KegiatanController extends BaseController
             ->join('magang', 'kegiatan.magang_id = magang.id')
             ->join('siswa', 'magang.siswa_id = siswa.id')
             ->whereIn('kegiatan.magang_id', $arrId)
+            ->orderBy('kegiatan.updated_at', 'desc')
             ->get()->getResultArray();
 
         return view('pembimbing/kegiatan/index', $data);

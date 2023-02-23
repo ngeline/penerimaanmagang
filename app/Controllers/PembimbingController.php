@@ -27,6 +27,7 @@ class PembimbingController extends BaseController
             ->join('users', 'pembimbing.users_id = users.id')
             ->join('bidang', 'pembimbing.bidang_id = bidang.id')
             ->where('pembimbing.status_hapus', 'tidak')
+            ->orderBy('pembimbing.updated_at', 'desc')
             ->get()->getResultArray();
 
         return view('admin/pembimbing/index', $data);

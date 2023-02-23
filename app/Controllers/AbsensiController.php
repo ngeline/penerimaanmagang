@@ -51,7 +51,7 @@ class AbsensiController extends BaseController
         $data['id_magang'] = $dataId;
 
         $absensi = new AbsensiModel();
-        $data['list'] = $absensi->whereIn('magang_id', $arrId)->findAll();
+        $data['list'] = $absensi->whereIn('magang_id', $arrId)->orderBy('updated_at', 'desc')->findAll();
 
         // Jika Profil tidak lengkap
         if ($siswaDetail['status_lengkap'] == 'tidak') {
@@ -211,6 +211,7 @@ class AbsensiController extends BaseController
         $data['list'] = $absensi->select('absensi.*, magang.*, siswa.*, absensi.id AS id_absensi')
             ->join('magang', 'absensi.magang_id = magang.id')
             ->join('siswa', 'magang.siswa_id = siswa.id')
+            ->orderBy('absensi.updated_at', 'desc')
             ->get()->getResultArray();
 
         return view('admin/absensi/index', $data);

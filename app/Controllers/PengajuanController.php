@@ -28,7 +28,7 @@ class PengajuanController extends BaseController
         $data['siswa'] = $siswaDetail;
 
         $pengajuan = new PengajuanModel();
-        $data['pengajuan'] = $pengajuan->where('siswa_id', $siswaDetail['id'])->findAll();
+        $data['pengajuan'] = $pengajuan->where('siswa_id', $siswaDetail['id'])->orderBy('updated_at', 'desc')->findAll();
 
         if ($siswaDetail['status_lengkap'] == 'tidak') {
             return view('siswa/error/profilError', $data);
@@ -214,6 +214,7 @@ class PengajuanController extends BaseController
         $pengajuan = new PengajuanModel();
         $data['pengajuan'] = $pengajuan->select('pengajuan.*, pengajuan.id AS id_pengajuan, siswa.*, siswa.id AS id_siswa')
             ->join('siswa', 'pengajuan.siswa_id = siswa.id')
+            ->orderBy('pengajuan.updated_at', 'desc')
             ->get()->getResultArray();
 
         return view('admin/pengajuan/index', $data);

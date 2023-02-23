@@ -24,6 +24,7 @@ class SiswaController extends BaseController
         $data['list'] = $siswa->select('siswa.*, siswa.id as id_siswa, users.*, users.id as id_users')
             ->join('users', 'siswa.users_id = users.id')
             ->where('siswa.status_hapus', 'tidak')
+            ->orderBy('siswa.updated_at', 'desc')
             ->get()->getResultArray();
 
         return view('admin/siswa/index', $data);
@@ -104,7 +105,7 @@ class SiswaController extends BaseController
         }
 
         $siswa = new SiswaModel();
-        $data['list'] = $siswa->whereIn('id', $arrId)->where('status_hapus', 'tidak')->findAll();
+        $data['list'] = $siswa->whereIn('id', $arrId)->where('status_hapus', 'tidak')->orderBy('updated_at', 'desc')->findAll();
 
         return view('pembimbing/siswa/index', $data);
     }

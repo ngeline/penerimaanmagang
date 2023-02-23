@@ -16,7 +16,7 @@ class UsersController extends BaseController
     {
         $data['activePage'] = 'adminUser';
         $model = new UsersModel();
-        $data['users'] = $model->where('status', 'aktif')->findAll();
+        $data['users'] = $model->where('status', 'aktif')->orderBy('updated_at', 'desc')->findAll();
         return view('admin/users/index', $data);
     }
 
