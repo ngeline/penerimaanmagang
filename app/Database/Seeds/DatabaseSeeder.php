@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
                 'singkatan_bidang' => 'Sekretariat',
                 'kepala_bidang' => 'Wahyu Hermawan S. Pd.',
                 'nip' => '19780812 20012 2 004',
-                'ttd' => 'ttd(1)',
+                'ttd' => 'ttd(1).png',
                 'keterangan' => 'Ruangan C1'
             ],
             [
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
                 'singkatan_bidang' => 'PTK',
                 'kepala_bidang' => 'Hiroatus Solihatin S. Pd.',
                 'nip' => '19780812 20012 2 014',
-                'ttd' => 'ttd(2)',
+                'ttd' => 'ttd(2).png',
                 'keterangan' => 'Ruangan C2'
             ],
             [
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
                 'singkatan_bidang' => 'DIKDAS',
                 'kepala_bidang' => 'Erna Suparina S. Pd.',
                 'nip' => '19780812 20012 2 114',
-                'ttd' => 'ttd(3)',
+                'ttd' => 'ttd(3).png',
                 'keterangan' => 'Ruangan C3'
             ],
             [
@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
                 'singkatan_bidang' => 'PAUD & PNF',
                 'kepala_bidang' => 'Maman Setyo S. Pd.',
                 'nip' => '19780812 20012 3 444',
-                'ttd' => 'ttd(4)',
+                'ttd' => 'ttd(4).png',
                 'keterangan' => 'Ruangan C4'
             ],
         ];
