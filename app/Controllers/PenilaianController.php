@@ -257,7 +257,7 @@ class PenilaianController extends BaseController
                 ->first();
 
             $penilaian = new PenilaianModel();
-            $dataPenilaian = $penilaian->select('penilaian.id, penilaian.nilai, kategori_penilaian.nama_kategori, kategori_penilaian.keterangan')
+            $dataPenilaian = $penilaian->select('penilaian.id, penilaian.nilai, penilaian.huruf, kategori_penilaian.nama_kategori, kategori_penilaian.keterangan')
                 ->join('kategori_penilaian', 'penilaian.kategori_id = kategori_penilaian.id')
                 ->where('penilaian.magang_id', $id)
                 ->get()->getResultArray();

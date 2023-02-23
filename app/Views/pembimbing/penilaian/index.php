@@ -20,7 +20,7 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="mb-3 col-md-12">
+                        <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table table-bordered w-100">
                                     <thead>
@@ -45,6 +45,16 @@
                             </div>
                         </div>
                     </div>
+                    <span style="font-size: 11px;">
+                        <b style="color: red;">*Note predikat</b><br>
+                        <ul>
+                            <li>Nilai 100-90 = A</li>
+                            <li>Nilai 90-75 = B</li>
+                            <li>Nilai 75-65 = C</li>
+                            <li>Nilai 65-50 = D</li>
+                            <li>Nilai 50-0 = E</li>
+                        </ul>
+                    </span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -70,7 +80,7 @@
                             <label class="form-label">Siswa Magang</label>
                             <input type="text" id="editSiswa" class="form-control" readonly>
                         </div>
-                        <div class="mb-3 col-md-12">
+                        <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table table-bordered w-100">
                                     <thead>
@@ -83,6 +93,16 @@
                             </div>
                         </div>
                     </div>
+                    <span style="font-size: 11px;">
+                        <b style="color: red;">*Note predikat</b><br>
+                        <ul>
+                            <li>Nilai 100-90 = A</li>
+                            <li>Nilai 90-75 = B</li>
+                            <li>Nilai 75-65 = C</li>
+                            <li>Nilai 65-50 = D</li>
+                            <li>Nilai 50-0 = E</li>
+                        </ul>
+                    </span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

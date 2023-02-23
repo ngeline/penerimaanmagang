@@ -19,7 +19,8 @@
                             <table class="table table-bordered w-100">
                                 <thead>
                                     <th>Kategori</th>
-                                    <th>Nilai</th>
+                                    <th style="width: 10%;">Predikat</th>
+                                    <th style="width: 10%;">Nilai</th>
                                 </thead>
                                 <tbody id="myTableBody">
                                 </tbody>
@@ -107,6 +108,7 @@
                         var row = '<tr>' +
                             '<td><label class="form-label">' + item.nama_kategori + '</label><br>' +
                             '<p style="font-size: 13px;">' + item.keterangan + '</p>' +
+                            '<td><input type="text" class="form-control" value="' + item.huruf + '" readonly></td>' +
                             '<td><input type="number" min="0" max="100" class="form-control" value="' + item.nilai + '" readonly></td>' +
                             '</tr>';
                         $('#myTableBody').append(row);
