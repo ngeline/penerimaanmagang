@@ -96,10 +96,9 @@
                     echo $date;
                     ?><br>
             Ka. Sub. Bagian Umum<br>
-            Dinas Pendidikan Kota Kediri<br>
+            Dinas Pendidikan Kota Kediri
             <br>
-            <br>
-            <br>
+            <img src="assets/file/ttd/ttd(1).png">
             <br>
             <b>SARI BASUKI, S.E</b><br>
             NIP. 19780812 20012 2 004

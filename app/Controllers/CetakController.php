@@ -6,9 +6,16 @@ use App\Controllers\BaseController;
 use App\Models\MagangModel;
 use App\Models\PenilaianModel;
 use Dompdf\Dompdf;
+use Dompdf\Options;
+use Mpdf\Mpdf;
 
 class CetakController extends BaseController
 {
+    public function __construct()
+    {
+        helper(['form', 'url', 'validation', 'session']);
+    }
+
     public function generateNilai($id)
     {
         $magang = new MagangModel();
@@ -31,7 +38,6 @@ class CetakController extends BaseController
 
         $data['total'] = number_format(array_sum($arr) / count($data['list']), 2, ',', '');
 
-        // Load the Dompdf library
         $dompdf = new Dompdf();
 
         // Load HTML into Dompdf
