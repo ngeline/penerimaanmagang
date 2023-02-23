@@ -226,20 +226,34 @@ class PengajuanController extends BaseController
         $id = $data['id'];
 
         $validation =  \Config\Services::validation();
-        $validation->setRules([
-            'validasiStatus' => [
-                'label' => 'Status Pengajuan',
-                'rules' => 'required'
-            ],
-            'validasiCatatan' => [
-                'label' => 'Catatan',
-                'rules' => 'required'
-            ],
-            'suratBalasan' => [
-                'label' => 'File Surat Balasan',
-                'rules' => 'uploaded[suratBalasan]|max_size[suratBalasan,5120]|ext_in[suratBalasan,pdf]'
-            ],
-        ]);
+
+        if ($data['validasiStatus'] == 'diterima') {
+            $validation->setRules([
+                'validasiStatus' => [
+                    'label' => 'Status Pengajuan',
+                    'rules' => 'required'
+                ],
+                'validasiCatatan' => [
+                    'label' => 'Catatan',
+                    'rules' => 'required'
+                ],
+                'suratBalasan' => [
+                    'label' => 'File Surat Balasan',
+                    'rules' => 'uploaded[suratBalasan]|max_size[suratBalasan,5120]|ext_in[suratBalasan,pdf]'
+                ],
+            ]);
+        } else {
+            $validation->setRules([
+                'validasiStatus' => [
+                    'label' => 'Status Pengajuan',
+                    'rules' => 'required'
+                ],
+                'validasiCatatan' => [
+                    'label' => 'Catatan',
+                    'rules' => 'required'
+                ]
+            ]);
+        }
 
         if (!$validation->run($_POST)) {
             $errors = $validation->getErrors();
@@ -260,11 +274,18 @@ class PengajuanController extends BaseController
         }
 
         $pengajuan = new PengajuanModel();
-        $dataPengajuan = [
-            'file_surat_balasan' => $nameSurat,
-            'status_pengajuan' => $data['validasiStatus'],
-            'catatan' => $data['validasiCatatan'],
-        ];
+        if ($data['validasiStatus'] == 'diterima') {
+            $dataPengajuan = [
+                'file_surat_balasan' => $nameSurat,
+                'status_pengajuan' => $data['validasiStatus'],
+                'catatan' => $data['validasiCatatan'],
+            ];
+        } else {
+            $dataPengajuan = [
+                'status_pengajuan' => $data['validasiStatus'],
+                'catatan' => $data['validasiCatatan'],
+            ];
+        }
         $pengajuan->updatePengajuan($dataPengajuan, $id);
 
         $anggota = new PengajuanAnggotaModel();
