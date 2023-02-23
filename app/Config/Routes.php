@@ -108,6 +108,8 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('siswa', 'SiswaController::indexPembimbing');
         $routes->get('magang', 'MagangController::indexPembimbing');
 
+        $routes->get('absensi', 'AbsensiPembimbingController::index');
+
         $routes->get('kegiatan', 'KegiatanController::indexPembimbing');
         $routes->post('kegiatan/update', 'KegiatanController::updatePembimbing');
 

@@ -13,9 +13,10 @@
                         <table class="table table-striped w-100" id="Tables">
                             <thead class="table-light">
                                 <th>No</th>
-                                <th>Tanggal Absensi</th>
-                                <th>Nama Siswa Magang</th>
                                 <th>Absensi</th>
+                                <th>Nama Siswa Magang</th>
+                                <th>Status Kedatangan</th>
+                                <th>Status Absensi</th>
                                 <th>Status Validasi Absensi</th>
                                 <th data-orderable="false">Aksi</th>
                             </thead>
@@ -24,8 +25,9 @@
                                 <?php foreach ($list as $row) : ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
-                                        <td><?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?></td>
+                                        <td><?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?> - <?= date_format(new DateTime($row['jam']), 'H:i:s'); ?></td>
                                         <td><?= $row['nama'] ?></td>
+                                        <td><?= $row['status_kedatangan'] ?></td>
                                         <td><?= $row['absen'] ?></td>
                                         <td><?= $row['status_absen'] ?></td>
                                         <td>
@@ -52,11 +54,15 @@
                                                                 <input type="text" class="form-control" value="<?= $row['nama']; ?>" readonly>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Tanggal</label>
-                                                                <input type="text" class="form-control" value="<?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?>" readonly>
+                                                                <label class="form-label">Absensi</label>
+                                                                <input type="text" class="form-control" value="<?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?> - <?= date_format(new DateTime($row['jam']), 'H:i:s'); ?>" readonly>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Absensi</label>
+                                                                <label class="form-label">Status Kedatangan</label>
+                                                                <input type="text" class="form-control" value="<?= $row['status_kedatangan']; ?>" readonly>
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Status Absensi</label>
                                                                 <input type="text" class="form-control" value="<?= $row['absen'] ?>" readonly>
                                                             </div>
                                                             <?php if ($row['absen'] == 'hadir') : ?>
@@ -68,7 +74,7 @@
                                                             <?php if ($row['absen'] == 'izin') : ?>
                                                                 <div class="mb-3 col-md-6">
                                                                     <label class="form-label">Surat Izin</label>
-                                                                    <a href="<?= base_url('assets/file/absensi/' . $row['file_surat_izin']) ?>" class="btn btn-warning text-white w-100" download>Unduh</a>
+                                                                    <a class="btn btn-warning text-white w-100 izin-btn" data-image-url="<?= base_url('assets/file/absensi/' . $row['file_surat_izin']) ?>">Lihat</a>
                                                                 </div>
                                                             <?php endif; ?>
                                                             <div class="mb-3 col-md-6">
@@ -79,7 +85,7 @@
                                                                     <option value="ditolak" <?= ($row['status_absen'] == 'ditolak') ? 'selected' : '' ?>>Ditolak</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="mb-3 col-md-6">
+                                                            <div class="mb-3 col-md-12">
                                                                 <label class="form-label">Catatan</label>
                                                                 <textarea name="validasiCatatan" rows="4" class="form-control" required><?= ($row['status_absen'] == 'diproses') ? '' : $row['catatan'] ?></textarea>
                                                             </div>
@@ -116,6 +122,17 @@
         });
 
         $('.image-btn').click(function() {
+            var this_id = $(this).data('image-url');
+            const myGallery = GLightbox({
+                elements: [{
+                    'href': this_id,
+                    'type': 'image',
+                }]
+            });
+            myGallery.open();
+        });
+
+        $('.izin-btn').click(function() {
             var this_id = $(this).data('image-url');
             const myGallery = GLightbox({
                 elements: [{

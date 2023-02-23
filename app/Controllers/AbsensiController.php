@@ -8,6 +8,7 @@ use App\Models\MagangModel;
 use App\Models\SiswaModel;
 use App\Models\PengajuanModel;
 use App\Models\PengajuanAnggotaModel;
+use DateTime;
 
 class AbsensiController extends BaseController
 {
@@ -131,7 +132,7 @@ class AbsensiController extends BaseController
                 ],
                 'izin' => [
                     'label' => 'Surat Izin',
-                    'rules' => 'uploaded[izin]|max_size[izin,5120]|ext_in[izin,pdf]'
+                    'rules' => 'uploaded[izin]|max_size[izin,5120]|ext_in[izin,png,jpg,jpeg]'
                 ],
             ]);
         } else {
@@ -152,6 +153,17 @@ class AbsensiController extends BaseController
         }
 
         $tanggal = date('Y-m-d');
+        $jam = date('H:i:s');
+
+        // Set the target time
+        $time = new DateTime('08:01:00');
+
+        // Compare the times
+        if ($jam <= $time) {
+            $datang = 'terlambat';
+        } else {
+            $datang = 'tepat waktu';
+        }
 
         $model = new AbsensiModel();
         $kondisi = $model->where('magang_id', $data['id'])->where('tanggal', $tanggal)->where('status_absen !=', 'ditolak')->findAll();
@@ -175,7 +187,9 @@ class AbsensiController extends BaseController
             $data = [
                 'magang_id' => $data['id'],
                 'tanggal' => $tanggal,
+                'jam' => $jam,
                 'absen' => $data['absensi'],
+                'status_kedatangan' => $datang,
                 'foto_absensi' => $nameFile,
             ];
         } else if ($data['absensi'] == 'izin') {
@@ -192,7 +206,9 @@ class AbsensiController extends BaseController
             $data = [
                 'magang_id' => $data['id'],
                 'tanggal' => $tanggal,
+                'jam' => $jam,
                 'absen' => $data['absensi'],
+                'status_kedatangan' => 'izin',
                 'file_surat_izin' => $nameFile,
             ];
         }

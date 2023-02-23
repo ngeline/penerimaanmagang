@@ -1,53 +1,6 @@
 <?php $this->extend('layouts/portal') ?>
 
 <?php $this->section('content') ?>
-<!-- Modal Create -->
-<div class="modal fade" id="tambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h5 class="modal-title text-white" id="staticBackdropLabel">Form Tambah Data</h5>
-            </div>
-            <form action="<?= base_url('siswa/absensi/store') ?>" method="POST" enctype="multipart/form-data" files="true" id="form">
-                <?= csrf_field() ?>
-                <div class="modal-body">
-                    <div class="row">
-                        <input type="hidden" name="id" value="<?= $id_magang ?>">
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Tanggal Hari Ini</label>
-                            <input type="text" class="form-control" value="<?php echo (new DateTime('now'))->format('d/m/Y') ?>" readonly>
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Jam Sekarang</label>
-                            <input type="text" class="form-control" value="<?php echo (new DateTime('now'))->format('H:i:s') ?>" readonly>
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <label class="form-label">Absensi</label>
-                            <select name="absensi" id="absensi" class="form-select">
-                                <option value="0">--Pilih Status--</option>
-                                <option value="hadir">Hadir</option>
-                                <option value="izin">Izin</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col-md-6" id="fotoToggle">
-                            <label class="form-label">Foto Absensi</label>
-                            <input id="foto" name="foto" type="file" class="form-control">
-                        </div>
-                        <div class="mb-3 col-md-6" id="izinToggle">
-                            <label class="form-label">Surat Izin</label>
-                            <input id="izin" name="izin" type="file" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-success text-white">Simpan</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <h1 class="app-page-title">Data Absensi</h1>
 
 <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration">
@@ -56,19 +9,14 @@
             <!-- <h3 class="mb-3">Welcome, developer!</h3> -->
             <div class="row gx-5 gy-3">
                 <div class="col-12 col-lg-12">
-                    <div class="mb-3 d-flex flex-row-reverse">
-                        <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#tambah">
-                            Tambah Data
-                        </button>
-                    </div>
                     <div class="table-responsive ">
                         <table class="table table-striped w-100" id="Tables">
                             <thead class="table-light">
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Jam</th>
                                 <th>Absensi</th>
+                                <th>Nama Siswa</th>
                                 <th>Status Kedatangan</th>
+                                <th>Status Absensi</th>
                                 <th>Status Validasi Absensi</th>
                                 <th data-orderable="false">Aksi</th>
                             </thead>
@@ -77,10 +25,10 @@
                                 <?php foreach ($list as $row) : ?>
                                     <tr>
                                         <td><?php echo $no++ ?></td>
-                                        <td><?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?></td>
-                                        <td><?= date_format(new DateTime($row['jam']), 'H:i:s'); ?></td>
-                                        <td><?= $row['absen'] ?></td>
+                                        <td><?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?> - <?= date_format(new DateTime($row['jam']), 'H:i:s'); ?></td>
+                                        <td><?= $row['nama'] ?></td>
                                         <td><?= $row['status_kedatangan'] ?></td>
+                                        <td><?= $row['absen'] ?></td>
                                         <td><?= $row['status_absen'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#Detail<?php echo $no ?>">
@@ -99,15 +47,19 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="mb-3 col-md-6">
-                                                            <label class="form-label">Tanggal</label>
-                                                            <input type="text" class="form-control" value="<?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?>" readonly>
-                                                        </div>
-                                                        <div class="mb-3 col-md-6">
-                                                            <label class="form-label">Jam</label>
-                                                            <input type="text" class="form-control" value="<?= date_format(new DateTime($row['jam']), 'H:i:s'); ?>" readonly>
+                                                            <label class="form-label">Nama Siswa Magang</label>
+                                                            <input type="text" class="form-control" value="<?= $row['nama']; ?>" readonly>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
                                                             <label class="form-label">Absensi</label>
+                                                            <input type="text" class="form-control" value="<?= date_format(new DateTime($row['tanggal']), 'd/m/Y'); ?> - <?= date_format(new DateTime($row['jam']), 'H:i:s'); ?>" readonly>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Status Kedatangan</label>
+                                                            <input type="text" class="form-control" value="<?= $row['status_kedatangan']; ?>" readonly>
+                                                        </div>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Status Absensi</label>
                                                             <input type="text" class="form-control" value="<?= $row['absen'] ?>" readonly>
                                                         </div>
                                                         <?php if ($row['absen'] == 'hadir') : ?>
@@ -123,16 +75,12 @@
                                                             </div>
                                                         <?php endif; ?>
                                                         <div class="mb-3 col-md-6">
-                                                            <label class="form-label">Status Kedatangan</label>
-                                                            <input type="text" class="form-control" value="<?= $row['status_kedatangan'] ?>" readonly>
-                                                        </div>
-                                                        <div class="mb-3 col-md-6">
                                                             <label class="form-label">Status Validasi Absensi</label>
                                                             <input type="text" class="form-control" value="<?= $row['status_absen'] ?>" readonly>
                                                         </div>
                                                         <div class="mb-3 col-md-12">
                                                             <label class="form-label">Catatan</label>
-                                                            <textarea rows="4" class="form-control" readonly><?= ($row['status_absen'] == 'diproses') ? 'tidak ada catatan' : $row['catatan'] ?></textarea>
+                                                            <textarea rows="4" class="form-control" readonly><?= ($row['status_absen'] == 'diproses') ? '' : $row['catatan'] ?></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
