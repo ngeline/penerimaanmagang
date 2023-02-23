@@ -20,6 +20,9 @@ class Absensi extends Migration
             'tanggal' => [
                 'type' => 'DATE',
             ],
+            'jam' => [
+                'type' => 'TIME',
+            ],
             'absen' => [
                 'type' => 'ENUM',
                 'constraint' => "'hadir', 'izin'",
@@ -39,6 +42,12 @@ class Absensi extends Migration
                 'constraint' => "'diterima', 'ditolak', 'diproses'",
                 'null' => false,
                 'default' => 'diproses',
+            ],
+            'status_kedatangan' => [
+                'type' => 'ENUM',
+                'constraint' => "'tepat waktu', 'terlambat'",
+                'null' => false,
+                'default' => 'tepat waktu',
             ],
             'catatan' => [
                 'type' => 'TEXT',

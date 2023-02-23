@@ -22,21 +22,37 @@ class DatabaseSeeder extends Seeder
             [
                 'id' => Uuid::uuid4()->toString(),
                 'nama_bidang' => 'Bidang Sekretariat',
+                'singkatan_bidang' => 'Sekretariat',
+                'kepala_bidang' => 'Wahyu Hermawan S. Pd.',
+                'nip' => '19780812 20012 2 004',
+                'ttd' => 'ttd(1)',
                 'keterangan' => 'Ruangan C1'
             ],
             [
                 'id' => Uuid::uuid4()->toString(),
                 'nama_bidang' => 'Bidang Pembinaan Pendidik dan Tenaga Kependidikan (PTK)',
+                'singkatan_bidang' => 'PTK',
+                'kepala_bidang' => 'Hiroatus Solihatin S. Pd.',
+                'nip' => '19780812 20012 2 014',
+                'ttd' => 'ttd(2)',
                 'keterangan' => 'Ruangan C2'
             ],
             [
                 'id' => Uuid::uuid4()->toString(),
                 'nama_bidang' => 'Bidang Pembinaan Pendidikan Dasar (Dikdas)',
+                'singkatan_bidang' => 'DIKDAS',
+                'kepala_bidang' => 'Erna Suparina S. Pd.',
+                'nip' => '19780812 20012 2 114',
+                'ttd' => 'ttd(3)',
                 'keterangan' => 'Ruangan C3'
             ],
             [
                 'id' => Uuid::uuid4()->toString(),
                 'nama_bidang' => 'Bidang Pembinaan Pendidikan Anak Usia Dini (PAUD) dan Pendidikan Non Formal (PNF)',
+                'singkatan_bidang' => 'PAUD & PNF',
+                'kepala_bidang' => 'Maman Setyo S. Pd.',
+                'nip' => '19780812 20012 3 444',
+                'ttd' => 'ttd(4)',
                 'keterangan' => 'Ruangan C4'
             ],
         ];

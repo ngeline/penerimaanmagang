@@ -17,6 +17,22 @@ class Bidang extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255
             ],
+            'singkatan_bidang' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255
+            ],
+            'kepala_bidang' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255
+            ],
+            'nip' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255
+            ],
+            'ttd' => [
+                'type' => 'TEXT',
+                'null' => true
+            ],
             'keterangan' => [
                 'type' => 'TEXT'
             ],
