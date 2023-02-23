@@ -26,13 +26,53 @@ class BidangController extends BaseController
 
         $id = $data['id'];
 
+        $ttd = $this->request->getFile('ttd');
+
         $validation =  \Config\Services::validation();
-        $validation->setRules([
-            'keterangan' => [
-                'label' => 'Keterangan',
-                'rules' => 'required'
-            ],
-        ]);
+
+        if ($ttd->isValid()) {
+            $validation->setRules([
+                'singkatan'  => [
+                    'label' => 'Singkatan Bidang',
+                    'rules' => 'required'
+                ],
+                'kepala'  => [
+                    'label' => 'Kepala Bidang',
+                    'rules' => 'required'
+                ],
+                'nip'  => [
+                    'label' => 'NIP Kepala Bidang',
+                    'rules' => 'required'
+                ],
+                'ttd'  => [
+                    'label' => 'Tanda Tangan Kepala Bidang',
+                    'rules' => 'uploaded[ttd]|max_size[ttd,1024]|ext_in[ttd,png]'
+                ],
+                'keterangan' => [
+                    'label' => 'Keterangan',
+                    'rules' => 'required'
+                ],
+            ]);
+        } else {
+            $validation->setRules([
+                'singkatan'  => [
+                    'label' => 'Singkatan Bidang',
+                    'rules' => 'required'
+                ],
+                'kepala'  => [
+                    'label' => 'Kepala Bidang',
+                    'rules' => 'required'
+                ],
+                'nip'  => [
+                    'label' => 'NIP Kepala Bidang',
+                    'rules' => 'required'
+                ],
+                'keterangan' => [
+                    'label' => 'Keterangan',
+                    'rules' => 'required'
+                ],
+            ]);
+        }
 
         if (!$validation->run($_POST)) {
             $errors = $validation->getErrors();
@@ -41,9 +81,34 @@ class BidangController extends BaseController
             return redirect()->to(base_url('admin/bidang'));
         }
 
-        $data = [
-            'keterangan' => $data['keterangan']
-        ];
+        // Check if the file was uploaded successfully
+        if ($ttd->isValid() && !$ttd->hasMoved()) {
+            // Move the file to a new location
+            $name =  time() . $ttd->getName();
+
+            $image = \Config\Services::image();
+
+            $image->withFile($ttd)
+                ->resize(150, 75, false, 'height')
+                ->save(FCPATH . '/assets/file/ttd/' . $name);
+        }
+
+        if ($ttd->isValid()) {
+            $data = [
+                'singkatan_bidang' => $data['singkatan'],
+                'kepala_bidang' => $data['kepala'],
+                'nip' => $data['nip'],
+                'ttd' => $name,
+                'keterangan' => $data['keterangan']
+            ];
+        } else {
+            $data = [
+                'singkatan_bidang' => $data['singkatan'],
+                'kepala_bidang' => $data['kepala'],
+                'nip' => $data['nip'],
+                'keterangan' => $data['keterangan']
+            ];
+        }
 
         $model = new BidangModel();
         $model->updateBidang($data, $id);

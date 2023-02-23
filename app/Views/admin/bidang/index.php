@@ -14,6 +14,8 @@
                             <thead class="table-light">
                                 <th style="width: 2%;">No</th>
                                 <th>Nama Bidang</th>
+                                <th>Singkatan Bidang</th>
+                                <th>Kepala Bidang</th>
                                 <th>Keterangan</th>
                                 <th data-orderable="false" style="width: 10%;">Aksi</th>
                             </thead>
@@ -23,6 +25,8 @@
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?= $row['nama_bidang'] ?></td>
+                                        <td><?= $row['singkatan_bidang'] ?></td>
+                                        <td><?= $row['kepala_bidang'] ?></td>
                                         <td><?= $row['keterangan'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Edit<?php echo $no ?>">
@@ -36,15 +40,44 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-warning">
-                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">Form Edit Data</h5>
+                                                    <h5 class="modal-title text-white" id="staticBackdropLabel">For Edit Data</h5>
                                                 </div>
-                                                <form action="<?= base_url('admin/bidang/update') ?>" method="POST">
+                                                <form action="<?= base_url('admin/bidang/update') ?>" method="POST" enctype="multipart/form-data" files="true">
                                                     <?= csrf_field() ?>
                                                     <div class="modal-body">
                                                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Keterangan</label>
-                                                            <textarea name="keterangan" rows="10" class="form-control" required><?= $row['keterangan'] ?></textarea>
+                                                        <div class="row">
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Nama Bidang</label>
+                                                                <input type="text" class="form-control" value="<?= $row['nama_bidang'] ?>" readonly>
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Singkatan Bidang</label>
+                                                                <input type="text" name="singkatan" class="form-control" value="<?= $row['singkatan_bidang'] ?>">
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Kepala Bidang</label>
+                                                                <input type="text" name="kepala" class="form-control" value="<?= $row['kepala_bidang'] ?>">
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">NIP Kepala Bidang</label>
+                                                                <input type="text" name="nip" class="form-control" value="<?= $row['nip'] ?>">
+                                                            </div>
+                                                            <div class="mb-3 col-md-12">
+                                                                <label class="form-label">Tanda Tangan Kepala Bidang <span style="color: red; font-size: 11px;">*tipe file png, ukuran max 1mb</span></label>
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <a class="btn btn-warning text-white w-100 image-btn" data-image-url="<?= base_url('assets/file/ttd/' . $row['ttd']) ?>">Lihat Tanda Tangan Sebelumnya</a>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="file" name="ttd" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 col-md-12">
+                                                                <label class="form-label">Keterangan</label>
+                                                                <textarea name="keterangan" rows="10" class="form-control" required><?= $row['keterangan'] ?></textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -76,6 +109,17 @@
                 sUrl: "<?= base_url('assets/template/dataTables/indonesian.json') ?>"
             }
         })
+
+        $('.image-btn').click(function() {
+            var this_id = $(this).data('image-url');
+            const myGallery = GLightbox({
+                elements: [{
+                    'href': this_id,
+                    'type': 'image',
+                }]
+            });
+            myGallery.open();
+        });
 
         <?php if (session()->has("success")) { ?>
             Swal.fire({

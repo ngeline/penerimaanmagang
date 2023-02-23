@@ -23,7 +23,7 @@
 
     .kiri {
         text-align: center;
-        padding-left: 75%;
+        padding-left: 65%;
     }
 
     .tengah {
@@ -95,13 +95,13 @@
                     $date = strftime("%d %B %Y");
                     echo $date;
                     ?><br>
-            Ka. Sub. Bagian Umum<br>
+            Ka. Sub. <?= $siswa['singkatan_bidang'] ?><br>
             Dinas Pendidikan Kota Kediri
             <br>
-            <img src="assets/file/ttd/ttd(1).png">
+            <img src="assets/file/ttd/<?= $siswa['ttd'] ?>">
             <br>
-            <b>SARI BASUKI, S.E</b><br>
-            NIP. 19780812 20012 2 004
+            <b><?= $siswa['kepala_bidang'] ?></b><br>
+            NIP. <?= $siswa['kepala_nip'] ?>
         </div>
     </div>
 </body>

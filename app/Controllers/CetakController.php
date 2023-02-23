@@ -6,8 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\MagangModel;
 use App\Models\PenilaianModel;
 use Dompdf\Dompdf;
-use Dompdf\Options;
-use Mpdf\Mpdf;
 
 class CetakController extends BaseController
 {
@@ -19,8 +17,10 @@ class CetakController extends BaseController
     public function generateNilai($id)
     {
         $magang = new MagangModel();
-        $data['siswa'] = $magang
+        $data['siswa'] = $magang->select('magang.*, siswa.*, pembimbing.*, bidang.*, bidang.nip AS kepala_nip, siswa.nama AS nama')
             ->join('siswa', 'magang.siswa_id = siswa.id')
+            ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')
+            ->join('bidang', 'pembimbing.bidang_id = bidang.id')
             ->where('magang.id', $id)
             ->first();
 

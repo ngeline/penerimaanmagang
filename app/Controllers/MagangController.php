@@ -101,12 +101,17 @@ class MagangController extends BaseController
             ->join('siswa', 'magang.siswa_id = siswa.id')
             ->join('pembimbing', 'magang.pembimbing_id = pembimbing.id')
             ->join('siswa AS s', 'pengajuan.siswa_id = s.id')
+            ->join('bidang', 'pembimbing.bidang_id = bidang.id')
             ->where('magang.status_hapus', 'tidak')
             ->orderBy('magang.updated_at', 'desc')
             ->get()->getResultArray();
 
         $pembimbing = new PembimbingModel();
-        $data['pembimbing'] = $pembimbing->where('status_hapus', 'tidak')->findAll();
+        $data['pembimbing'] = $pembimbing->select('pembimbing.*, bidang.*, pembimbing.id AS id, bidang.id AS id_bidang')
+            ->join('bidang', 'pembimbing.bidang_id = bidang.id')
+            ->where('pembimbing.status_hapus', 'tidak')
+            ->orderBy('pembimbing.nama', 'asc')
+            ->get()->getResultArray();
 
         $pengajuan = new PengajuanModel();
         $data['pengajuan'] = $pengajuan->select('pengajuan.id AS id_pengajuan, pengajuan.created_at, siswa.nama AS nama_siswa, pengajuan.tanggal_mulai, pengajuan.tanggal_selesai')

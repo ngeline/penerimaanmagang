@@ -35,7 +35,7 @@
                             <select name="pembimbing" id="pembimbing" class="form-select">
                                 <option value="">--Pilih Pembimbing--</option>
                                 <?php foreach ($pembimbing as $item) : ?>
-                                    <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
+                                    <option value="<?= $item['id'] ?>"><?= $item['nama'] ?> | <?= $item['singkatan_bidang'] ?></option>
                                 <?php endforeach ?>
                             </select>
                         </div>
@@ -115,7 +115,7 @@
                                                                 <select name="editPembimbing" id="editPembimbing" class="form-select">
                                                                     <option value="">--Pilih Pembimbing--</option>
                                                                     <?php foreach ($pembimbing as $item) : ?>
-                                                                        <option value="<?= $item['id'] ?>" <?= ($row['id_pembimbing'] == $item['id']) ? 'selected' : '' ?>><?= $item['nama'] ?></option>
+                                                                        <option value="<?= $item['id'] ?>" <?= ($row['id_pembimbing'] == $item['id']) ? 'selected' : '' ?>><?= $item['nama'] ?> | <?= $item['singkatan_bidang'] ?></option>
                                                                     <?php endforeach ?>
                                                                 </select>
                                                             </div>
