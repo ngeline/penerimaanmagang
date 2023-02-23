@@ -62,7 +62,7 @@
                                 <input id="kelas" name="kelas" type="number" class="form-control" value="<?= $siswa['kelas']; ?>" required="required">
                             </div>
                             <div class="mb-3 col-md-6" id="divTingkat">
-                                <label class="form-label">Tingkat</label>
+                                <label class="form-label">Semester</label>
                                 <input id="tingkat" name="tingkat" type="number" class="form-control" value="<?= $siswa['tingkat']; ?>" required="required">
                             </div>
                             <div class="mb-3 col-md-6" id="divSekolah">

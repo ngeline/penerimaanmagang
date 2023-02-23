@@ -96,7 +96,7 @@
                                                                 <input id="jurusan" type="text" class="form-control" value="<?= $row['jurusan']; ?>" readonly>
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Tingkat</label>
+                                                                <label class="form-label">Semester</label>
                                                                 <input id="tingkat" type="number" class="form-control" value="<?= $row['tingkat']; ?>" readonly>
                                                             </div>
                                                             <div class="mb-3 col-md-6">

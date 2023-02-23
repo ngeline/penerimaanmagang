@@ -95,7 +95,7 @@
                                                                 <input id="kelas" name="kelas" type="number" class="form-control" value="<?= $row['kelas']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Tingkat <span class="text-danger" style="font-size: 9pt;">*bagi perguruan tinggi</span></label>
+                                                                <label class="form-label">Semester <span class="text-danger" style="font-size: 9pt;">*bagi perguruan tinggi</span></label>
                                                                 <input id="tingkat" name="tingkat" type="number" class="form-control" value="<?= $row['tingkat']; ?>">
                                                             </div>
                                                             <div class="mb-3 col-md-6">
