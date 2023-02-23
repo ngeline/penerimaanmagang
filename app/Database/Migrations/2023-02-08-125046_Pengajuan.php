@@ -9,16 +9,9 @@ class Pengajuan extends Migration
     public function up()
     {
         $this->forge->addField([
-            // 'id' => [
-            //     'type' => 'INT',
-            //     'constraint' => 11,
-            //     'unsigned' => true,
-            //     'auto_increment' => true
-            // ],
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 36,
-                // 'unique' => true,
             ],
             'siswa_id' => [
                 'type' => 'VARCHAR',
