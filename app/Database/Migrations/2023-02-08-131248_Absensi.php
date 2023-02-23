@@ -45,7 +45,7 @@ class Absensi extends Migration
             ],
             'status_kedatangan' => [
                 'type' => 'ENUM',
-                'constraint' => "'tepat waktu', 'terlambat'",
+                'constraint' => "'tepat waktu', 'terlambat','izin'",
                 'null' => false,
                 'default' => 'tepat waktu',
             ],
