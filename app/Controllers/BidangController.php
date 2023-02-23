@@ -7,6 +7,11 @@ use App\Models\BidangModel;
 
 class BidangController extends BaseController
 {
+    public function __construct()
+    {
+        helper(['form', 'url', 'validation', 'session']);
+    }
+
     public function index()
     {
         $data['activePage'] = 'adminBidang';
