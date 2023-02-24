@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <td class="table-less"><b>Sekolah</b></td>
-                <td class="table-less">: <?= ($siswa['asal_sekolah']) ? $siswa['asal_sekolah'] : $siswa['perguruan'] ?></td>
+                <td class="table-less">: <?= ($siswa['jenjang'] == 'SLTA') ? $siswa['asal_sekolah'] : $siswa['perguruan'] ?></td>
             </tr>
         </tbody>
     </table>

@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\MagangModel;
 use App\Models\PenilaianModel;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class CetakController extends BaseController
 {
@@ -38,7 +39,11 @@ class CetakController extends BaseController
 
         $data['total'] = number_format(array_sum($arr) / count($data['list']), 2, ',', '');
 
+        $options = new Options();
+        $options->setChroot('');
+
         $dompdf = new Dompdf();
+        $dompdf->setOptions($options);
 
         // Load HTML into Dompdf
         $dompdf->loadHtml(view('siswa/penilaian/cetak', $data));
