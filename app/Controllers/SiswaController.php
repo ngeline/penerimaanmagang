@@ -3,8 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AbsensiModel;
+use App\Models\KegiatanModel;
 use App\Models\MagangModel;
 use App\Models\PembimbingModel;
+use App\Models\PengajuanAnggotaModel;
+use App\Models\PengajuanModel;
+use App\Models\PenilaianModel;
 use App\Models\UsersModel;
 use App\Models\SiswaModel;
 
@@ -63,20 +68,38 @@ class SiswaController extends BaseController
 
     public function delete($id_siswa, $id_users)
     {
-        $siswa = new SiswaModel();
-        $dataSiswa = [
-            'status_hapus' => 'hapus'
-        ];
+        $magang = new MagangModel();
+        $dataMagang = $magang->where('siswa_id', $id_siswa)->findAll();
 
-        $siswa->updateSiswa($dataSiswa, $id_siswa);
+        $absensi = new AbsensiModel();
+        $kegiatan = new KegiatanModel();
+        $penilaian = new PenilaianModel();
+
+        foreach ($dataMagang as $value) {
+            $absensi->where('magang_id', $value['id'])->delete();
+            $kegiatan->where('magang_id', $value['id'])->delete();
+            $penilaian->where('magang_id', $value['id'])->delete();
+        }
+
+        $magang->where('siswa_id', $id_siswa)->delete();
+
+        $anggota = new PengajuanAnggotaModel();
+        $anggota->where('siswa_id', $id_siswa)->delete();
+
+        $pengajuan = new PengajuanModel();
+        $dataPengajuan = $pengajuan->where('siswa_id', $id_siswa)->first();
+
+        if ($dataPengajuan) {
+            $anggota->where('pengajuan_id', $dataPengajuan['id'])->delete();
+        }
+
+        $pengajuan->where('siswa_id', $id_siswa)->delete();
+
+        $siswa = new SiswaModel();
+        $siswa->deleteSiswa($id_siswa);
 
         $user = new UsersModel();
-
-        $dataUser = [
-            'status' => 'nonaktif'
-        ];
-
-        $user->updateUser($dataUser, $id_users);
+        $user->deleteUser($id_users);
 
         session()->setFlashdata("success", 'File Anda telah dihapus!');
         return redirect()->to(base_url('admin/siswa'));

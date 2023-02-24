@@ -30,7 +30,7 @@ class Siswa extends Migration
             'email' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
-                'unique' => true,
+                // 'unique' => true,
                 'null' => true
             ],
             'telepon' => [

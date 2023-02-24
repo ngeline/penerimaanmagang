@@ -3,6 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AbsensiModel;
+use App\Models\KegiatanModel;
+use App\Models\MagangModel;
+use App\Models\PembimbingModel;
+use App\Models\PengajuanAnggotaModel;
+use App\Models\PengajuanModel;
+use App\Models\PenilaianModel;
+use App\Models\SiswaModel;
 use App\Models\UsersModel;
 
 class UsersController extends BaseController
@@ -54,13 +62,57 @@ class UsersController extends BaseController
 
     public function delete($id)
     {
-        $model = new UsersModel();
+        $siswa = new SiswaModel();
+        $pembimbing = new PembimbingModel();
+        $magang = new MagangModel();
+        $absensi = new AbsensiModel();
+        $kegiatan = new KegiatanModel();
+        $penilaian = new PenilaianModel();
+        $anggota = new PengajuanAnggotaModel();
+        $pengajuan = new PengajuanModel();
 
-        $data = [
-            'status' => 'nonaktif'
-        ];
 
-        $model->updateUser($data, $id);
+        $cekSiswa = $siswa->where('users_id', $id)->first();
+        $cekPembimbing = $pembimbing->where('users_id', $id)->first();
+
+        if ($cekSiswa) {
+            $dataMagang = $magang->where('siswa_id', $cekSiswa['id'])->findAll();
+
+            foreach ($dataMagang as $value) {
+                $absensi->where('magang_id', $value['id'])->delete();
+                $kegiatan->where('magang_id', $value['id'])->delete();
+                $penilaian->where('magang_id', $value['id'])->delete();
+            }
+
+            $magang->where('siswa_id', $cekSiswa['id'])->delete();
+
+            $anggota->where('siswa_id', $cekSiswa['id'])->delete();
+
+            $dataPengajuan = $pengajuan->where('siswa_id', $cekSiswa['id'])->first();
+
+            if ($dataPengajuan) {
+                $anggota->where('pengajuan_id', $dataPengajuan['id'])->delete();
+            }
+
+            $pengajuan->where('siswa_id', $cekSiswa['id'])->delete();
+
+            $siswa->deleteSiswa($cekSiswa['id']);
+        } else if ($cekPembimbing) {
+            $dataMagang = $magang->where('pembimbing_id', $cekPembimbing['id'])->findAll();
+
+            foreach ($dataMagang as $value) {
+                $absensi->where('magang_id', $value['id'])->delete();
+                $kegiatan->where('magang_id', $value['id'])->delete();
+                $penilaian->where('magang_id', $value['id'])->delete();
+            }
+
+            $magang->where('pembimbing_id', $cekPembimbing['id'])->delete();
+
+            $pembimbing->deletePembimbing($cekPembimbing['id']);
+        }
+
+        $user = new UsersModel();
+        $user->deleteUser($id);
 
         session()->setFlashdata("success", 'File Anda telah dihapus!');
         return redirect()->to(base_url('admin/users'));

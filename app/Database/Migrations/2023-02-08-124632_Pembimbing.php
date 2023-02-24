@@ -38,7 +38,7 @@ class Pembimbing extends Migration
             'email' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
-                'unique' => true,
+                // 'unique' => true,
             ],
             'telepon' => [
                 'type' => 'VARCHAR',

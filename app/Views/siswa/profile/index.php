@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mt-3 d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btn-primary text-white">Simpan</button>
+                                    <button type="submit" class="btn btn-primary text-white">Simpan Data Diri</button>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mt-3 d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btn-primary text-white button-container">Simpan</button>
+                                    <button type="submit" class="btn btn-primary text-white button-container">Simpan Pengguna & Sandi</button>
                                 </div>
                             </div>
                         </div>
