@@ -61,7 +61,11 @@ class CetakController extends BaseController
     public function generateSertifikat()
     {
         // Load the Dompdf library
+        $options = new Options();
+        $options->setChroot('');
+
         $dompdf = new Dompdf();
+        $dompdf->setOptions($options);
 
         // Load HTML into Dompdf
         $dompdf->loadHtml(view('siswa/magang/cetak'));

@@ -1,273 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Background Image Example</title>
+    <style type="text/css">
+        @font-face {
+            font-family: 'Arial';
+            src: url('assets/font/arial.ttf') format('truetype');
+        }
+
+        html,
+        body {
+            background-image: url('assets/img/bg-sertif.jpeg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .table-bordered th td {
+            border: 1px solid;
+            border-collapse: collapse;
+            padding: 0;
+            margin: 1px;
+        }
+
+        .borderless tr td {
+            border: 0px solid;
+            border-collapse: none;
+            line-height: 0.5;
+        }
+
+        .content {
+            padding-top: 1%;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+        }
+
+        .judul {
+            text-align: center;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .sub-judul {
+            text-align: center;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        .guedi {
+            border: 2px solid black;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .isi {
+            font-size: 12px;
+        }
+    </style>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans|Pinyon+Script|Rochester');
-
-    .cursive {
-        font-family: 'Pinyon Script', cursive;
-    }
-
-    .sans {
-        font-family: 'Open Sans', sans-serif;
-    }
-
-    .bold {
-        font-weight: bold;
-    }
-
-    .block {
-        display: block;
-    }
-
-    .underline {
-        border-bottom: 1px solid #777;
-        padding: 5px;
-        margin-bottom: 15px;
-    }
-
-    .margin-0 {
-        margin: 0;
-    }
-
-    .padding-0 {
-        padding: 0;
-    }
-
-    .pm-empty-space {
-        height: 40px;
-        width: 100%;
-    }
-
-    body {
-        padding: 20px 0;
-        background: #ccc;
-    }
-
-    .pm-certificate-container {
-        position: relative;
-        width: 800px;
-        height: 600px;
-        background-color: #618597;
-        padding: 30px;
-        color: #333;
-        font-family: 'Open Sans', sans-serif;
-        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-        background: -webkit-repeating-linear-gradient(45deg,
-                #618597,
-                #618597 1px,
-                #b2cad6 1px,
-                #b2cad6 2px);
-        background: repeating-linear-gradient(90deg,
-                #618597,
-                #618597 1px,
-                #b2cad6 1px,
-                #b2cad6 2px)
-    }
-
-    ;
-
-    .outer-border {
-        width: 794px;
-        height: 594px;
-        position: absolute;
-        left: 50%;
-        margin-left: -397px;
-        top: 50%;
-        margin-top: -297px;
-        border: 2px solid #fff;
-    }
-
-    ;
-
-    .inner-border {
-        width: 730px;
-        height: 530px;
-        position: absolute;
-        left: 50%;
-        margin-left: -365px;
-        top: 50%;
-        margin-top: -265px;
-        border: 2px solid #fff;
-    }
-
-    .pm-certificate-border {
-        position: relative;
-        width: 720px;
-        height: 520px;
-        padding: 0;
-        border: 1px solid #E1E5F0;
-        background-color: rgba(255, 255, 255, 1);
-        background-image: none;
-        left: 50%;
-        margin-left: -360px;
-        top: 50%;
-        margin-top: -260px
-    }
-
-    ;
-
-    .pm-certificate-block {
-        width: 650px;
-        height: 200px;
-        position: relative;
-        left: 50%;
-        margin-left: -325px;
-        top: 70px;
-        margin-top: 0;
-    }
-
-    .pm-certificate-header {
-        margin-bottom: 10px;
-    }
-
-    .pm-certificate-title {
-        position: relative;
-        top: 40px;
-
-    }
-
-    h2 {
-        font-size: 34px !important;
-    }
-
-    .pm-certificate-body {
-        padding: 20px;
-
-    }
-
-    .pm-name-text {
-        font-size: 20px;
-    }
-
-    .pm-earned {
-        margin: 15px 0 20px;
-    }
-
-    .pm-earned-text {
-        font-size: 20px;
-    }
-
-    .pm-credits-text {
-        font-size: 15px;
-    }
-
-    .pm-course-title {}
-
-    .pm-earned-text {
-        font-size: 20px;
-    }
-
-    .pm-credits-text {
-        font-size: 15px;
-    }
-
-    .pm-certified {
-        font-size: 12px;
-
-    }
-
-    .underline {
-        margin-bottom: 5px;
-    }
-
-    .pm-certificate-footer {
-        width: 650px;
-        height: 100px;
-        position: relative;
-        left: 50%;
-        margin-left: -325px;
-        bottom: -105px;
-    }
-</style>
 
 <body>
-    <div class="container pm-certificate-container">
-        <div class="outer-border"></div>
-        <div class="inner-border"></div>
-
-        <div class="pm-certificate-border col-xs-12">
-            <div class="row pm-certificate-header">
-                <div class="pm-certificate-title cursive col-xs-12 text-center">
-                    <h2>Buffalo Public Schools Certificate of Completion</h2>
-                </div>
-            </div>
-
-            <div class="row pm-certificate-body">
-
-                <div class="pm-certificate-block">
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-certificate-name underline margin-0 col-xs-8 text-center">
-                                <span class="pm-name-text bold">TrueNorth Administrator</span>
-                            </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+    <div class="content">
+        <table class="borderless" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 18%; text-align: center;">
+                        <img src="assets/img/logo-pemkot.png" style="width: 160px; height: 160px;" alt="logo">
+                    </td>
+                    <td style="padding-right: 22%;">
+                        <div class="judul">
+                            <p style="padding-top: 8px;">
+                                PEMERINTAH KOTA KEDIRI <br><br>
+                                <span class="judul">
+                                    DINAS PENDIDIKAN
+                                </span><br><br>
+                                <span class="sub-judul">
+                                    JALAN MAYOR BISMO NO. 10-12 TELP. (0354) 689923 FAX. (0354) 690556
+                                </span><br><br>
+                                <span class="sub-judul">
+                                    SITUS: DISPENDIK.KEDIRIKOTA.GO.ID EMAIL:DISPENDIK@KEDIRIKOTA.GO.ID
+                                </span><br><br>
+                                <span class="sub-judul">
+                                    KEDIRI
+                                </span>
+                            </p>
                         </div>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-earned col-xs-8 text-center">
-                                <span class="pm-earned-text padding-0 block cursive">has earned</span>
-                                <span class="pm-credits-text block bold sans">PD175: 1.0 Credit Hours</span>
-                            </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="col-xs-12"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-course-title col-xs-8 text-center">
-                                <span class="pm-earned-text block cursive">while completing the training course entitled</span>
-                            </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-course-title underline col-xs-8 text-center">
-                                <span class="pm-credits-text block bold sans">BPS PGS Initial PLO for Principals at Cluster Meetings</span>
-                            </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="pm-certificate-footer">
-                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
-                                <span class="pm-credits-text block sans">Buffalo City School District</span>
-                                <span class="pm-empty-space block underline"></span>
-                                <span class="bold block">Crystal Benton Instructional Specialist II, Staff Development</span>
-                            </div>
-                            <div class="col-xs-4">
-                                <!-- LEAVE EMPTY -->
-                            </div>
-                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
-                                <span class="pm-credits-text block sans">Date Completed</span>
-                                <span class="pm-empty-space block underline"></span>
-                                <span class="bold block">DOB: </span>
-                                <span class="bold block">Social Security # (last 4 digits)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                        <hr class="guedi">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="isi">
+            <center style="padding-top: 5px;">
+                <b style="font-size: 13px;"><u>SURAT KETERANGAN</u></b>
+                <p style="margin: 0;">No. 421.4/1814/419.109/2022</p>
+            </center>
         </div>
     </div>
 </body>
