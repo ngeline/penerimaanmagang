@@ -66,10 +66,6 @@
     <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/popper.min.js') ?>"></script>
     <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
 
-    <!-- Charts JS -->
-    <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/plugins/chart.js/chart.min.js') ?>"></script>
-    <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/js/index-charts.js') ?>"></script>
-
     <!-- Page Specific JS -->
     <script src="<?= base_url('assets/template/portal-theme-bs5-v2.1/assets/js/app.js') ?>"></script>
 

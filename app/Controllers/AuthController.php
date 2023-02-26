@@ -3,6 +3,10 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\MagangModel;
+use App\Models\PembimbingModel;
+use App\Models\PengajuanModel;
+use App\Models\SiswaModel;
 use App\Models\UsersModel;
 
 class AuthController extends BaseController
@@ -69,7 +73,60 @@ class AuthController extends BaseController
     public function dashboard()
     {
         $data['activePage'] = 'dashboard';
+
+        $siswa = new SiswaModel();
+        $data['t1'] = $siswa->countAllResults();
+
+        $pembimbing = new PembimbingModel();
+        $data['t2'] = $pembimbing->countAllResults();
+
+        $pengajuan = new PengajuanModel();
+        $data['t3'] = $pengajuan->countAllResults();
+
+        $magang = new MagangModel();
+        $data['t4'] = $magang->countAllResults();
+
         return view('dashboard', $data);
+    }
+
+    public function chartMagang()
+    {
+        $year = date('Y');
+
+        $data['labels'] = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+        $arr = [];
+        $magang = new MagangModel();
+        for ($i = 1; $i < 13; $i++) {
+            $getData = $magang->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')
+                ->where("YEAR(pengajuan.tanggal_mulai)", $year)->where("MONTH(pengajuan.tanggal_mulai)", [$i])->countAllResults();
+            array_push($arr, $getData);
+        }
+
+        $data['values'] = $arr;
+
+        $data['tahun'] = $year;
+
+        return $this->response->setJSON($data);
+    }
+
+    public function chartMagangYear()
+    {
+        $year = $this->request->getVar('year');
+
+        $arr = [];
+        $magang = new MagangModel();
+        for ($i = 1; $i < 13; $i++) {
+            $getData = $magang->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')
+                ->where("YEAR(pengajuan.tanggal_mulai)", $year)->where("MONTH(pengajuan.tanggal_mulai)", [$i])->countAllResults();
+            array_push($arr, $getData);
+        }
+
+        $data['values'] = $arr;
+
+        $data['tahun'] = $year;
+
+        return $this->response->setJSON($data);
     }
 
     public function errors()
