@@ -45,9 +45,10 @@ $routes->get('errors', 'AuthController::errors');
 
 $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
     $routes->get('dashboard', 'AuthController::dashboard');
-    $routes->get('profile', 'ProfileController::index');
+    $routes->get('chart-magang', 'AuthController::chartMagang');
+    $routes->get('chart-magang-year', 'AuthController::chartMagangYear');
 
-    $routes->get('generate-sertifikat', 'CetakController::generateSertifikat');
+    $routes->get('profile', 'ProfileController::index');
 
     $routes->group('admin', ['filter' => 'AdminFilter'], function ($routes) {
         $routes->get('users', 'UsersController::index');
@@ -100,7 +101,7 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('penilaian/detail', 'PenilaianController::editPembimbing');
 
         $routes->get('generate-nilai/(:any)', 'CetakController::generateNilai/$1');
-        // $routes->get('generate-sertifikat', 'CetakController::generateSertifikat');
+        $routes->get('generate-sertifikat/(:any)', 'CetakController::generateSertifikat/$1');
     });
 
     $routes->group('pembimbing', ['filter' => 'PembimbingFilter'], function ($routes) {

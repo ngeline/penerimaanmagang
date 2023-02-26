@@ -156,7 +156,7 @@ class PenilaianController extends BaseController
         $data['siswa'] = $siswa->whereIn('id', $arrSiswa)->where('status_hapus', 'tidak')->findAll();
 
         $kategori = new PenilaianKategoriModel();
-        $data['kategori'] = $kategori->where('status_hapus', 'tidak')->findAll();
+        $data['kategori'] = $kategori->where('status_hapus', 'tidak')->orderBy('nama_kategori', 'asc')->findAll();
 
         $data['count'] = count($data['kategori']);
 
@@ -260,6 +260,7 @@ class PenilaianController extends BaseController
             $dataPenilaian = $penilaian->select('penilaian.id, penilaian.nilai, penilaian.huruf, kategori_penilaian.nama_kategori, kategori_penilaian.keterangan')
                 ->join('kategori_penilaian', 'penilaian.kategori_id = kategori_penilaian.id')
                 ->where('penilaian.magang_id', $id)
+                ->orderBy('kategori_penilaian.nama_kategori', 'asc')
                 ->get()->getResultArray();
 
             $data = [

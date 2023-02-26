@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Background Image Example</title>
+    <title>Laporan Sertifikat Magang</title>
     <style type="text/css">
         @font-face {
             font-family: 'Arial';
@@ -28,15 +28,15 @@
         }
 
         .table-less {
-        border: 0px solid;
-        border-collapse: none;
-        padding: 0px;
-        margin: 1px;
+            border: 0px solid;
+            border-collapse: none;
+            padding: 0px;
+            margin: 1px;
         }
 
         .kiri {
-        text-align: center;
-        padding-left: 65%;
+            text-align: center;
+            padding-left: 65%;
         }
 
         .borderless tr td {
@@ -54,13 +54,13 @@
 
         .judul {
             text-align: center;
-            font-size: 25px;
+            font-size: 23px;
             font-weight: 700;
         }
 
         .sub-judul {
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 300;
         }
 
@@ -71,7 +71,9 @@
         }
 
         .isi {
-            font-size: 12px;
+            font-size: 14px;
+            /* padding-left: 1%; */
+            padding-right: 5%;
         }
     </style>
 </head>
@@ -82,7 +84,7 @@
             <tbody>
                 <tr>
                     <td style="width: 18%; text-align: center;">
-                        <img src="assets/img/logo-pemkot.png" style="width: 160px; height: 160px;" alt="logo">
+                        <img src="assets/img/logo-pemkot.png" style="width: 130px; height: 130px;" alt="logo">
                     </td>
                     <td style="padding-right: 22%;">
                         <div class="judul">
@@ -113,64 +115,83 @@
             </tbody>
         </table>
         <div class="isi">
-            <center style="padding-top: 5px;">
+            <center style="padding-top: 5px; padding-left: 5%;">
                 <b style="font-size: 15px;"><u>SURAT KETERANGAN</u></b>
-                <p style="margin: 0;">No. 421.4/1814/419.109/2022</p>
+                <p style="margin: 0;">No. <?= $siswa['sertifikat'] ?></p>
             </center><br>
-            <dd>Yang bertanda tangan dibawah ini Kepala Dinas Pendidikan Kota Kediri, menerangkan bahwa mahasiswa Politeknik Negeri Malang PSDKU Kota Kediri.</dd>
+            <dd>
+                Yang bertanda tangan dibawah ini Kepala Dinas Pendidikan Kota Kediri, menerangkan bahwa
+                <?= ($siswa['jenjang'] == 'SLTA') ? 'siswa ' . $siswa['asal_sekolah'] : 'mahasiswa ' . $siswa['perguruan'] ?>
+            </dd>
             <pre><table style="padding-left: 10%;">
                 <tbody>
                     <tr>
                         <td class="table-less"><b>Nama</b></td>
-                        <td class="table-less">: </td>
+                        <td class="table-less">: <?= $siswa['nama'] ?></td>
                     </tr>
+                    <?php if ($siswa['jenjang'] == 'SLTA') : ?>
                     <tr>
-                        <td class="table-less"><b>Tempat/Tanggal Lahir</b></td>
-                        <td class="table-less">:</td>
-                    </tr>
-                    <tr>
-                        <td class="table-less"><b>Universitas</b></td>
-                        <td class="table-less">:</td>
-                    </tr>
-                    <tr>
-                        <td class="table-less"><b>Prodi</b></td>
-                        <td class="table-less">:</td>
+                        <td class="table-less"><b>Sekolah</b></td>
+                        <td class="table-less">: <?= $siswa['asal_sekolah'] ?></td>
                     </tr>
                     <tr>
                         <td class="table-less"><b>Jurusan</b></td>
-                        <td class="table-less">:</td>
+                        <td class="table-less">: <?= $siswa['jurusan'] ?></td>
                     </tr>
                     <tr>
-                        <td class="table-less"><b>Tingkat</b></td>
-                        <td class="table-less">:</td>
+                        <td class="table-less"><b>Kelas</b></td>
+                        <td class="table-less">: <?= $siswa['kelas'] ?></td>
                     </tr>
                     <tr>
-                        <td class="table-less"><b>Nomor Induk Mahasiswa(NIM)</b></td>
-                        <td class="table-less">:</td>
+                        <td class="table-less"><b>Nomor Induk Siswa Nasional (NISN)</b></td>
+                        <td class="table-less">: <?= $siswa['nisn'] ?></td>
                     </tr>
+                    <?php endif; ?>
+                    <?php if ($siswa['jenjang'] == 'Perguruan Tinggi') : ?>
+                    <tr>
+                        <td class="table-less"><b>Universitas</b></td>
+                        <td class="table-less">: <?= $siswa['perguruan'] ?></td>
+                    </tr>
+                    <tr>
+                        <td class="table-less"><b>Prodi</b></td>
+                        <td class="table-less">: <?= $siswa['prodi'] ?></td>
+                    </tr>
+                    <tr>
+                        <td class="table-less"><b>Jurusan</b></td>
+                        <td class="table-less">: <?= $siswa['jurusan'] ?></td>
+                    </tr>
+                    <tr>
+                        <td class="table-less"><b>Semester</b></td>
+                        <td class="table-less">: <?= $siswa['tingkat'] ?></td>
+                    </tr>
+                    <tr>
+                        <td class="table-less"><b>Nomor Induk Mahasiswa (NIM)</b></td>
+                        <td class="table-less">: <?= $siswa['nim'] ?></td>
+                    </tr>
+                    <?php endif; ?>
                 </tbody>
             </table></pre>
             <br>
             <dd>
-                Telah mengikuti Program Praktik Kerja Industri/Praktik Pengalaman Kerja dalam Praktik Kerja Lapangan (PKL). Pada tanggal <b>27 Juni sampai dengan 19 Agustus 2022</b> (2 bulan) dengan hasil SANGAT BAIK :(daftar nilai tertera dibalik ini).
+                Telah mengikuti Program Praktik Kerja Industri/Praktik Pengalaman Kerja dalam Praktik Kerja
+                Lapangan (PKL). Pada tanggal <b><?= $mulai ?> sampai dengan <?= $selesai ?></b> dengan
+                hasil <?= $hasil ?> (daftar nilai tertera dibalik ini).
             </dd>
             <div class="kiri">
-            <br>
-            Kediri, <?php
-                    setlocale(LC_ALL, 'IND');
-                    $date = strftime("%d %B %Y");
-                    echo $date;
-                    ?><br>
-            Kepala Dinas Pendidikan<br>
-            Kota Kediri
-            <br>
-            <img src="assets/file/ttd/">
-            <br>
-            <br>
-            <b><u>Drs. H. SISWANTO. M.Pd.</u></b><br>
-            Pembina Utama Muda<br>
-            NIP. 19621029 198603 1 011
-        </div>
+                <br>
+                Kediri, <?php
+                        setlocale(LC_ALL, 'IND');
+                        $date = strftime("%d %B %Y");
+                        echo $date;
+                        ?><br>
+                Ka. Sub. <?= $siswa['singkatan_bidang'] ?><br>
+                Dinas Pendidikan Kota Kediri
+                <br>
+                <img src="assets/file/ttd/<?= $siswa['ttd'] ?>">
+                <br>
+                <b><?= $siswa['kepala_bidang'] ?></b><br>
+                NIP. <?= $siswa['kepala_nip'] ?>
+            </div>
         </div>
     </div>
 </body>

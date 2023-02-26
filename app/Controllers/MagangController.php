@@ -117,7 +117,7 @@ class MagangController extends BaseController
         $data['pengajuan'] = $pengajuan->select('pengajuan.id AS id_pengajuan, pengajuan.created_at, siswa.nama AS nama_siswa, pengajuan.tanggal_mulai, pengajuan.tanggal_selesai')
             ->join('siswa', 'pengajuan.siswa_id = siswa.id')
             ->where('pengajuan.status_pengajuan', 'diterima')
-            ->orderBy('pengajuan.created_at', 'asc')
+            ->orderBy('pengajuan.tanggal_mulai', 'desc')
             ->get()->getResultArray();
 
         return view('admin/magang/index', $data);

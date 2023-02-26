@@ -156,10 +156,11 @@ class AbsensiController extends BaseController
         $jam = date('H:i:s');
 
         // Set the target time
-        $time = new DateTime('08:01:00');
+        $target = '08:01:00';
+        $time = date('H:i:s', strtotime($target));
 
         // Compare the times
-        if ($jam <= $time) {
+        if ($jam >= $time) {
             $datang = 'terlambat';
         } else {
             $datang = 'tepat waktu';

@@ -2,9 +2,16 @@
 <html>
 
 <head>
-    <title>Laporan Penilaian Magang 2023</title>
+    <title>Laporan Penilaian Magang</title>
 </head>
 <style>
+    html,
+    body {
+        padding-top: 0;
+        margin-top: 0;
+        font-size: 13px;
+    }
+
     .table-bordered,
     th,
     td {
@@ -33,7 +40,6 @@
 
 <body>
     <center>
-        <p></p>
         <h2>DAFTAR NILAI</h2>
     </center>
     <table>
@@ -71,11 +77,11 @@
             <tbody>
                 <?php $no = 1; ?>
                 <?php foreach ($list as $row) : ?>
-                    <tr>
+                    <tr style="line-height: 0; align-items: center; align-content: center; vertical-align: middle;">
                         <td class="tengah"><?php echo $no++ ?></td>
                         <td style="width: 80%; padding-left: 5px; padding-right: 5px;">
-                            <p><?= $row['nama_kategori'] ?><br>
-                                <span style="font-size: 13px;"><?= $row['keterangan'] ?></span>
+                            <p><?= $row['nama_kategori'] ?> -
+                                <span style="font-size: 11px; line-height: normal;"><?= $row['keterangan'] ?></span>
                             </p>
                         </td>
                         <td class="tengah"><?= $row['huruf'] ?></td>

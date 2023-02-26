@@ -26,10 +26,10 @@
                                     <tr>
                                         <td><?php echo $no++ ?></td>
                                         <td><?= $row['username'] ?></td>
-                                        <td><?= ($row['nama'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['nama'] ?></td>
-                                        <td><?= ($row['jenjang'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['jenjang'] ?></td>
-                                        <td><?= ($row['jurusan'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['jurusan'] ?></td>
-                                        <td><?= ($row['telepon'] == '') ? '<mark>Profil pengguna belum lengkap</mark>' : $row['telepon'] ?></td>
+                                        <td><?= ($row['nama'] == '') ? '<mark>Pengguna belum melengkapi profil</mark>' : $row['nama'] ?></td>
+                                        <td><?= ($row['jenjang'] == '') ? '<mark>Pengguna belum melengkapi profil</mark>' : $row['jenjang'] ?></td>
+                                        <td><?= ($row['jurusan'] == '') ? '<mark>Pengguna belum melengkapi profil</mark>' : $row['jurusan'] ?></td>
+                                        <td><?= ($row['telepon'] == '') ? '<mark>Pengguna belum melengkapi profil</mark>' : $row['telepon'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#Edit<?php echo $no ?>">
                                                 Edit

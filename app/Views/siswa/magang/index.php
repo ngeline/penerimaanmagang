@@ -66,7 +66,7 @@
                                                         <?php if ($row['sertifikat']) : ?>
                                                             <div class="mb-3 col-md-6">
                                                                 <label class="form-label">Sertifikat</label>
-                                                                <button class="btn btn-warning text-white w-100" disabled>Cetak</button>
+                                                                <a href="<?= base_url('siswa/generate-sertifikat/' . $row['id_magang']) ?>" class="btn btn-warning text-white w-100">Cetak</a>
                                                             </div>
                                                         <?php endif; ?>
                                                         <div class="mb-3 col-md-6">
