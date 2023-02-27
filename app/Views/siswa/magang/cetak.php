@@ -75,10 +75,15 @@
             /* padding-left: 1%; */
             padding-right: 5%;
         }
+
+        .typetext {
+            font-family: 'TimesNewRoman';
+            src: url('assets/font/timesnewroman.ttf') format('truetype');
+        }
     </style>
 </head>
 
-<body>
+<body class="typetext">
     <div class="content">
         <table class="borderless" style="width: 100%;">
             <tbody>
@@ -119,11 +124,11 @@
                 <b style="font-size: 15px;"><u>SURAT KETERANGAN</u></b>
                 <p style="margin: 0;">No. <?= $siswa['sertifikat'] ?></p>
             </center><br>
-            <dd>
+            <dd class="typetext">
                 Yang bertanda tangan dibawah ini Kepala Dinas Pendidikan Kota Kediri, menerangkan bahwa
                 <?= ($siswa['jenjang'] == 'SLTA') ? 'siswa ' . $siswa['asal_sekolah'] : 'mahasiswa ' . $siswa['perguruan'] ?>
             </dd>
-            <pre><table style="padding-left: 10%;">
+            <pre><table style="padding-left: 10%;"class="typetext">
                 <tbody>
                     <tr>
                         <td class="table-less"><b>Nama</b></td>
