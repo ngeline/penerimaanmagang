@@ -35,6 +35,12 @@
                                             <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#Detail<?php echo $no ?>">
                                                 Detail
                                             </button>
+                                            <?php if ($row['sertifikat']) : ?>
+                                                <!-- <div class="mb-3 col-md-6">
+                                                    <label class="form-label">Sertifikat</label> -->
+                                                <a href="<?= base_url('siswa/generate-sertifikat/' . $row['id_magang']) ?>" class="btn btn-warning text-white">Cetak</a>
+                                                <!-- </div> -->
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
 
@@ -63,12 +69,6 @@
                                                             <label class="form-label">Status Magang</label>
                                                             <input type="text" class="form-control" value="<?= $row['status_magang'] ?>" readonly>
                                                         </div>
-                                                        <?php if ($row['sertifikat']) : ?>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Sertifikat</label>
-                                                                <a href="<?= base_url('siswa/generate-sertifikat/' . $row['id_magang']) ?>" class="btn btn-warning text-white w-100">Cetak</a>
-                                                            </div>
-                                                        <?php endif; ?>
                                                         <div class="mb-3 col-md-6">
                                                             <label class="form-label">Nama Pembimbing</label>
                                                             <input type="text" class="form-control" value="<?= $row['nama'] ?>" readonly>

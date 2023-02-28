@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\KepalaDinasModel;
 use App\Models\MagangModel;
 use App\Models\PenilaianModel;
 use DateTime;
@@ -73,6 +74,24 @@ class CetakController extends BaseController
             ->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')
             ->where('magang.id', $id)
             ->first();
+
+        $penilaian = new PenilaianModel();
+        $data['list'] = $penilaian
+            ->join('kategori_penilaian', 'penilaian.kategori_id = kategori_penilaian.id')
+            ->where('magang_id', $id)
+            ->orderBy('kategori_penilaian.nama_kategori', 'asc')
+            ->get()->getResultArray();
+
+        $arr = [];
+
+        for ($i = 0; $i < count($data['list']); $i++) {
+            array_push($arr, $data['list'][$i]['nilai']);
+        }
+
+        $data['total'] = number_format(array_sum($arr) / count($data['list']), 2, ',', '');
+
+        $kepDinas = new KepalaDinasModel();
+        $data['kepDinas'] = $kepDinas->first();
 
         $mulai = $data['siswa']['tanggal_mulai'];
         $selesai = $data['siswa']['tanggal_selesai'];

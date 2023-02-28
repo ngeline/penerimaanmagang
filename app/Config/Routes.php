@@ -62,6 +62,9 @@ $routes->group('', ['filter' => 'AuthFilter'], function ($routes) {
         $routes->get('bidang', 'BidangController::index');
         $routes->post('bidang/update', 'BidangController::update');
 
+        $routes->get('kepala-dinas', 'KepalaDinasController::index');
+        $routes->post('kepala-dinas/update', 'KepalaDinasController::update');
+
         $routes->get('pembimbing', 'PembimbingController::index');
         $routes->post('pembimbing/store', 'PembimbingController::store');
         $routes->post('pembimbing/update', 'PembimbingController::update');
