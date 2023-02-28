@@ -4,11 +4,6 @@
 <head>
     <title>Laporan Sertifikat Magang</title>
     <style type="text/css">
-        @font-face {
-            font-family: 'Arial';
-            src: url('assets/font/arial.ttf') format('truetype');
-        }
-
         html,
         body {
             background-image: url('assets/img/bg-sertif.jpeg');
@@ -54,13 +49,13 @@
 
         .judul {
             text-align: center;
-            font-size: 23px;
+            font-size: 25px;
             font-weight: 700;
         }
 
         .sub-judul {
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 300;
         }
 
@@ -71,8 +66,7 @@
         }
 
         .isi {
-            font-size: 14px;
-            /* padding-left: 1%; */
+            font-size: 16px;
             padding-right: 5%;
         }
 
