@@ -41,12 +41,12 @@ class AbsensiController extends BaseController
                 if ($value['status_magang'] == 'berjalan') {
                     $dataId = $value['id'];
                 } else {
-                    $dataId = 0;
+                    $dataId = '0';
                 }
             }
         } else {
             $arrId = ['0'];
-            $dataId = 0;
+            $dataId = '0';
         }
 
         $data['id_magang'] = $dataId;
@@ -156,7 +156,7 @@ class AbsensiController extends BaseController
         $jam = date('H:i:s');
 
         // Set the target time
-        $target = '08:01:00';
+        $target = '07:31:00';
         $time = date('H:i:s', strtotime($target));
 
         // Compare the times

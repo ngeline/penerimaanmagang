@@ -23,11 +23,11 @@
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Tanggal Mulai Magang</label>
-                            <input id="mulai" name="mulai" type="date" class="form-control">
+                            <input id="mulai" name="mulai" type="date" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" class="form-control">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Tanggal Selesai Magang</label>
-                            <input id="selesai" name="selesai" type="date" class="form-control">
+                            <input id="selesai" name="selesai" type="date" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" class="form-control">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">File Proposal</label>

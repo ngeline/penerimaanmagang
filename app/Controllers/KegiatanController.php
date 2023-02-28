@@ -41,15 +41,25 @@ class KegiatanController extends BaseController
                 if ($value['status_magang'] == 'berjalan') {
                     $dataId = $value['id'];
                 } else {
-                    $dataId = 0;
+                    $dataId = '0';
                 }
             }
         } else {
             $arrId = ['0'];
-            $dataId = 0;
+            $dataId = '0';
         }
 
         $data['id_magang'] = $dataId;
+
+        $periodeMagang = $magang->join('pengajuan', 'magang.pengajuan_id = pengajuan.id')->where('magang.id', $dataId)->first();
+
+        if ($periodeMagang) {
+            $data['periodeMulai'] = $periodeMagang['tanggal_mulai'];
+            $data['periodeSelesai'] = $periodeMagang['tanggal_selesai'];
+        } else {
+            $data['periodeMulai'] = '0';
+            $data['periodeSelesai'] = '0';
+        }
 
         $kegiatan = new KegiatanModel();
         $data['list'] = $kegiatan->whereIn('magang_id', $arrId)->orderBy('updated_at', 'desc')->findAll();

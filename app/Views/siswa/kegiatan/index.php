@@ -15,7 +15,7 @@
                         <input type="hidden" name="id" value="<?= $id_magang ?>">
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Tanggal Kegiatan</label>
-                            <input name="tanggal" type="date" class="form-control" required>
+                            <input name="tanggal" type="date" <?= ($periodeMulai == 0) ? '' : 'min="' . $periodeMulai . '" max="' . $periodeSelesai . '"' ?> class="form-control" required>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label">Foto Kegiatan</label>
