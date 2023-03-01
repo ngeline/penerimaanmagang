@@ -19,7 +19,7 @@
     <div class="col-6 col-lg-3">
         <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-                <h4 class="stats-type mb-4">Jumlah Siswa</h4>
+                <h4 class="stats-type mb-4">Jumlah Akun Siswa</h4>
                 <div class="stats-figure"><?= $t1 ?></div>
                 <div class="stats-meta">
                     Siswa</div>
@@ -30,7 +30,7 @@
     <div class="col-6 col-lg-3">
         <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-                <h4 class="stats-type mb-4">Jumlah Pembimbing</h4>
+                <h4 class="stats-type mb-1">Jumlah Pengajuan Magang Yang Diterima</h4>
                 <div class="stats-figure"><?= $t2 ?></div>
                 <div class="stats-meta">
                     Pembimbing</div>
@@ -41,7 +41,7 @@
     <div class="col-6 col-lg-3">
         <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-                <h4 class="stats-type mb-1">Total Pengajuan Magang</h4>
+                <h4 class="stats-type mb-1">Jumlah Pengajuan Magang Yang Ditolak</h4>
                 <div class="stats-figure"><?= $t3 ?></div>
                 <div class="stats-meta">
                     Pengajuan</div>

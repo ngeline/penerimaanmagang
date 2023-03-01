@@ -77,11 +77,9 @@ class AuthController extends BaseController
         $siswa = new SiswaModel();
         $data['t1'] = $siswa->countAllResults();
 
-        $pembimbing = new PembimbingModel();
-        $data['t2'] = $pembimbing->countAllResults();
-
         $pengajuan = new PengajuanModel();
-        $data['t3'] = $pengajuan->countAllResults();
+        $data['t2'] = $pengajuan->where('status_pengajuan', 'diterima')->countAllResults();
+        $data['t3'] = $pengajuan->where('status_pengajuan', 'ditolak')->countAllResults();
 
         $magang = new MagangModel();
         $data['t4'] = $magang->countAllResults();
