@@ -33,7 +33,7 @@
                 <h4 class="stats-type mb-1">Jumlah Pengajuan Magang Yang Diterima</h4>
                 <div class="stats-figure"><?= $t2 ?></div>
                 <div class="stats-meta">
-                    Pembimbing</div>
+                    Pengajuan</div>
             </div><!--//app-card-body-->
         </div><!--//app-card-->
     </div><!--//col-->
