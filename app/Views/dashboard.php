@@ -52,7 +52,7 @@
     <div class="col-6 col-lg-3">
         <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
-                <h4 class="stats-type mb-1">Total Siswa Magang</h4>
+                <h4 class="stats-type mb-4">Total Siswa Magang</h4>
                 <div class="stats-figure"><?= $t4 ?></div>
                 <div class="stats-meta">
                     Siswa Magang</div>
