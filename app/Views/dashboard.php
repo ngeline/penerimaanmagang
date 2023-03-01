@@ -22,7 +22,7 @@
                 <h4 class="stats-type mb-4">Jumlah Akun Siswa</h4>
                 <div class="stats-figure"><?= $t1 ?></div>
                 <div class="stats-meta">
-                    Siswa</div>
+                    Akun Siswa</div>
             </div><!--//app-card-body-->
         </div><!--//app-card-->
     </div><!--//col-->
